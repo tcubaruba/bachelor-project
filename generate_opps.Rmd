@@ -4,14 +4,129 @@ output: html_notebook
 ---
 
 ## Generate Dimensions
-Each opportunity has following dimensions: upload date, opportunity name, industry, region, marketing campaign, customer type, opportunity owner, forecast category, stage, product, price, quantity, value, estimated close date, created
+Each opportunity has following dimensions: upload date, opportunity name, customer, industry, region, marketing campaign, customer type, opportunity owner, forecast category, stage, product, price, quantity, value, estimated close date, created
 
 ```{r}
-plot(cars)
+# Upload and estimated close date
+dates <- seq.Date(from = as.Date("2017-01-01"), to = as.Date("2020-01-01"), by = "week")
+fc_dates <- seq.Date(from = as.Date("2019-10-01"), to = as.Date("2021-10-01"), by = "week")
+
+# Opportunity name
+opp_names <- c()
+for (i in 1:1200){
+  name <- paste(c('Opportunity', i), collapse = '_')
+  opp_names[i] <- name
+}
+
+# Customer
+customer_names <- c()
+for (i in 1:700){
+  name <- paste(c('Customer', i), collapse = '_')
+  customer_names[i] <- name
+}
+
+# Industry
+industry_names <- c()
+for (i in 1:10){
+  name <- paste(c('Industry', i), collapse = '_')
+  industry_names[i] <- name
+}
+
+# Region
+region_names <- c()
+for (i in 1:10){
+  name <- paste(c('Region', i), collapse = '_')
+  region_names[i] <- name
+}
+
+# Campaign
+campaign_names <- c()
+for (i in 1:6){
+  name <- paste(c('Campaign', i), collapse = '_')
+  campaign_names[i] <- name
+}
+
+# Customer type
+customer_types <- c("New Business", "Existing Business")
+
+# Opportunity owner
+owner_names <- c()
+for (i in 1:15){
+  name <- paste(c('Owner', i), collapse = '_')
+  owner_names[i] <- name
+}
+
+# Stage
+stage_names <- c("1. Marketing", "2. Prospect", "3. Discovery", "4. Identify Pains", "5. Value Proposition", "6. Final bid", "7. Closing", "Won", "Lost")
+
+# Product
+product_names <- c()
+for (i in 1:12){
+  name <- paste(c('Product', i), collapse = '_')
+  product_names[i] <- name
+}
+
+# Fuction to generate probabilities
+generate_random_probabilities <- function(n){
+  nums <- runif(n, 0, 1)
+  return(nums/sum(nums))
+}
+
 ```
 
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
 
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+## Create the opportunities for new and existing businesses
+First create new businesses, then take part of them to define as existing business. Here we add only the dimensions, which are static for a particular customer, these are: customer name, region, industry and owner.
 
-The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+```{r}
+# Divide the opportunity names
+
+new_business <- opp_names[1:length(customer_names)]
+existing_business <- opp_names[(length(customer_names)+1):length(opp_names)]
+
+# Create new businesses
+
+new_business_df <- data.frame(new_business)
+colnames(new_business_df) <- 'Opportunity_Name'
+new_business_df$Customer <- customer_names
+new_business_df$Region <- sample(x = region_names, size = length(new_business), replace = TRUE, prob = generate_random_probabilities(length(region_names)))
+new_business_df$Industry <- sample(x = industry_names, size = length(new_business), replace = TRUE, prob = generate_random_probabilities(length(industry_names)))
+new_business_df$Customer_Type <- 'New Business'
+new_business_df$Owner <- sample(x = owner_names, size = length(new_business), replace = TRUE, prob = generate_random_probabilities(length(owner_names)))
+
+# # Add products
+# new_business_df_new <- data.frame()
+# for (row in 1:nrow(new_business_df)){
+#   line <- new_business_df[row,]
+#   opp_products <- sample( x = product_names, size = sample(3:10, 1), replace = FALSE, prob = generate_random_probabilities(length(product_names)))
+#   new_line <- data.frame(opp_products)
+#   colnames(new_line) <- 'Product'
+#   new_line$Opportunity_Name <- line$Opportunity_Name
+#   new_line$Customer <- line$Customer
+#   new_line$Region <- line$Region
+#   new_line$Industry <- line$Industry
+#   new_line$Customer_Type <- line$Customer_Type
+#   new_line$Owner <- line$Owner
+#   new_line$Campaign <- line$Campaign
+#   new_business_df_new <- rbind(new_business_df_new, new_line)
+# }
+
+# Create existing business
+library('dplyr')
+existing_business_df <- sample_n(new_business_df, length(existing_business))
+existing_business_df$Customer_Type <- 'Existing Business'
+existing_business_df$Opportunity_Name <- existing_business
+
+opps_complete <- rbind(new_business_df, existing_business_df)
+print(opps_complete)
+```
+
+## Add further dimensions
+Now the dimensions marketing campaign, creation date and stage for all opporunities are added
+```{r}
+# opps_complete <- mutate_if(opps_complete, is.character, as.factor)
+# summary(opps_complete, maxsum = 20)
+
+
+```
+
