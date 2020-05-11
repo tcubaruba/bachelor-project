@@ -260,6 +260,8 @@ owners_wc <- c('Owner_1', 'Owner_2', 'Owner_3', 'Owner_5', 'Owner_5')
 owners_bc <- c('Owner_6', 'Owner_7', 'Owner_8', 'Owner_9', 'Owner_10')
 owners_nc <- c('Owner_11', 'Owner_12', 'Owner_13', 'Owner_14', 'Owner_15')
 
+max_date <- '2020-01-01'
+
 library(dplyr)
 data_complete <- data.frame()
 while(check_val){
@@ -268,45 +270,51 @@ while(check_val){
   new_stage_new <- data.frame()
   for (opportunity in opp_names){
     opportunity_data <- new_stage[(new_stage$Opportunity_Name == opportunity),]
-    opportunity_data$last_stage <- opportunity_data$Stage
-    # case when
-    opportunity_data$Stage <- case_when(
-      opportunity_data$Owner %in% owners_wc & opportunity_data$Stage == '1. Marketing' ~ sample(x = sample_first_stage_wc, size=1, prob = probability_first_stage_wc),
-      opportunity_data$Owner %in% owners_nc & opportunity_data$Stage == '1. Marketing' ~ sample(x = sample_first_stage_nc, size=1, prob = probability_first_stage_nc),
-      opportunity_data$Owner %in% owners_bc & opportunity_data$Stage == '1. Marketing' ~ sample(x = sample_first_stage_bc, size=1, prob = probability_first_stage_bc),
+    if (nrow(opportunity_data) > 0 & opportunity_data$Upload_date[1] < max_date){
+      opportunity_data$last_stage <- opportunity_data$Stage
+      # case when
+      opportunity_data$Stage <- case_when(
+        opportunity_data$Owner %in% owners_wc & opportunity_data$Stage == '1. Marketing' ~ sample(x = sample_first_stage_wc, size=1, prob = probability_first_stage_wc),
+        opportunity_data$Owner %in% owners_nc & opportunity_data$Stage == '1. Marketing' ~ sample(x = sample_first_stage_nc, size=1, prob = probability_first_stage_nc),
+        opportunity_data$Owner %in% owners_bc & opportunity_data$Stage == '1. Marketing' ~ sample(x = sample_first_stage_bc, size=1, prob = probability_first_stage_bc),
+        
+        opportunity_data$Owner %in% owners_wc & opportunity_data$Stage == '2. Prospect' ~ sample(x = sample_second_stage_wc, size=1, prob = probability_second_stage_wc),
+        opportunity_data$Owner %in% owners_nc & opportunity_data$Stage == '2. Prospect' ~ sample(x = sample_second_stage_nc, size=1, prob = probability_second_stage_nc),
+        opportunity_data$Owner %in% owners_bc & opportunity_data$Stage == '2. Prospect' ~ sample(x = sample_second_stage_bc, size=1, prob = probability_second_stage_bc),
+        
+        opportunity_data$Owner %in% owners_wc & opportunity_data$Stage == '3. Discovery' ~ sample(x = sample_third_stage_wc, size=1, prob = probability_third_stage_wc),
+        opportunity_data$Owner %in% owners_nc & opportunity_data$Stage == '3. Discovery' ~ sample(x = sample_third_stage_nc, size=1, prob = probability_third_stage_nc),
+        opportunity_data$Owner %in% owners_bc & opportunity_data$Stage == '3. Discovery' ~ sample(x = sample_third_stage_bc, size=1, prob = probability_third_stage_bc),
+              
+        opportunity_data$Owner %in% owners_wc & opportunity_data$Stage == '4. Identify Pains' ~ sample(x = sample_fourth_stage_wc, size=1, prob = probability_fourth_stage_wc),
+        opportunity_data$Owner %in% owners_nc & opportunity_data$Stage == '4. Identify Pains' ~ sample(x = sample_fourth_stage_nc, size=1, prob = probability_fourth_stage_nc),
+        opportunity_data$Owner %in% owners_bc & opportunity_data$Stage == '4. Identify Pains' ~ sample(x = sample_fourth_stage_bc, size=1, prob = probability_fourth_stage_bc),
+                    
+        opportunity_data$Owner %in% owners_wc & opportunity_data$Stage == '5. Value Proposition' ~ sample(x = sample_fifth_stage_wc, size=1, prob = probability_fifth_stage_wc),
+        opportunity_data$Owner %in% owners_nc & opportunity_data$Stage == '5. Value Proposition' ~ sample(x = sample_fifth_stage_nc, size=1, prob = probability_fifth_stage_nc),
+        opportunity_data$Owner %in% owners_bc & opportunity_data$Stage == '5. Value Proposition' ~ sample(x = sample_fifth_stage_bc, size=1, prob = probability_fifth_stage_bc),
+                          
+        opportunity_data$Owner %in% owners_wc & opportunity_data$Stage == '6. Final bid' ~ sample(x = sample_sixth_stage_wc, size=1, prob = probability_sixth_stage_wc),
+        opportunity_data$Owner %in% owners_nc & opportunity_data$Stage == '6. Final bid' ~ sample(x = sample_sixth_stage_nc, size=1, prob = probability_sixth_stage_nc),
+        opportunity_data$Owner %in% owners_bc & opportunity_data$Stage == '6. Final bid' ~ sample(x = sample_sixth_stage_bc, size=1, prob = probability_sixth_stage_bc),
       
-      opportunity_data$Owner %in% owners_wc & opportunity_data$Stage == '2. Prospect' ~ sample(x = sample_second_stage_wc, size=1, prob = probability_second_stage_wc),
-      opportunity_data$Owner %in% owners_nc & opportunity_data$Stage == '2. Prospect' ~ sample(x = sample_second_stage_nc, size=1, prob = probability_second_stage_nc),
-      opportunity_data$Owner %in% owners_bc & opportunity_data$Stage == '2. Prospect' ~ sample(x = sample_second_stage_bc, size=1, prob = probability_second_stage_bc),
-      
-      opportunity_data$Owner %in% owners_wc & opportunity_data$Stage == '3. Discovery' ~ sample(x = sample_third_stage_wc, size=1, prob = probability_third_stage_wc),
-      opportunity_data$Owner %in% owners_nc & opportunity_data$Stage == '3. Discovery' ~ sample(x = sample_third_stage_nc, size=1, prob = probability_third_stage_nc),
-      opportunity_data$Owner %in% owners_bc & opportunity_data$Stage == '3. Discovery' ~ sample(x = sample_third_stage_bc, size=1, prob = probability_third_stage_bc),
-            
-      opportunity_data$Owner %in% owners_wc & opportunity_data$Stage == '4. Identify Pains' ~ sample(x = sample_fourth_stage_wc, size=1, prob = probability_fourth_stage_wc),
-      opportunity_data$Owner %in% owners_nc & opportunity_data$Stage == '4. Identify Pains' ~ sample(x = sample_fourth_stage_nc, size=1, prob = probability_fourth_stage_nc),
-      opportunity_data$Owner %in% owners_bc & opportunity_data$Stage == '4. Identify Pains' ~ sample(x = sample_fourth_stage_bc, size=1, prob = probability_fourth_stage_bc),
-                  
-      opportunity_data$Owner %in% owners_wc & opportunity_data$Stage == '5. Value Proposition' ~ sample(x = sample_fifth_stage_wc, size=1, prob = probability_fifth_stage_wc),
-      opportunity_data$Owner %in% owners_nc & opportunity_data$Stage == '5. Value Proposition' ~ sample(x = sample_fifth_stage_nc, size=1, prob = probability_fifth_stage_nc),
-      opportunity_data$Owner %in% owners_bc & opportunity_data$Stage == '5. Value Proposition' ~ sample(x = sample_fifth_stage_bc, size=1, prob = probability_fifth_stage_bc),
-                        
-      opportunity_data$Owner %in% owners_wc & opportunity_data$Stage == '6. Final bid' ~ sample(x = sample_sixth_stage_wc, size=1, prob = probability_sixth_stage_wc),
-      opportunity_data$Owner %in% owners_nc & opportunity_data$Stage == '6. Final bid' ~ sample(x = sample_sixth_stage_nc, size=1, prob = probability_sixth_stage_nc),
-      opportunity_data$Owner %in% owners_bc & opportunity_data$Stage == '6. Final bid' ~ sample(x = sample_sixth_stage_bc, size=1, prob = probability_sixth_stage_bc),
-    
-      
-      TRUE ~ as.character(opportunity_data$Stage)
+        
+        TRUE ~ as.character(opportunity_data$Stage)
     )
     new_stage_new <- rbind(new_stage_new, opportunity_data)
+    }
   }
   data_complete <- rbind(data_complete, new_stage_new)
   last_stage <- new_stage_new
-  check_val <- nrow(last_stage[(last_stage$Upload_date < '2020-01-01'),])
+  check_val <- nrow(last_stage[(last_stage$Upload_date <= max_date),])
   print(check_val)
 }
 print(data_complete[order(data_complete$Opportunity_Name, data_complete$Upload_date),])
 
 ```
 
+## Save data
+```{r}
+write.csv(data_complete, 'generated_data_for_testing_complete.csv')
+```
 
