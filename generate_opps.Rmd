@@ -238,111 +238,74 @@ probability_sixth_stage_nc <-  c(0.3, 0.6, 0.1)
 
 # Probabilities for best case
 
-sample_first_stage_nc <- c("1. Marketing", "2. Prospect", "3. Discovery", "4. Identify Pains", "5. Value Proposition", "6. Final bid", "Won", "Lost")
-probability_first_stage_nc <- c(0.5, 0.4, 0.03, 0.02, 0.02, 0.02, 0.002, 0.008)
+sample_first_stage_bc <- c("1. Marketing", "2. Prospect", "3. Discovery", "4. Identify Pains", "5. Value Proposition", "6. Final bid", "Won", "Lost")
+probability_first_stage_bc <- c(0.5, 0.4, 0.03, 0.02, 0.02, 0.02, 0.002, 0.008)
 
-sample_second_stage_nc <- c("2. Prospect", "3. Discovery", "4. Identify Pains", "5. Value Proposition", "6. Final bid", "Won", "Lost")
-probability_second_stage_nc <-  c(0.5, 0.35, 0.04, 0.02, 0.02, 0.02, 0.05)
+sample_second_stage_bc <- c("2. Prospect", "3. Discovery", "4. Identify Pains", "5. Value Proposition", "6. Final bid", "Won", "Lost")
+probability_second_stage_bc <-  c(0.5, 0.35, 0.04, 0.02, 0.02, 0.02, 0.05)
 
-sample_third_stage_nc <- c("3. Discovery", "4. Identify Pains", "5. Value Proposition", "6. Final bid", "Won", "Lost")
-probability_third_stage_nc <-  c(0.4, 0.4, 0.06, 0.02, 0.02, 0.1)
+sample_third_stage_bc <- c("3. Discovery", "4. Identify Pains", "5. Value Proposition", "6. Final bid", "Won", "Lost")
+probability_third_stage_bc <-  c(0.4, 0.4, 0.06, 0.02, 0.02, 0.1)
 
-sample_fourth_stage_nc <- c("4. Identify Pains", "5. Value Proposition", "6. Final bid", "Won", "Lost")
-probability_fourth_stage_nc <-  c(0.4, 0.4, 0.08, 0.02, 0.1)
+sample_fourth_stage_bc <- c("4. Identify Pains", "5. Value Proposition", "6. Final bid", "Won", "Lost")
+probability_fourth_stage_bc <-  c(0.4, 0.4, 0.08, 0.02, 0.1)
 
-sample_fifth_stage_nc <- c("5. Value Proposition", "6. Final bid", "Won", "Lost")
-probability_fifth_stage_nc <-  c(0.3, 0.4, 0.2, 0.1)
+sample_fifth_stage_bc <- c("5. Value Proposition", "6. Final bid", "Won", "Lost")
+probability_fifth_stage_bc <-  c(0.3, 0.4, 0.2, 0.1)
 
-sample_sixth_stage_nc <- c("6. Final bid", "Won", "Lost")
-probability_sixth_stage_nc <-  c(0.2, 0.8, 0.0)
+sample_sixth_stage_bc <- c("6. Final bid", "Won", "Lost")
+probability_sixth_stage_bc <-  c(0.2, 0.8, 0.0)
 
+owners_wc <- c('Owner_1', 'Owner_2', 'Owner_3', 'Owner_5', 'Owner_5')
+owners_bc <- c('Owner_6', 'Owner_7', 'Owner_8', 'Owner_9', 'Owner_10')
+owners_nc <- c('Owner_11', 'Owner_12', 'Owner_13', 'Owner_14', 'Owner_15')
 
-
+library(dplyr)
+data_complete <- data.frame()
 while(check_val){
   new_stage <- last_stage
   new_stage$Upload_date <- last_stage$Upload_date + 7
-  for (opportunity in c('Opportunity_1', 'Opportunity_2')){
+  new_stage_new <- data.frame()
+  for (opportunity in opp_names){
     opportunity_data <- new_stage[(new_stage$Opportunity_Name == opportunity),]
+    opportunity_data$last_stage <- opportunity_data$Stage
     # case when
+    opportunity_data$Stage <- case_when(
+      opportunity_data$Owner %in% owners_wc & opportunity_data$Stage == '1. Marketing' ~ sample(x = sample_first_stage_wc, size=1, prob = probability_first_stage_wc),
+      opportunity_data$Owner %in% owners_nc & opportunity_data$Stage == '1. Marketing' ~ sample(x = sample_first_stage_nc, size=1, prob = probability_first_stage_nc),
+      opportunity_data$Owner %in% owners_bc & opportunity_data$Stage == '1. Marketing' ~ sample(x = sample_first_stage_bc, size=1, prob = probability_first_stage_bc),
+      
+      opportunity_data$Owner %in% owners_wc & opportunity_data$Stage == '2. Prospect' ~ sample(x = sample_second_stage_wc, size=1, prob = probability_second_stage_wc),
+      opportunity_data$Owner %in% owners_nc & opportunity_data$Stage == '2. Prospect' ~ sample(x = sample_second_stage_nc, size=1, prob = probability_second_stage_nc),
+      opportunity_data$Owner %in% owners_bc & opportunity_data$Stage == '2. Prospect' ~ sample(x = sample_second_stage_bc, size=1, prob = probability_second_stage_bc),
+      
+      opportunity_data$Owner %in% owners_wc & opportunity_data$Stage == '3. Discovery' ~ sample(x = sample_third_stage_wc, size=1, prob = probability_third_stage_wc),
+      opportunity_data$Owner %in% owners_nc & opportunity_data$Stage == '3. Discovery' ~ sample(x = sample_third_stage_nc, size=1, prob = probability_third_stage_nc),
+      opportunity_data$Owner %in% owners_bc & opportunity_data$Stage == '3. Discovery' ~ sample(x = sample_third_stage_bc, size=1, prob = probability_third_stage_bc),
+            
+      opportunity_data$Owner %in% owners_wc & opportunity_data$Stage == '4. Identify Pains' ~ sample(x = sample_fourth_stage_wc, size=1, prob = probability_fourth_stage_wc),
+      opportunity_data$Owner %in% owners_nc & opportunity_data$Stage == '4. Identify Pains' ~ sample(x = sample_fourth_stage_nc, size=1, prob = probability_fourth_stage_nc),
+      opportunity_data$Owner %in% owners_bc & opportunity_data$Stage == '4. Identify Pains' ~ sample(x = sample_fourth_stage_bc, size=1, prob = probability_fourth_stage_bc),
+                  
+      opportunity_data$Owner %in% owners_wc & opportunity_data$Stage == '5. Value Proposition' ~ sample(x = sample_fifth_stage_wc, size=1, prob = probability_fifth_stage_wc),
+      opportunity_data$Owner %in% owners_nc & opportunity_data$Stage == '5. Value Proposition' ~ sample(x = sample_fifth_stage_nc, size=1, prob = probability_fifth_stage_nc),
+      opportunity_data$Owner %in% owners_bc & opportunity_data$Stage == '5. Value Proposition' ~ sample(x = sample_fifth_stage_bc, size=1, prob = probability_fifth_stage_bc),
+                        
+      opportunity_data$Owner %in% owners_wc & opportunity_data$Stage == '6. Final bid' ~ sample(x = sample_sixth_stage_wc, size=1, prob = probability_sixth_stage_wc),
+      opportunity_data$Owner %in% owners_nc & opportunity_data$Stage == '6. Final bid' ~ sample(x = sample_sixth_stage_nc, size=1, prob = probability_sixth_stage_nc),
+      opportunity_data$Owner %in% owners_bc & opportunity_data$Stage == '6. Final bid' ~ sample(x = sample_sixth_stage_bc, size=1, prob = probability_sixth_stage_bc),
     
-    print(opportunity_data)
+      
+      TRUE ~ as.character(opportunity_data$Stage)
+    )
+    new_stage_new <- rbind(new_stage_new, opportunity_data)
   }
-  check_val = FALSE
+  data_complete <- rbind(data_complete, new_stage_new)
+  last_stage <- new_stage_new
+  check_val <- nrow(last_stage[(last_stage$Upload_date < '2020-01-01'),])
+  print(check_val)
 }
-
-# while (check_val > 0) {
-# data_last_stage$Close_date <- ifelse((data_last_stage$Stage == "Won" | data_last_stage$Stage == "Lost"), data_last_stage$Upload_date, 
-#                                      ifelse(data_last_stage$Stage == "7. Closing", data_last_stage$Upload_date + 14,
-#                                             ifelse(data_last_stage$Stage == "6. Final bid", data_last_stage$Upload_date + 28,
-#                                                    ifelse(data_last_stage$Stage == "5. Value Proposition", data_last_stage$Upload_date + 42,
-#                                                           ifelse(data_last_stage$Stage == "4. Identify Pains", data_last_stage$Upload_date + 63,
-#                                                                  ifelse(data_last_stage$Stage == "3. Discovery", data_last_stage$Upload_date + 91,
-#                                                                         ifelse(data_last_stage$Stage == "2. Prospect", data_last_stage$Upload_date + 112,
-#                                                                                ifelse(data_last_stage$Stage == "1. Marketing", data_last_stage$Upload_date + 153, NA))))))))
-# data_last_stage$Close_date <- as.Date(data_last_stage$Close_date, origin = "1970-01-01")
-# data_next_stage <- data_last_stage
-# data_next_stage$Upload_date <- data_next_stage$Upload_date + 7
-# #rint(data_next_stage)
-# 
-# first_stage <- subset(data_next_stage, data_next_stage$Stage == "1. Marketing")
-# second_stage <- subset(data_next_stage, data_next_stage$Stage == "2. Prospect")
-# third_stage <- subset(data_next_stage, data_next_stage$Stage == "3. Discovery")
-# fourth_stage <- subset(data_next_stage, data_next_stage$Stage == "4. Identify Pains")
-# fifth_stage <- subset(data_next_stage, data_next_stage$Stage == "5. Value Proposition")
-# sixth_stage <- subset(data_next_stage, data_next_stage$Stage == "6. Final bid")
-# seventh_stage <- subset(data_next_stage, data_next_stage$Stage == "7. Closing")
-# closed_stage <- subset(data_next_stage, (data_next_stage$Stage == "Won") | (data_next_stage$Stage == "Lost"))
-# 
-# first_stage_austria <- first_stage[(first_stage$Region == "Austria"),]
-# first_stage_rest <- first_stage[(first_stage$Region != "Austria"),]
-# first_stage_austria$Stage <- sample(x = c("1. Marketing", "2. Prospect", "3. Discovery", "4. Identify Pains", "5. Value Proposition", "6. Final bid", "7. Closing", "Won", "Lost"), size = dim(first_stage_austria)[1], replace = TRUE, prob = c(0.8, 0.1, 0.02, 0.02, 0.02, 0.02, 0.01, 0.002, 0.008))
-# first_stage_rest$Stage <- sample(x = c("1. Marketing", "2. Prospect", "3. Discovery", "4. Identify Pains", "5. Value Proposition", "6. Final bid", "7. Closing", "Won", "Lost"), size = dim(first_stage_rest)[1], replace = TRUE, prob = c(0.63, 0.2, 0.08, 0.02, 0.02, 0.02, 0.02, 0.005, 0.005))
-# 
-# second_stage_austria <- second_stage[(second_stage$Region == "Austria"),]
-# second_stage_rest <- second_stage[(second_stage$Region != "Austria"),]
-# second_stage_austria$Stage <- sample(x = c("2. Prospect", "3. Discovery", "4. Identify Pains", "5. Value Proposition", "6. Final bid", "7. Closing", "Won", "Lost"), size = dim(second_stage_austria)[1], replace = TRUE, prob = c(0.8, 0.09, 0.02, 0.01, 0.01, 0.01, 0.01, 0.05))
-# second_stage_rest$Stage <- sample(x = c("2. Prospect", "3. Discovery", "4. Identify Pains", "5. Value Proposition", "6. Final bid", "7. Closing", "Won", "Lost"), size = dim(second_stage_rest)[1], replace = TRUE, prob = c(0.5, 0.3, 0.1, 0.02, 0.02, 0.02, 0.02, 0.02))
-# 
-# third_stage_austria <- third_stage[(third_stage$Region == "Austria"),]
-# third_stage_rest <- third_stage[(third_stage$Region != "Austria"),]
-# third_stage_austria$Stage <- sample(x = c("3. Discovery", "4. Identify Pains", "5. Value Proposition", "6. Final bid", "7. Closing", "Won", "Lost"), size = dim(third_stage_austria)[1], replace = TRUE, prob = c(0.8, 0.05, 0.05, 0.05, 0.01, 0.01, 0.03))
-# third_stage_rest$Stage <- sample(x = c("3. Discovery", "4. Identify Pains", "5. Value Proposition", "6. Final bid", "7. Closing", "Won", "Lost"), size = dim(third_stage_rest)[1], replace = TRUE, prob = c(0.4, 0.4, 0.08, 0.04, 0.02, 0.02, 0.02))
-# 
-# fourth_stage_austria <- fourth_stage[(fourth_stage$Region == "Austria"),]
-# fourth_stage_rest <- fourth_stage[(fourth_stage$Region != "Austria"),]
-# fourth_stage_austria$Stage <- sample(x = c("4. Identify Pains", "5. Value Proposition", "6. Final bid", "7. Closing", "Won", "Lost"), size = dim(fourth_stage_austria)[1], replace = TRUE, prob = c(0.7, 0.15, 0.06, 0.02, 0.02, 0.05))
-# fourth_stage_rest$Stage <- sample(x = c("4. Identify Pains", "5. Value Proposition", "6. Final bid", "7. Closing", "Won", "Lost"), size = dim(fourth_stage_rest)[1], replace = TRUE, prob = c(0.3, 0.5, 0.1, 0.06, 0.02, 0.02))
-# 
-# fifth_stage_austria <- fifth_stage[(fifth_stage$Region == "Austria"),]
-# fifth_stage_rest <- fifth_stage[(fifth_stage$Region != "Austria"),]
-# fifth_stage_austria$Stage <- sample(x = c("5. Value Proposition", "6. Final bid", "7. Closing", "Won", "Lost"), size = dim(fifth_stage_austria)[1], replace = TRUE, prob = c(0.7, 0.2, 0.06, 0.02, 0.02))
-# fifth_stage_rest$Stage <- sample(x = c("5. Value Proposition", "6. Final bid", "7. Closing", "Won", "Lost"), size = dim(fifth_stage_rest)[1], replace = TRUE, prob = c(0.3, 0.5, 0.1, 0.08, 0.02))
-# 
-# sixth_stage_austria <- sixth_stage[(sixth_stage$Region == "Austria"),]
-# sixth_stage_rest <- sixth_stage[(sixth_stage$Region != "Austria"),]
-# sixth_stage_austria$Stage <- sample(x = c("6. Final bid", "7. Closing", "Won", "Lost"), size = dim(sixth_stage_austria)[1], replace = TRUE, prob = c(0.6, 0.1, 0.1, 0.2))
-# sixth_stage_rest$Stage <- sample(x = c("6. Final bid", "7. Closing", "Won", "Lost"), size = dim(sixth_stage_rest)[1], replace = TRUE, prob = c(0.4, 0.3, 0.2, 0.1))
-# 
-# seventh_stage_austria <- seventh_stage[(seventh_stage$Region == "Austria"),]
-# seventh_stage_rest <- seventh_stage[(seventh_stage$Region != "Austria"),]
-# seventh_stage_austria$Stage <- sample(x = c("7. Closing", "Won", "Lost"), size = dim(seventh_stage_austria)[1], replace = TRUE, prob = c(0.4, 0.3, 0.3))
-# seventh_stage_rest$Stage <- sample(x = c("7. Closing", "Won", "Lost"), size = dim(seventh_stage_rest)[1], replace = TRUE, prob = c(0.2, 0.6, 0.2))
-# 
-# 
-# data_next_week <- do.call("rbind", list(first_stage_austria, first_stage_rest, second_stage_austria, second_stage_rest, third_stage_austria, third_stage_rest, fourth_stage_austria, fourth_stage_rest, fifth_stage_austria, fifth_stage_rest, sixth_stage_austria, sixth_stage_rest, seventh_stage_austria, seventh_stage_rest, closed_stage))
-# 
-# data_next_week$Stage <- ifelse((data_next_week$Region == "Austria" & data_next_week$Product == "MODL_BI_FORC_SAAS" & data_next_week$Stage != "1. Marketing"), "1. Marketing", data_next_week$Stage)
-# data_next_week$Stage <- ifelse((data_next_week$Region == "Austria" & data_next_week$Product == "MODL_BI_FORC_SAAS" & data_next_week$Stage != "2. Prospect"), "2. Prospect", data_next_week$Stage)
-# 
-# 
-# test_data <- rbind(test_data, data_next_week)
-# data_last_stage <- data_next_week
-# check_data <- data_next_week[(data_next_week$Upload_date < "2019-08-30"),]
-# check_val <- dim(check_data)[1]
-# print(check_val)
-# 
-# }
-# print(test_data)
+print(data_complete[order(data_complete$Opportunity_Name, data_complete$Upload_date),])
 
 ```
 
