@@ -318,3 +318,22 @@ print(data_complete[order(data_complete$Opportunity_Name, data_complete$Upload_d
 write.csv(data_complete, 'generated_data_for_testing_complete.csv')
 ```
 
+## Plot data
+```{r}
+data_open <- data_complete[!(data_complete$Stage %in% c('Won', 'Lost')),]
+data_closed <- data_complete[data_complete$Stage %in% c('Won', 'Lost'),]
+data_closed <- data_closed[data_closed$Stage != data_closed$last_stage,]
+
+data_dropped_closed_duplicates <- rbind(data_open, data_closed)
+data_for_plot <- data.frame(table(data_dropped_closed_duplicates$Stage, data_dropped_closed_duplicates$Upload_date))
+data_for_plot$Var2 <- as.Date(data_for_plot$Var2)
+print(data_for_plot)
+library(tidyverse)
+ggplot(data_for_plot) + geom_area(mapping = aes(x = Var2, y = Freq, fill = Var1))
+```
+
+## Save data with dropped duplocates for closed opportunities
+```{r}
+write.csv(data_dropped_closed_duplicates, 'data_complete_no_closed_duplicates.csv')
+```
+
