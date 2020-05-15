@@ -6,8 +6,6 @@ from sklearn.preprocessing import LabelEncoder
 from src.preprocess import scale_transform
 from sklearn.neural_network import MLPRegressor
 from sklearn.tree import DecisionTreeRegressor
-from sklearn.model_selection import train_test_split
-
 
 class Model(ABC):
     model_name = ""
@@ -27,6 +25,7 @@ class Model(ABC):
         self.model = None
         self.period = period
         self.update_col = update_col
+        self.periods_model_name = 'dt'
 
     @abstractmethod
     def define_model(self):
@@ -44,7 +43,7 @@ class Model(ABC):
         y_predict = self.model.predict(self.X_test)
         win_probability = self.model.predict_proba(self.X_test)
         win_probability = win_probability[:, self.index_won]
-        y_predict = pd.DataFrame({'predict': y_predict, 'probability win': win_probability})
+        y_predict = pd.DataFrame({'predict': y_predict, 'probability win': win_probability*100})
 
         predictions_column_name = 'predictions_' + self.model_name
         y_predict = y_predict.set_index(self.index_test, drop=True)
@@ -60,18 +59,13 @@ class Model(ABC):
         X, y, y_predict = self.fit_predict_win_proba()
         predictions_periods = self.predict_period(X, y, self.index_test, self.index_train, self.second_part_data)
         predictions_periods.index = predictions_periods.index.map(int)
-        predictions_periods.loc[self.index_test, 'probability win'] = y_predict['probability win']
+        predictions_periods.loc[self.index_test, 'probability win'] = y_predict['probability win'].map('{:,.2f}%'.format)
         predictions_periods.loc[self.index_test, 'predicted stage'] = y_predict['predict']
 
         return predictions_periods
 
     def preprocess_periods(self):
-        # # make predictions only for data which predicted to be be won
-        # open_data = self.second_part_data.loc[self.second_part_data['future stage'] == 1]
         open_data = self.second_part_data
-
-        # index_train = open_data.index[open_data[self.update_col] < self.period]
-        # index_test = open_data.index[open_data[self.update_col] >= self.period]
 
         # delete unnecessary columns
         open_data = open_data.drop(columns=['future stage'])
@@ -85,9 +79,8 @@ class Model(ABC):
         d = defaultdict(LabelEncoder)  # to be able to decode later
         X = scale_transform(to_change, to_stay, d)
         return X, y
-            # , index_test, index_train
 
-    def predict_period(self, X, y, index_test, index_train, data, model_name='dt'):
+    def predict_period(self, X, y, index_test, index_train, data):
         if index_test.empty:
             print('Empty data')
             data['time to close'] = 0
@@ -97,28 +90,24 @@ class Model(ABC):
             y_train = y.loc[index_train]
             y_train = np.ravel(y_train)
 
-            X_test_orig = X_test
-            # X_train, X_test, y_train, y_test = train_test_split(X_train, y_train, test_size=0.3, shuffle=True)
-
-            if model_name == 'nn':
-                model = MLPRegressor(hidden_layer_sizes=(50, 30), max_iter=1000)
+            if self.periods_model_name == 'nn':
+                model = MLPRegressor(hidden_layer_sizes=(100, 80), max_iter=1000)
                 model.fit(X_train, y_train)
             else:  # model = decision trees
                 model = DecisionTreeRegressor()
                 model.fit(X_train, y_train)
 
-            predictions = model.predict(X_test_orig)
+            predictions = model.predict(X_test)
             predictions = np.around(predictions).astype(int)
             predictions = np.where(predictions < 0, 0, predictions)
 
             predictions_periods = pd.DataFrame(predictions)
-            period_columns_name = 'days to close'
+            period_columns_name = 'predicted days to close'
             predictions_periods.columns = [period_columns_name]
             predictions_periods = predictions_periods.set_index(index_test, drop=True)
             data[period_columns_name] = 0
             data.loc[index_test, period_columns_name] = predictions_periods[period_columns_name]
-            # data.loc[index_test, 'time to close'] = data[self.update_col] + pd.to_timedelta(data[period_columns_name],
-            #                                                                          unit='D')
+
             data.drop(columns=period_columns_name)
         return data
 

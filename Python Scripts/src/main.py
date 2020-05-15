@@ -45,18 +45,18 @@ data_after_nn, acc_nn = nn.make_predicitons()
 print(acc_nn)
 print(data_after_nn.loc[index_test])
 
-# lr = LogRegModel(X_train, X_test, y_train, y_test,index_test,
-#                  index_train, second_part, target, test_period, update_col)
-# lr.define_model(solver=lr_solver, penalty='')
-# data_after_lr, acc_lr = lr.make_predicitons()
-#
-# print(acc_lr)
-# print(data_after_lr)
+lr = LogRegModel(X_train, X_test, y_train, y_test,index_test,
+                 index_train, second_part, target, test_period, update_col)
+lr.define_model(solver=lr_solver, penalty='')
+data_after_lr, acc_lr = lr.make_predicitons()
 
-# svc = SVCModel(X_train, X_test, y_train, y_test, index_test,
-#                  index_train, second_part, target, test_period, update_col)
-# svc.define_model(kernel=svc_kernel)
-# data_after_svc, acc_svc = svc.make_predicitons()
-#
-# print(acc_svc)
-# print(data_after_svc)
+print(acc_lr)
+print(data_after_lr.loc[index_test])
+
+svc = SVCModel(X_train, X_test, y_train, y_test, index_test,
+                 index_train, second_part, target, test_period, update_col)
+svc.define_model(kernel=svc_kernel)
+data_after_svc, acc_svc = svc.make_predicitons()
+
+print(acc_svc)
+print(data_after_svc.loc[index_test])

@@ -145,8 +145,8 @@ def preprocess(data, test_period, target, key_columns, update_col, created_col, 
     # change values in target column to numeric
     open_data.loc[:, 'future stage'] = np.where(open_data['future stage'] == 'Lost', 0, 1)
 
-    # delete stage new column, because unnecessary
-    open_data_second_part = open_data.drop(columns=[update_col, stage_col, 'Expected_closing'])
+    # need time difference for the second part predictions
+    open_data_second_part = open_data.drop(columns=[update_col, stage_col])
     open_data = open_data_second_part.drop(columns='time_diff_to_close')
 
     # get indices of train and test data
@@ -161,19 +161,6 @@ def preprocess(data, test_period, target, key_columns, update_col, created_col, 
     to_stay = to_stay.drop(columns=target)
     X = scale_transform(to_change, to_stay, dict_LE)
 
-    print(open_data.shape)
-    print(open_data.head())
-    # SECOND PART
-    # open_data_second_part = data_second_part.loc[data_second_part[stage_col] == 'Open']
-    # # change future stage open to lost to make it easier to make the predictions
-    # open_data_second_part.loc[:, 'future stage'] = np.where(open_data_second_part['future stage'] == 'Open', 'Lost',
-    #                                                         open_data_second_part['future stage'])
-    #
-    # # change values in target column to numeric
-    # open_data_second_part.loc[:, 'future stage'] = np.where(open_data_second_part['future stage'] == 'Lost', 0, 1)
-
-    print(open_data_second_part.shape)
-    print(open_data_second_part.head())
     end = time.time()
     log.info('Preprocessing data finished. Execution time: ' + str(timer(start, end)))
     return X, y, index_train, index_test, dict_LE, open_data_second_part

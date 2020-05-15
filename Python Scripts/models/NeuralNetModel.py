@@ -14,3 +14,4 @@ class NeuralNetModel(Model):
         self.model = MLPClassifier(solver=solver, early_stopping=True, verbose=False, learning_rate='adaptive',
                                    activation=activation,
                                    hidden_layer_sizes=n_nodes)
+        self.periods_model_name = 'nn'
