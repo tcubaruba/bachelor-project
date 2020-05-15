@@ -17,6 +17,7 @@ pd.options.mode.chained_assignment = None  # default='warn'
 
 def prepare_data(data):
     data['Stage_simple'] = np.where(~data['Stage'].isin(['Won', 'Lost']), 'Open', data['Stage'])
+
     return data.drop(columns=['Price', 'Amount', 'last_stage', 'Stage'])
 
 
@@ -63,9 +64,29 @@ def scale_transform(to_change, to_stay, dict):
 
 def preprocess(data, test_period, target, key_columns, update_col, created_col, opp_name_col, product_name_col):
     log.info('Start preprocessing data')
-    stage_col = 'Stage_simple'
     start = time.time()
-    data = data.copy()
+
+    # First create column "Stage_simple", which has only three values: Open, Won or Lost. This will be predicted
+    stage_col = 'Stage_simple'
+    data[stage_col] = np.where(~data['Stage'].isin(['Won', 'Lost']), 'Open', data['Stage'])
+
+    # create pivot table for products for more compact view of which products each opportunity has
+    pivot_products = pd.pivot_table(data[[opp_name_col, product_name_col, update_col]],
+                                    index=[opp_name_col, update_col],
+                                    columns=[product_name_col],
+                                    aggfunc=[len],
+                                    fill_value=0
+                                    )
+    # The initial column with product name, as well as its price and amount is not needed. Only the entire volume
+    # of opportunity is interesting. The volume will be aggregated
+    data = data.drop(columns=[product_name_col, 'Price', 'Amount'])
+    columns_left = list(data.columns)
+    columns_left.remove('Volume')
+    columns_right = list(pivot_products.columns)
+    columns = columns_left + columns_right
+    data = data.join(pivot_products, on=[opp_name_col, update_col]).groupby(columns)['Volume'].sum().to_frame()
+    data = pd.DataFrame(data.to_records())
+
     key_columns.append(stage_col)
     # sort data by update
     data = data.sort_values(by=update_col)
@@ -85,15 +106,10 @@ def preprocess(data, test_period, target, key_columns, update_col, created_col, 
 
     # time to close (won or lost)
     data['time_diff_to_close'] = np.where(data[stage_col] == 'Open', data.groupby(key_columns)['timediff'].transform(
-        'last') - data['timediff'], data.groupby(key_columns)['timediff'].transform(
+        'last') - data['timediff'] + 7, data.groupby(key_columns)['timediff'].transform(
         'first') - data['timediff'])
 
-    # take only first occurrence of an opportunity
-    data_no_duplicates = data.loc[data['timediff'] == 0]
-
-    # create key value
-    data_no_duplicates['key_val'] = data_no_duplicates[opp_name_col].map(str) + ' ' + data_no_duplicates[
-        product_name_col]
+    data_no_duplicates = data.loc[(data['Stage'] != data['last_stage']) | (data['timediff'] == 0)]
 
     # split data and reset indexes
     data_won = data_no_duplicates.loc[data_no_duplicates[stage_col] == 'Won']
@@ -101,60 +117,43 @@ def preprocess(data, test_period, target, key_columns, update_col, created_col, 
     data_closed = data_no_duplicates.loc[data_no_duplicates[stage_col] != 'Open']
 
     # create temp tables with only key values and date
-    data_won_temp = data_won[['key_val', update_col]]
-    data_lost_temp = data_lost[['key_val', update_col]]
-    data_closed_temp = data_closed[['key_val', update_col]]
+    data_won_temp = data_won[[opp_name_col, update_col]]
+    data_lost_temp = data_lost[[opp_name_col, update_col]]
 
     # define the future stage
-    data_no_duplicates['future stage'] = np.where(data_no_duplicates['key_val'].isin(data_won_temp['key_val']), 'Won',
+    data_no_duplicates['future stage'] = np.where(data_no_duplicates[opp_name_col].isin(data_won_temp[opp_name_col]), 'Won',
                                                   np.where(
-                                                      data_no_duplicates['key_val'].isin(data_lost_temp['key_val']),
+                                                      data_no_duplicates[opp_name_col].isin(data_lost_temp[opp_name_col]),
                                                       'Lost', 'Open'))
 
     data_no_duplicates['future stage'] = np.where(data_no_duplicates[stage_col] != 'Open', 'none',
                                                   data_no_duplicates['future stage'])
 
-    # get close date for closed opportunities
-    data_no_duplicates['close date'] = data_no_duplicates['key_val'].map(
-        data_closed_temp.set_index('key_val')[update_col])
-
-    # set max date to last date of update
-    max_date = data[update_col].max()
-    max_date = pd.to_datetime(max_date).date()
-    data_no_duplicates['close date'] = np.where(data_no_duplicates['close date'].isnull(), max_date,
-                                                data_no_duplicates['close date'].dt.date)
-    data_no_duplicates['close date'] = data_no_duplicates['close date'].astype('datetime64[ns]')
-
-    # recompute  time difference to closing by days
-    data_no_duplicates['time_diff_to_close'] = ((data_no_duplicates['close date'] - data_no_duplicates[update_col])
-        .dt.components['days']).astype(int)
-
-    data_no_duplicates[stage_col] = np.where(data_no_duplicates['time_diff_to_close'] < 0,
-                                               data_no_duplicates['future stage'], data_no_duplicates[stage_col])
+    # drop rows which are still not closed, because we can not check the prediction accuracy for them
+    data_no_duplicates = data_no_duplicates.loc[data_no_duplicates['future stage'] != 'Open']
 
     # delete unnecessary columns
     data_first_part = data_no_duplicates.drop(
-        columns=['timediff', 'key_val', 'time_diff_to_close', 'close date'])
-    data_second_part = data_no_duplicates.drop(columns=['timediff', 'key_val', 'close date'])
+        columns=['timediff', 'time_diff_to_close', created_col])
+    data_second_part = data_no_duplicates.drop(columns=['timediff', created_col])
 
     # FIRST PART
     # data to make predictions for
     open_data = data_first_part.loc[data_first_part[stage_col] == 'Open']
-
-    # change future stage open to lost to make it easier to make the predictions
-    open_data.loc[:, 'future stage'] = np.where(open_data['future stage'] == 'Open', 'Lost', open_data['future stage'])
 
     # change values in target column to numeric
     open_data.loc[:, 'future stage'] = np.where(open_data['future stage'] == 'Lost', 0, 1)
 
     # delete stage new column, because unnecessary
     open_data = open_data.drop(columns=stage_col)
+    print(open_data.head(20))
+    print(open_data['future stage'].value_counts())
 
     # get indices of train and test data
     index_train = open_data.index[open_data[update_col] < test_period]
     index_test = open_data.index[open_data[update_col] >= test_period]
 
-    open_data = open_data.drop(columns=update_col)
+    open_data = open_data.drop(columns = update_col)
 
     # convert datatypes
     to_change = open_data.select_dtypes(include=['object', 'datetime'])  # data which need to be encoded

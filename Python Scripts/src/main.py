@@ -7,6 +7,9 @@ import sys
 
 from src.preprocess import prepare_data
 from src.preprocess import preprocess
+from models.NeuralNetModel import NeuralNetModel
+from models.LogRegModel import LogRegModel
+from models.SVCModel import SVCModel
 
 logging.basicConfig(level=os.environ.get("LOGLEVEL", "DEBUG"))
 log = logging.getLogger('Predicting win probability for sales data')
@@ -23,7 +26,37 @@ key_columns = key_columns[1:-1].split(',')
 target = 'future stage'
 target_second_part = 'time_diff_to_close'
 
-data = prepare_data(data_raw)
-print(data.head())
+# data = prepare_data(data_raw)
 
-X, y, index_train, index_test, dict_LE, second_part = preprocess(data, test_period, target, key_columns, update_col, created_col, opp_name_col, product_name_col)
+print(data_raw.head())
+
+X, y, index_train, index_test, dict_LE, second_part = preprocess(data_raw, test_period, target, key_columns, update_col, created_col, opp_name_col, product_name_col)
+
+X_train = X.loc[index_train]
+X_test = X.loc[index_test]
+y_train = y.loc[index_train]
+y_test = y.loc[index_test]
+
+nn = NeuralNetModel(X_train, X_test, y_train, y_test, index_test,
+                 index_train, second_part, target, test_period, update_col)
+nn.define_model(solver=nn_solver, activation=nn_activation, n_nodes=nn_nodes)
+data_after_nn, acc_nn = nn.make_predicitons()
+
+print(acc_nn)
+print(data_after_nn.loc[index_test])
+
+# lr = LogRegModel(X_train, X_test, y_train, y_test,index_test,
+#                  index_train, second_part, target, test_period, update_col)
+# lr.define_model(solver=lr_solver, penalty='')
+# data_after_lr, acc_lr = lr.make_predicitons()
+#
+# print(acc_lr)
+# print(data_after_lr)
+
+# svc = SVCModel(X_train, X_test, y_train, y_test, index_test,
+#                  index_train, second_part, target, test_period, update_col)
+# svc.define_model(kernel=svc_kernel)
+# data_after_svc, acc_svc = svc.make_predicitons()
+#
+# print(acc_svc)
+# print(data_after_svc)
