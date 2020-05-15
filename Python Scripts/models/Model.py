@@ -43,7 +43,6 @@ class Model(ABC):
         self.model.fit(self.X_train, self.y_train)
         y_predict = self.model.predict(self.X_test)
         win_probability = self.model.predict_proba(self.X_test)
-
         win_probability = win_probability[:, self.index_won]
         y_predict = pd.DataFrame({'predict': y_predict, 'probability win': win_probability})
 
@@ -54,12 +53,12 @@ class Model(ABC):
 
         self.second_part_data = self.second_part_data.drop(columns=self.target)
         self.second_part_data = self.second_part_data.rename(columns={predictions_column_name: self.target})
-        X, y, index_test_new, index_train_new = self.preprocess_periods()
-        return X, y, index_test_new, index_train_new, y_predict
+        X, y = self.preprocess_periods()
+        return X, y, y_predict
 
     def predict_closing_dates(self):
-        X, y, index_test_new, index_train_new, y_predict = self.fit_predict_win_proba()
-        predictions_periods = self.predict_period(X, y, index_test_new, index_train_new, self.second_part_data)
+        X, y, y_predict = self.fit_predict_win_proba()
+        predictions_periods = self.predict_period(X, y, self.index_test, self.index_train, self.second_part_data)
         predictions_periods.index = predictions_periods.index.map(int)
         predictions_periods.loc[self.index_test, 'probability win'] = y_predict['probability win']
         predictions_periods.loc[self.index_test, 'predicted stage'] = y_predict['predict']
@@ -71,11 +70,11 @@ class Model(ABC):
         # open_data = self.second_part_data.loc[self.second_part_data['future stage'] == 1]
         open_data = self.second_part_data
 
-        index_train = open_data.index[open_data[self.update_col] < self.period]
-        index_test = open_data.index[open_data[self.update_col] >= self.period]
+        # index_train = open_data.index[open_data[self.update_col] < self.period]
+        # index_test = open_data.index[open_data[self.update_col] >= self.period]
 
         # delete unnecessary columns
-        open_data = open_data.drop(columns=[self.update_col, 'future stage'])
+        open_data = open_data.drop(columns=['future stage'])
 
         # convert data types
         to_change = open_data.select_dtypes(include=['object', 'datetime'])  # data which need to be encoded
@@ -85,7 +84,8 @@ class Model(ABC):
         y = open_data[self.target_second_part]  # writing the target column in y
         d = defaultdict(LabelEncoder)  # to be able to decode later
         X = scale_transform(to_change, to_stay, d)
-        return X, y, index_test, index_train
+        return X, y
+            # , index_test, index_train
 
     def predict_period(self, X, y, index_test, index_train, data, model_name='dt'):
         if index_test.empty:

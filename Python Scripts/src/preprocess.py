@@ -69,7 +69,6 @@ def preprocess(data, test_period, target, key_columns, update_col, created_col, 
     # First create column "Stage_simple", which has only three values: Open, Won or Lost. This will be predicted
     stage_col = 'Stage_simple'
     data[stage_col] = np.where(~data['Stage'].isin(['Won', 'Lost']), 'Open', data['Stage'])
-
     # create pivot table for products for more compact view of which products each opportunity has
     pivot_products = pd.pivot_table(data[[opp_name_col, product_name_col, update_col]],
                                     index=[opp_name_col, update_col],
@@ -121,9 +120,11 @@ def preprocess(data, test_period, target, key_columns, update_col, created_col, 
     data_lost_temp = data_lost[[opp_name_col, update_col]]
 
     # define the future stage
-    data_no_duplicates['future stage'] = np.where(data_no_duplicates[opp_name_col].isin(data_won_temp[opp_name_col]), 'Won',
+    data_no_duplicates['future stage'] = np.where(data_no_duplicates[opp_name_col].isin(data_won_temp[opp_name_col]),
+                                                  'Won',
                                                   np.where(
-                                                      data_no_duplicates[opp_name_col].isin(data_lost_temp[opp_name_col]),
+                                                      data_no_duplicates[opp_name_col].isin(
+                                                          data_lost_temp[opp_name_col]),
                                                       'Lost', 'Open'))
 
     data_no_duplicates['future stage'] = np.where(data_no_duplicates[stage_col] != 'Open', 'none',
@@ -134,8 +135,8 @@ def preprocess(data, test_period, target, key_columns, update_col, created_col, 
 
     # delete unnecessary columns
     data_first_part = data_no_duplicates.drop(
-        columns=['timediff', 'time_diff_to_close', created_col])
-    data_second_part = data_no_duplicates.drop(columns=['timediff', created_col])
+        columns=['timediff', created_col])
+    # data_second_part = data_no_duplicates.drop(columns=['timediff', created_col])
 
     # FIRST PART
     # data to make predictions for
@@ -145,15 +146,12 @@ def preprocess(data, test_period, target, key_columns, update_col, created_col, 
     open_data.loc[:, 'future stage'] = np.where(open_data['future stage'] == 'Lost', 0, 1)
 
     # delete stage new column, because unnecessary
-    open_data = open_data.drop(columns=stage_col)
-    print(open_data.head(20))
-    print(open_data['future stage'].value_counts())
+    open_data_second_part = open_data.drop(columns=[update_col, stage_col, 'Expected_closing'])
+    open_data = open_data_second_part.drop(columns='time_diff_to_close')
 
     # get indices of train and test data
-    index_train = open_data.index[open_data[update_col] < test_period]
-    index_test = open_data.index[open_data[update_col] >= test_period]
-
-    open_data = open_data.drop(columns = update_col)
+    index_test = open_data.sample(frac=0.3, random_state=1).index
+    index_train = open_data.drop(index_test).index
 
     # convert datatypes
     to_change = open_data.select_dtypes(include=['object', 'datetime'])  # data which need to be encoded
@@ -163,15 +161,19 @@ def preprocess(data, test_period, target, key_columns, update_col, created_col, 
     to_stay = to_stay.drop(columns=target)
     X = scale_transform(to_change, to_stay, dict_LE)
 
+    print(open_data.shape)
+    print(open_data.head())
     # SECOND PART
-    open_data_second_part = data_second_part.loc[data_second_part[stage_col] == 'Open']
-    # change future stage open to lost to make it easier to make the predictions
-    open_data_second_part.loc[:, 'future stage'] = np.where(open_data_second_part['future stage'] == 'Open', 'Lost',
-                                                            open_data_second_part['future stage'])
+    # open_data_second_part = data_second_part.loc[data_second_part[stage_col] == 'Open']
+    # # change future stage open to lost to make it easier to make the predictions
+    # open_data_second_part.loc[:, 'future stage'] = np.where(open_data_second_part['future stage'] == 'Open', 'Lost',
+    #                                                         open_data_second_part['future stage'])
+    #
+    # # change values in target column to numeric
+    # open_data_second_part.loc[:, 'future stage'] = np.where(open_data_second_part['future stage'] == 'Lost', 0, 1)
 
-    # change values in target column to numeric
-    open_data_second_part.loc[:, 'future stage'] = np.where(open_data_second_part['future stage'] == 'Lost', 0, 1)
-
+    print(open_data_second_part.shape)
+    print(open_data_second_part.head())
     end = time.time()
     log.info('Preprocessing data finished. Execution time: ' + str(timer(start, end)))
     return X, y, index_train, index_test, dict_LE, open_data_second_part
