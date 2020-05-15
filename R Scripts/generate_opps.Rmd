@@ -134,14 +134,13 @@ print(opps_complete)
 For lost and won opportunities "upload date" will be taken. For the 6. stage "final Bid" four weeks, for the 5. stage six weeks and so on. For the 1. stage we add 22 weeks.
 
 ```{r}
-opps_complete$Close_date <- ifelse((opps_complete$Stage == "Won" | opps_complete$Stage == "Lost"), opps_complete$Upload_date, 
-                                      ifelse(opps_complete$Stage == "6. Final bid", opps_complete$Upload_date + 28,
-                                             ifelse(opps_complete$Stage == "5. Value Proposition", opps_complete$Upload_date + 42,
-                                                    ifelse(opps_complete$Stage == "4. Identify Pains", opps_complete$Upload_date + 63,
-                                                           ifelse(opps_complete$Stage == "3. Discovery", opps_complete$Upload_date + 91,
-                                                                  ifelse(opps_complete$Stage == "2. Prospect", opps_complete$Upload_date + 112,
-                                                                         ifelse(opps_complete$Stage == "1. Marketing", opps_complete$Upload_date + 154, NA)))))))
-opps_complete$Close_date <- as.Date(opps_complete$Close_date, origin = "1970-01-01")
+opps_complete$Expected_closing <- ifelse((opps_complete$Stage == "Won" | opps_complete$Stage == "Lost"), 0, 
+                                      ifelse(opps_complete$Stage == "6. Final bid", 28,
+                                             ifelse(opps_complete$Stage == "5. Value Proposition", 42,
+                                                    ifelse(opps_complete$Stage == "4. Identify Pains", 63,
+                                                           ifelse(opps_complete$Stage == "3. Discovery", 91,
+                                                                  ifelse(opps_complete$Stage == "2. Prospect", 112,
+                                                                         ifelse(opps_complete$Stage == "1. Marketing", 154, NA)))))))
 
 print(opps_complete)
 
@@ -178,7 +177,7 @@ for (row in 1:nrow(opps_complete)){
   new_line$Stage <- line$Stage
   new_line$Created <- line$Created
   new_line$Upload_date <- line$Upload_date
-  new_line$Close_date <- line$Close_Date
+  new_line$Expected_closing <- line$Expected_closing
   new_line$Price <- product_prices$prices[match(new_line$Product, product_prices$Product)]
   new_line$Amount <- floor(runif(nrow(new_line), min = 1, max = 10))
   
@@ -311,6 +310,10 @@ while(check_val){
 }
 print(data_complete[order(data_complete$Opportunity_Name, data_complete$Upload_date),])
 
+```
+## Calculate volume
+```{r}
+data_complete$Volume <- data_complete$Price * data_complete$Amount
 ```
 
 ## Save data
