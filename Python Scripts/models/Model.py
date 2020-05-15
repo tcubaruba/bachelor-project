@@ -43,6 +43,7 @@ class Model(ABC):
         self.model.fit(self.X_train, self.y_train)
         y_predict = self.model.predict(self.X_test)
         win_probability = self.model.predict_proba(self.X_test)
+
         win_probability = win_probability[:, self.index_won]
         y_predict = pd.DataFrame({'predict': y_predict, 'probability win': win_probability})
 
