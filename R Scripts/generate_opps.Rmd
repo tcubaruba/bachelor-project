@@ -336,4 +336,3 @@ ggplot(data_for_plot) + geom_area(mapping = aes(x = Var2, y = Freq, fill = Var1)
 ```{r}
 write.csv(data_dropped_closed_duplicates, 'data_complete_no_closed_duplicates.csv')
 ```
-
