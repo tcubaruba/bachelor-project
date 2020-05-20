@@ -7,6 +7,7 @@ import logging
 import time
 import os
 import warnings
+import random
 from sklearn.exceptions import DataConversionWarning
 
 warnings.filterwarnings(action='ignore', category=DataConversionWarning)
@@ -150,7 +151,9 @@ def preprocess(data, test_period, target, key_columns, update_col, created_col, 
     open_data = open_data_second_part.drop(columns='time_diff_to_close')
 
     # get indices of train and test data
-    index_test = open_data.sample(frac=0.3, random_state=1).index
+    opps_list = open_data[opp_name_col].unique()
+    test_opps = random.sample(list(opps_list), int(0.3*len(opps_list)))
+    index_test = open_data[open_data[opp_name_col].isin(test_opps)].index
     index_train = open_data.drop(index_test).index
 
     # convert datatypes

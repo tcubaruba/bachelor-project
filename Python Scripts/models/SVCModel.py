@@ -8,3 +8,4 @@ class SVCModel(Model):
             kernel = 'rbf'
 
         self.model = SVC(gamma='scale', probability=True, kernel=kernel, C=0.99, class_weight='balanced')
+        self.model_name = 'svc'

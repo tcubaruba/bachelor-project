@@ -10,3 +10,4 @@ class LogRegModel(Model):
             penalty = 'l2'
         self.model = LogisticRegression(solver=solver, class_weight='balanced', multi_class='auto',
                                         verbose=False, warm_start=True, C=0.5, penalty=penalty)
+        self.model_name = 'lr'

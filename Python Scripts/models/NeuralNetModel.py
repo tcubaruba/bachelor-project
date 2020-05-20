@@ -15,3 +15,4 @@ class NeuralNetModel(Model):
                                    activation=activation,
                                    hidden_layer_sizes=n_nodes)
         self.periods_model_name = 'nn'
+        self.model_name = 'nn'
