@@ -16,10 +16,10 @@ log = logging.getLogger('Preprocessing data')
 pd.options.mode.chained_assignment = None  # default='warn'
 
 
-def prepare_data(data):
-    data['Stage_simple'] = np.where(~data['Stage'].isin(['Won', 'Lost']), 'Open', data['Stage'])
-
-    return data.drop(columns=['Price', 'Amount', 'last_stage', 'Stage'])
+# def prepare_data(data):
+#     data['Stage_simple'] = np.where(~data['Stage'].isin(['Won', 'Lost']), 'Open', data['Stage'])
+#
+#     return data.drop(columns=['Price', 'Amount', 'last_stage', 'Stage'])
 
 
 def timer(start, end):
@@ -109,7 +109,9 @@ def preprocess(data, test_period, target, key_columns, update_col, created_col, 
         'last') - data['timediff'] + 7, data.groupby(key_columns)['timediff'].transform(
         'first') - data['timediff'])
 
-    data_no_duplicates = data.loc[(data['Stage'] != data['last_stage']) | (data['timediff'] == 0)]
+    # TODO rename dataset or keep dropping duplicates
+    # data_no_duplicates = data.loc[(data['Stage'] != data['last_stage']) | (data['timediff'] == 0)]
+    data_no_duplicates = data
 
     # split data and reset indexes
     data_won = data_no_duplicates.loc[data_no_duplicates[stage_col] == 'Won']

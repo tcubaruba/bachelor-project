@@ -52,7 +52,6 @@ class Model(ABC):
 
         self.second_part_data = self.second_part_data.drop(columns=self.target)
         # self.second_part_data = self.second_part_data.rename(columns={predictions_column_name: self.target})
-        print(self.second_part_data)
         X, y = self.preprocess_periods()
         return X, y, y_predict
 
@@ -68,16 +67,10 @@ class Model(ABC):
     def preprocess_periods(self):
         open_data = self.second_part_data
 
-        # delete unnecessary columns
-        # open_data = open_data.drop(columns=['future stage'])
-
         # convert data types
         to_change = open_data.select_dtypes(include=['object', 'datetime'])  # data which need to be encoded
         to_stay = open_data.select_dtypes(include='number')  # numerical data
         to_stay = to_stay.drop(columns='time_diff_to_close')
-
-        print(to_change)
-        print(to_stay)
 
         y = open_data[self.target_second_part]  # writing the target column in y
         d = defaultdict(LabelEncoder)  # to be able to decode later
