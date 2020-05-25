@@ -6,13 +6,23 @@ from sklearn.preprocessing import LabelEncoder
 from src.preprocess import scale_transform
 from sklearn.neural_network import MLPRegressor
 from sklearn.tree import DecisionTreeRegressor
+from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import roc_auc_score
+from sklearn.metrics import roc_curve
+
+import matplotlib.pyplot as plt
+
+import logging
+mpl_logger = logging.getLogger('matplotlib')
+mpl_logger.setLevel(logging.WARNING)
 
 class Model(ABC):
     model_name = ""
     target_second_part = 'time_diff_to_close'
 
     def __init__(self, X_train, X_test, y_train, y_test, index_test,
-                 index_train, second_part_data, target, period, update_col):
+                 index_train, second_part_data, target, update_col, guessed_win_probabilities_for_test_data):
         self.X_train = X_train
         self.X_test = X_test
         self.y_train = y_train
@@ -23,9 +33,11 @@ class Model(ABC):
         self.target = target
         self.index_won = second_part_data[target][second_part_data[second_part_data[target] == 1].first_valid_index()]
         self.model = None
-        self.period = period
         self.update_col = update_col
         self.periods_model_name = 'dt'
+        self.y_predict = None
+        self.win_probability = None
+        self.guessed_win_probabilities_for_test_data = guessed_win_probabilities_for_test_data
 
     @abstractmethod
     def define_model(self):
@@ -40,10 +52,10 @@ class Model(ABC):
     def fit_predict_win_proba(self):
         self.y_train = np.ravel(self.y_train)
         self.model.fit(self.X_train, self.y_train)
-        y_predict = self.model.predict(self.X_test)
-        win_probability = self.model.predict_proba(self.X_test)
-        win_probability = win_probability[:, self.index_won]
-        y_predict = pd.DataFrame({'predict': y_predict, 'probability win': win_probability*100})
+        self.y_predict = self.model.predict(self.X_test)
+        self.win_probability = self.model.predict_proba(self.X_test)
+        self.win_probability = self.win_probability[:, self.index_won]
+        y_predict = pd.DataFrame({'predict': self.y_predict, 'probability win': self.win_probability*100})
 
         predictions_column_name = 'predictions_' + self.model_name
         y_predict = y_predict.set_index(self.index_test, drop=True)
@@ -110,5 +122,28 @@ class Model(ABC):
 
     def make_predicitons(self):
         predictions_periods = self.predict_closing_dates()
-        acc = self.fit_score()
-        return predictions_periods, acc
+        # acc = self.fit_score()
+        print(classification_report(self.y_test, self.y_predict))
+        print(confusion_matrix(self.y_test, self.y_predict))
+        # roc
+        ns_probs = self.guessed_win_probabilities_for_test_data
+        # calculate scores
+        ns_auc = roc_auc_score(self.y_test, ns_probs)
+        lr_auc = roc_auc_score(self.y_test, self.win_probability)
+        print('No Skill: ROC AUC=%.3f' % (ns_auc))
+        print('Model: ROC AUC=%.3f' % (lr_auc))
+
+        # calculate roc curves
+        ns_fpr, ns_tpr, _ = roc_curve(self.y_test, ns_probs)
+        lr_fpr, lr_tpr, _ = roc_curve(self.y_test, self.win_probability)
+        # plot the roc curve for the model
+        plt.plot(ns_fpr, ns_tpr, linestyle='--', label='No Skill')
+        plt.plot(lr_fpr, lr_tpr, marker='.', label='Trained Model')
+        plt.show()
+
+        self.calculate_revenue_forecast(predictions_periods.loc[self.index_test])
+
+        return predictions_periods
+
+    def calculate_revenue_forecast(self, predictions):
+        pass

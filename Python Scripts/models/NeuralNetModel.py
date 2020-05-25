@@ -7,9 +7,9 @@ class NeuralNetModel(Model):
         if solver == 'default':
             solver = 'adam'
         if activation == 'default':
-            activation = 'logistic'
+            activation = 'relu'
         if n_nodes == '()':
-            n_nodes = '(100,100)'
+            n_nodes = '(100,80, 60)'
         n_nodes = eval(n_nodes)
         self.model = MLPClassifier(solver=solver, early_stopping=True, verbose=False, learning_rate='adaptive',
                                    activation=activation,

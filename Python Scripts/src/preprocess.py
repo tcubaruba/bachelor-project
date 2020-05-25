@@ -63,7 +63,7 @@ def scale_transform(to_change, to_stay, dict):
     return X
 
 
-def preprocess(data, test_period, target, key_columns, update_col, created_col, opp_name_col, product_name_col):
+def preprocess(data, target, key_columns, update_col, created_col, opp_name_col, product_name_col):
     log.info('Start preprocessing data')
     start = time.time()
 
@@ -93,8 +93,8 @@ def preprocess(data, test_period, target, key_columns, update_col, created_col, 
     data[created_col] = data[created_col].astype('datetime64[ns]')
     data[update_col] = data[update_col].astype('datetime64[ns]')
     # time difference to first update
-    data['timediff'] = np.where(data[stage_col] != 'Open', (data[update_col] - data.groupby(key_columns)[
-        update_col].transform('first')), (data[update_col] - data.groupby(key_columns)[
+    data['timediff'] = np.where(data[stage_col] != 'Open', (data[update_col] - data.groupby(opp_name_col)[
+        update_col].transform('first')), (data[update_col] - data.groupby(opp_name_col)[
         update_col].transform('last')))
 
     # time difference from create datum
@@ -105,8 +105,8 @@ def preprocess(data, test_period, target, key_columns, update_col, created_col, 
     data['timediff_since_create'] = (data['timediff_since_create'].dt.components['days']).astype(int)
 
     # time to close (won or lost)
-    data['time_diff_to_close'] = np.where(data[stage_col] == 'Open', data.groupby(key_columns)['timediff'].transform(
-        'last') - data['timediff'] + 7, data.groupby(key_columns)['timediff'].transform(
+    data['time_diff_to_close'] = np.where(data[stage_col] == 'Open', data.groupby(opp_name_col)['timediff'].transform(
+        'last') - data['timediff'] + 7, data.groupby(opp_name_col)['timediff'].transform(
         'first') - data['timediff'])
 
     # TODO rename dataset or keep dropping duplicates
@@ -158,6 +158,21 @@ def preprocess(data, test_period, target, key_columns, update_col, created_col, 
     index_test = open_data[open_data[opp_name_col].isin(test_opps)].index
     index_train = open_data.drop(index_test).index
 
+    # set win probabilities
+    probability_dict = {
+        '1. Marketing': 0.05,
+        '2. Prospect': 0.1,
+        '3. Discovery': 0.25,
+        '4. Identify Pains': 0.5,
+        '5. Value Proposition': 0.8,
+        '6. Final bid': 0.9,
+        'Won': 1.,
+        'Lost': 0.
+    }
+    data_no_duplicates['Estimated_win_probability'] = data_no_duplicates['Stage'].replace(probability_dict)
+    guessed_win_probabilities = data_no_duplicates['Estimated_win_probability']
+    guessed_win_probabilities_for_test_data = guessed_win_probabilities.loc[index_test]
+
     # convert datatypes
     to_change = open_data.select_dtypes(include=['object', 'datetime'])  # data which need to be encoded
     to_stay = open_data.select_dtypes(include='number')  # numerical data
@@ -168,4 +183,4 @@ def preprocess(data, test_period, target, key_columns, update_col, created_col, 
 
     end = time.time()
     log.info('Preprocessing data finished. Execution time: ' + str(timer(start, end)))
-    return X, y, index_train, index_test, dict_LE, open_data_second_part
+    return X, y, index_train, index_test, open_data_second_part, guessed_win_probabilities_for_test_data
