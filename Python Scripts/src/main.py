@@ -35,7 +35,7 @@ key_columns = key_columns[1:-1].split(',')
 target = 'future stage'
 target_second_part = 'time_diff_to_close'
 
-X, y, index_train, index_test, second_part, guessed_win_probabilities_for_test_data = preprocess(data_raw, target, key_columns, update_col, created_col, opp_name_col, product_name_col)
+X, y, index_train, index_test, second_part, guessed_win_probabilities_for_test_data, updates, data_won = preprocess(data_raw, target, key_columns, update_col, created_col, opp_name_col, product_name_col)
 
 X_train = X.loc[index_train]
 X_test = X.loc[index_test]
@@ -43,7 +43,7 @@ y_train = y.loc[index_train]
 y_test = y.loc[index_test]
 
 nn = NeuralNetModel(X_train, X_test, y_train, y_test, index_test,
-                 index_train, second_part, target, update_col, guessed_win_probabilities_for_test_data)
+                 index_train, second_part, target, update_col, guessed_win_probabilities_for_test_data, updates, data_won)
 nn.define_model(solver=nn_solver, activation=nn_activation, n_nodes=nn_nodes)
 data_after_nn = nn.make_predicitons()
 

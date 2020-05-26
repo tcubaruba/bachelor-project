@@ -11,18 +11,22 @@ from sklearn.metrics import confusion_matrix
 from sklearn.metrics import roc_auc_score
 from sklearn.metrics import roc_curve
 
+import datetime
 import matplotlib.pyplot as plt
 
 import logging
+
 mpl_logger = logging.getLogger('matplotlib')
 mpl_logger.setLevel(logging.WARNING)
+
 
 class Model(ABC):
     model_name = ""
     target_second_part = 'time_diff_to_close'
 
     def __init__(self, X_train, X_test, y_train, y_test, index_test,
-                 index_train, second_part_data, target, update_col, guessed_win_probabilities_for_test_data):
+                 index_train, second_part_data, target, update_col, guessed_win_probabilities_for_test_data, updates,
+                 data_won):
         self.X_train = X_train
         self.X_test = X_test
         self.y_train = y_train
@@ -38,6 +42,8 @@ class Model(ABC):
         self.y_predict = None
         self.win_probability = None
         self.guessed_win_probabilities_for_test_data = guessed_win_probabilities_for_test_data
+        self.updates = updates
+        self.data_won = data_won
 
     @abstractmethod
     def define_model(self):
@@ -55,12 +61,12 @@ class Model(ABC):
         self.y_predict = self.model.predict(self.X_test)
         self.win_probability = self.model.predict_proba(self.X_test)
         self.win_probability = self.win_probability[:, self.index_won]
-        y_predict = pd.DataFrame({'predict': self.y_predict, 'probability win': self.win_probability*100})
+        y_predict = pd.DataFrame({'predict': self.y_predict, 'probability win': self.win_probability})
 
-        predictions_column_name = 'predictions_' + self.model_name
+        self.predictions_column_name = 'predictions_' + self.model_name
         y_predict = y_predict.set_index(self.index_test, drop=True)
-        self.second_part_data.loc[self.index_train, predictions_column_name] = self.second_part_data[self.target]
-        self.second_part_data.loc[self.index_test, predictions_column_name] = y_predict['predict']
+        self.second_part_data.loc[self.index_train, self.predictions_column_name] = self.second_part_data[self.target]
+        self.second_part_data.loc[self.index_test, self.predictions_column_name] = y_predict['predict']
 
         self.second_part_data = self.second_part_data.drop(columns=self.target)
         # self.second_part_data = self.second_part_data.rename(columns={predictions_column_name: self.target})
@@ -71,8 +77,10 @@ class Model(ABC):
         X, y, y_predict = self.fit_predict_win_proba()
         predictions_periods = self.predict_period(X, y, self.index_test, self.index_train, self.second_part_data)
         predictions_periods.index = predictions_periods.index.map(int)
-        predictions_periods.loc[self.index_test, 'probability win'] = y_predict['probability win'].map('{:,.2f}%'.format)
-        predictions_periods.loc[self.index_test, 'predicted stage'] = y_predict['predict']
+        # predictions_periods.loc[self.index_test, 'probability win'] = y_predict['probability win'].map(
+        #     '{:,.2f}'.format)
+        predictions_periods.loc[self.index_test, 'probability win'] = y_predict['probability win']
+        # predictions_periods.loc[self.index_test, 'predicted stage'] = y_predict['predict']
 
         return predictions_periods
 
@@ -137,13 +145,62 @@ class Model(ABC):
         ns_fpr, ns_tpr, _ = roc_curve(self.y_test, ns_probs)
         lr_fpr, lr_tpr, _ = roc_curve(self.y_test, self.win_probability)
         # plot the roc curve for the model
-        plt.plot(ns_fpr, ns_tpr, linestyle='--', label='No Skill')
-        plt.plot(lr_fpr, lr_tpr, marker='.', label='Trained Model')
-        plt.show()
+        # plt.plot(ns_fpr, ns_tpr, linestyle='--', label='No Skill')
+        # plt.plot(lr_fpr, lr_tpr, marker='.', label='Trained Model')
+        # plt.show()
 
         self.calculate_revenue_forecast(predictions_periods.loc[self.index_test])
 
         return predictions_periods
 
     def calculate_revenue_forecast(self, predictions):
-        pass
+        predictions = predictions[['Opportunity_Name', 'Stage', 'Expected_closing', 'Volume', 'time_diff_to_close',
+                                   self.predictions_column_name, 'predicted days to close', 'probability win']]
+        predictions['Update'] = self.updates
+        predictions['Guessed probabilities'] = self.guessed_win_probabilities_for_test_data
+        predictions['Guessed_closing'] = pd.to_datetime(predictions['Update']) + pd.to_timedelta(
+            predictions['Expected_closing'], unit='D')
+        predictions['Predicted_closing'] = pd.to_datetime(predictions['Update']) + pd.to_timedelta(
+            predictions['predicted days to close'], unit='D')
+        predictions['Guessed_revenue'] = predictions['Volume'] * predictions['Guessed probabilities']
+        predictions['Predicted_revenue'] = predictions['Volume'] * predictions['probability win']
+
+        print(predictions.head())
+        updates = predictions['Update'].unique()
+
+        test_opps = predictions['Opportunity_Name'].unique()
+        actual_won_opps = self.data_won[self.data_won['Opportunity_Name'].isin(test_opps)]
+        actual_won_opps = actual_won_opps[['Opportunity_Name', 'Upload_date', 'Volume']]
+
+        actual_revenue = actual_won_opps.groupby('Upload_date')['Volume'].sum().reset_index()
+        actual_revenue.columns = ['Update', 'Actual_sum']
+        actual_revenue = actual_revenue.groupby(actual_revenue['Update'].dt.to_period('M'))['Actual_sum'].sum().reset_index()
+        actual_revenue.index = actual_revenue['Update']
+        actual_revenue = actual_revenue.drop(columns='Update')
+
+
+        for u in updates:
+            # TODO: show only actual revenue of the opps which are in predictions data
+            df = predictions[predictions['Update'] == u]
+            guessed_revenue = df.groupby('Guessed_closing')['Guessed_revenue'].sum().reset_index()
+            guessed_revenue.columns = ['Update', 'Guessed_sum']
+            guessed_revenue = guessed_revenue.groupby(guessed_revenue['Update'].dt.to_period('M'))[
+                'Guessed_sum'].sum().reset_index()
+            guessed_revenue.index = guessed_revenue['Update']
+            guessed_revenue = guessed_revenue.drop(columns='Update')
+
+            predicted_revenue = df.groupby('Predicted_closing')['Predicted_revenue'].sum().reset_index()
+            predicted_revenue.columns = ['Update', 'Predicted_sum']
+            predicted_revenue = predicted_revenue.groupby(predicted_revenue['Update'].dt.to_period('M'))[
+                'Predicted_sum'].sum().reset_index()
+            predicted_revenue.index = predicted_revenue['Update']
+            predicted_revenue = predicted_revenue.drop(columns='Update')
+
+            res = pd.concat([guessed_revenue, predicted_revenue], axis=1)
+            res = pd.concat([res, actual_revenue], axis=1)
+            res = res.fillna(0)
+
+            res.plot(y=['Predicted_sum', 'Guessed_sum', 'Actual_sum'])
+            print(res)
+
+            plt.show()

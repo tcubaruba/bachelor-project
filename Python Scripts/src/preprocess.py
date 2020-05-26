@@ -149,12 +149,13 @@ def preprocess(data, target, key_columns, update_col, created_col, opp_name_col,
     open_data.loc[:, 'future stage'] = np.where(open_data['future stage'] == 'Lost', 0, 1)
 
     # need time difference for the second part predictions
+    updates = open_data[update_col]  # need later
     open_data_second_part = open_data.drop(columns=[update_col, stage_col])
     open_data = open_data_second_part.drop(columns='time_diff_to_close')
 
     # get indices of train and test data
     opps_list = open_data[opp_name_col].unique()
-    test_opps = random.sample(list(opps_list), int(0.3*len(opps_list)))
+    test_opps = random.sample(list(opps_list), int(0.3 * len(opps_list)))
     index_test = open_data[open_data[opp_name_col].isin(test_opps)].index
     index_train = open_data.drop(index_test).index
 
@@ -183,4 +184,5 @@ def preprocess(data, target, key_columns, update_col, created_col, opp_name_col,
 
     end = time.time()
     log.info('Preprocessing data finished. Execution time: ' + str(timer(start, end)))
-    return X, y, index_train, index_test, open_data_second_part, guessed_win_probabilities_for_test_data
+    return X, y, index_train, index_test, open_data_second_part, guessed_win_probabilities_for_test_data, updates.loc[
+        index_test], data_won
