@@ -16,3 +16,7 @@ class NeuralNetModel(Model):
                                    hidden_layer_sizes=n_nodes)
         self.periods_model_name = 'nn'
         self.model_name = 'nn'
+        self.plot_name = 'Neural Networks' + ' with solver: ' + solver + '\n activation function: ' + activation + \
+                         ' and number nodes: ' + str(n_nodes)
+        self.description = 'Neural Networks' + ' with solver: ' + solver + ', activation function: ' + activation + \
+                         ' and number nodes: ' + str(n_nodes)
