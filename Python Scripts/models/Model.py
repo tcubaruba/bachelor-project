@@ -1,15 +1,19 @@
 from abc import ABC, abstractmethod
 import numpy as np
 import pandas as pd
+import time
 from collections import defaultdict
 from sklearn.preprocessing import LabelEncoder
 from src.preprocess import scale_transform
 from sklearn.neural_network import MLPRegressor
 from sklearn.tree import DecisionTreeRegressor
+from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import roc_auc_score
 from sklearn.metrics import roc_curve
+
+from src.preprocess import timer
 
 import matplotlib.pyplot as plt
 
@@ -17,6 +21,7 @@ import logging
 
 mpl_logger = logging.getLogger('matplotlib')
 mpl_logger.setLevel(logging.WARNING)
+model_logger = logging.getLogger('Training Model')
 
 
 class Model(ABC):
@@ -37,7 +42,7 @@ class Model(ABC):
         self.index_won = second_part_data[target][second_part_data[second_part_data[target] == 1].first_valid_index()]
         self.model = None
         self.update_col = update_col
-        self.periods_model_name = 'dt'
+        self.periods_model_name = 'nn'
         self.y_predict = None
         self.win_probability = None
         self.guessed_win_probabilities_for_test_data = guessed_win_probabilities_for_test_data
@@ -91,7 +96,7 @@ class Model(ABC):
         # convert data types
         to_change = open_data.select_dtypes(include=['object', 'datetime'])  # data which need to be encoded
         to_stay = open_data.select_dtypes(include='number')  # numerical data
-        to_stay = to_stay.drop(columns='time_diff_to_close')
+        to_stay = to_stay.drop(columns=self.target_second_part)
 
         y = open_data[self.target_second_part]  # writing the target column in y
         d = defaultdict(LabelEncoder)  # to be able to decode later
@@ -108,12 +113,9 @@ class Model(ABC):
             y_train = y.loc[index_train]
             y_train = np.ravel(y_train)
 
-            if self.periods_model_name == 'nn':
-                model = MLPRegressor(hidden_layer_sizes=(100, 80), max_iter=1000)
-                model.fit(X_train, y_train)
-            else:  # model = decision trees
-                model = DecisionTreeRegressor()
-                model.fit(X_train, y_train)
+            model = MLPRegressor(hidden_layer_sizes=(10, 8, 6, 4, 2), activation='tanh', batch_size=100,
+                                 solver='adam', learning_rate='adaptive', random_state=42, alpha=0.001)
+            model.fit(X_train, y_train)
 
             predictions = model.predict(X_test)
             predictions = np.around(predictions).astype(int)
@@ -130,36 +132,41 @@ class Model(ABC):
         return data
 
     def make_predicitons(self):
+        model_logger.info('Making predictions for ' + self.description)
+        start = time.time()
         print(self.description.upper())
         predictions_periods = self.predict_closing_dates()
-        # acc = self.fit_score()
         print(classification_report(self.y_test, self.y_predict))
+        print('Confusion matrix'.upper())
         print(confusion_matrix(self.y_test, self.y_predict))
         # roc
         ns_probs = self.guessed_win_probabilities_for_test_data
         # calculate scores
         ns_auc = roc_auc_score(self.y_test, ns_probs)
-        lr_auc = roc_auc_score(self.y_test, self.win_probability)
-        print('No Skill: ROC AUC=%.3f' % (ns_auc))
-        print('Model: ROC AUC=%.3f' % (lr_auc))
+        model_auc = roc_auc_score(self.y_test, self.win_probability)
+        print('No Skill: ROC AUC=%.3f' % ns_auc)
+        print('Model: ROC AUC=%.3f' % model_auc)
 
         # calculate roc curves
         ns_fpr, ns_tpr, _ = roc_curve(self.y_test, ns_probs)
-        lr_fpr, lr_tpr, _ = roc_curve(self.y_test, self.win_probability)
+        model_fpr, model_tpr, _ = roc_curve(self.y_test, self.win_probability)
         # plot the roc curve for the model
         plt.plot(ns_fpr, ns_tpr, linestyle='--', label='No Skill')
-        plt.plot(lr_fpr, lr_tpr, marker='.', label='Trained Model')
+        plt.plot(model_fpr, model_tpr, marker='.', label='Trained Model')
         plt.legend()
         title = 'ROC Curve for ' + self.data_name + ' with ' + self.plot_name
         plt.title(title)
-        plot_name = './Plots/roc_' + self.description.lower().replace(" ", "_") + '.svg'
+        plot_name = './Plots/roc_' + self.description.lower().replace(" ", "_") + self.data_name.lower().replace(" ",
+                                                                                                                 "_") + '.svg'
         plt.savefig(plot_name)
         plt.show()
-        plt.show()
 
-        self.calculate_revenue_forecast(predictions_periods.loc[self.index_test])
+        mpe_guessed, mpe_predicted = self.calculate_revenue_forecast(predictions_periods.loc[self.index_test])
+        end = time.time()
+        model_logger.info(('Making predictions finished. Execution time: ' + str(timer(start, end))))
+        print('Making predictions finished. Execution time: ' + str(timer(start, end)))
 
-        # return predictions_periods
+        return model_auc, mpe_guessed, mpe_predicted, self.description
 
     def calculate_revenue_forecast(self, predictions):
         predictions = predictions[['Opportunity_Name', 'Stage', 'Expected_closing', 'Volume', 'time_diff_to_close',
@@ -172,6 +179,17 @@ class Model(ABC):
             predictions['predicted days to close'], unit='D')
         predictions['Guessed_revenue'] = predictions['Volume'] * predictions['Guessed probabilities']
         predictions['Predicted_revenue'] = predictions['Volume'] * predictions['probability win']
+
+        # Closing dates MPE:
+        mpe_dates_guessed = (np.abs(
+            (predictions['Expected_closing'] - predictions['time_diff_to_close']) / predictions[
+                'time_diff_to_close'] + 1)).mean()
+        mpe_dates_predicted = (np.abs(
+            (predictions['predicted days to close'] - predictions['time_diff_to_close']) / predictions[
+                'time_diff_to_close'] + 1)).mean()
+
+        print('MPE for guessed closing dates: {:.2f}'.format(mpe_dates_guessed))
+        print('MPE for predicted closing dates: {:.2f}'.format(mpe_dates_predicted))
 
         updates = predictions['Update'].unique()
         monthly_errors_guessed = []
@@ -214,7 +232,6 @@ class Model(ABC):
             res_montly['Predicted_percentage_error'] = np.abs(
                 (res_montly['Predicted_sum'] - res_montly['Actual_sum']) / (res_montly['Actual_sum'] + 1))
 
-            # res_montly.plot(y=['Predicted_sum', 'Guessed_sum', 'Actual_sum'])
             monthly_errors_guessed.append(res_montly['Guessed_percentage_error'].mean())
             monthly_errors_predicted.append(res_montly['Predicted_percentage_error'].mean())
 
@@ -228,24 +245,42 @@ class Model(ABC):
             quarterly_errors_guessed.append(res_quarterly['Guessed_percentage_error'].mean())
             quarterly_errors_predicted.append(res_quarterly['Predicted_percentage_error'].mean())
 
+        mean_monthly_mpe_guessed = sum(monthly_errors_guessed) / len(monthly_errors_guessed)
+        mean_monthly_mpe_predicted = sum(monthly_errors_predicted) / len(monthly_errors_predicted)
+        print('Mean monthly MPE for guessed data: {:.2f}'.format(mean_monthly_mpe_guessed))
+        print('Mean monthly MPE for predicted data: {:.2f}'.format(mean_monthly_mpe_predicted))
+
+        mean_quarterly_mpe_guessed = sum(quarterly_errors_guessed) / len(quarterly_errors_guessed)
+        mean_quarterly_mpe_predicted = sum(quarterly_errors_predicted) / len(quarterly_errors_predicted)
+        print('Mean quarterly MPE for guessed data: {:.2f}'.format(mean_quarterly_mpe_guessed))
+        print('Mean quarterly MPE for predicted data: {:.2f}'.format(mean_quarterly_mpe_predicted))
+
+        monthly_errors_guessed = [1 if x > 1 else x for x in monthly_errors_guessed]
+        monthly_errors_predicted = [1 if x > 1 else x for x in monthly_errors_predicted]
+
         plt.plot(monthly_errors_guessed, color='red', label='Guessed Revenue')
         plt.plot(monthly_errors_predicted, color='blue', label='Predicted Revenue')
         plt.legend()
         plt.ylabel('Mean Percentage Error')
-        plt.yscale('log')
         title = 'Compare monthly errors for ' + self.data_name + ' with\n' + self.plot_name
         plt.title(title)
-        plot_name = './Plots/m_err_' + self.description.lower().replace(" ", "_") + '.svg'
+        plot_name = './Plots/m_err_' + self.description.lower().replace(" ", "_") + self.data_name.lower().replace(" ",
+                                                                                                                   "_") + '.svg'
         plt.savefig(plot_name)
         plt.show()
+
+        quarterly_errors_guessed = [1 if x > 1 else x for x in quarterly_errors_guessed]
+        quarterly_errors_predicted = [1 if x > 1 else x for x in quarterly_errors_predicted]
 
         plt.plot(quarterly_errors_guessed, color='red', label='Guessed Revenue')
         plt.plot(quarterly_errors_predicted, color='blue', label='Predicted Revenue')
         plt.legend()
         plt.ylabel('Mean Percentage Error')
-        plt.yscale('log')
         title = 'Compare quarterly errors for ' + self.data_name + ' with\n' + self.plot_name
         plt.title(title)
-        plot_name = './Plots/q_err_' + self.description.lower().replace(" ", "_") + '.svg'
+        plot_name = './Plots/q_err_' + self.description.lower().replace(" ", "_") + self.data_name.lower().replace(" ",
+                                                                                                                   "_") + '.svg'
         plt.savefig(plot_name)
         plt.show()
+
+        return mean_quarterly_mpe_guessed, mean_quarterly_mpe_predicted

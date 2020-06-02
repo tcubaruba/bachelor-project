@@ -13,7 +13,7 @@ class NeuralNetModel(Model):
         n_nodes = eval(n_nodes)
         self.model = MLPClassifier(solver=solver, early_stopping=True, verbose=False, learning_rate='adaptive',
                                    activation=activation,
-                                   hidden_layer_sizes=n_nodes)
+                                   hidden_layer_sizes=n_nodes, random_state=42, max_iter=1000)
         self.periods_model_name = 'nn'
         self.model_name = 'nn'
         self.plot_name = 'Neural Networks' + ' with solver: ' + solver + '\n activation function: ' + activation + \

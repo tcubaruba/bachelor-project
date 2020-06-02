@@ -14,6 +14,7 @@ warnings.filterwarnings(action='ignore', category=DataConversionWarning)
 logging.basicConfig(level=os.environ.get("LOGLEVEL", "DEBUG"))
 log = logging.getLogger('Preprocessing data')
 pd.options.mode.chained_assignment = None  # default='warn'
+random.seed(42)
 
 
 # def prepare_data(data):
