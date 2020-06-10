@@ -6,8 +6,6 @@ from collections import defaultdict
 from sklearn.preprocessing import LabelEncoder
 from src.preprocess import scale_transform
 from sklearn.neural_network import MLPRegressor
-from sklearn.tree import DecisionTreeRegressor
-from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import roc_auc_score
@@ -42,7 +40,6 @@ class Model(ABC):
         self.index_won = second_part_data[target][second_part_data[second_part_data[target] == 1].first_valid_index()]
         self.model = None
         self.update_col = update_col
-        self.periods_model_name = 'nn'
         self.y_predict = None
         self.win_probability = None
         self.guessed_win_probabilities_for_test_data = guessed_win_probabilities_for_test_data
@@ -83,11 +80,7 @@ class Model(ABC):
         X, y, y_predict = self.fit_predict_win_proba()
         predictions_periods = self.predict_period(X, y, self.index_test, self.index_train, self.second_part_data)
         predictions_periods.index = predictions_periods.index.map(int)
-        # predictions_periods.loc[self.index_test, 'probability win'] = y_predict['probability win'].map(
-        #     '{:,.2f}'.format)
         predictions_periods.loc[self.index_test, 'probability win'] = y_predict['probability win']
-        # predictions_periods.loc[self.index_test, 'predicted stage'] = y_predict['predict']
-
         return predictions_periods
 
     def preprocess_periods(self):
@@ -161,12 +154,38 @@ class Model(ABC):
         plt.savefig(plot_name)
         plt.show()
 
-        mpe_guessed, mpe_predicted = self.calculate_revenue_forecast(predictions_periods.loc[self.index_test])
+        mpe_guessed, mpe_predicted, mpe_predicted_strict = self.calculate_revenue_forecast(
+            predictions_periods.loc[self.index_test])
         end = time.time()
         model_logger.info(('Making predictions finished. Execution time: ' + str(timer(start, end))))
         print('Making predictions finished. Execution time: ' + str(timer(start, end)))
 
-        return model_auc, mpe_guessed, mpe_predicted, self.description
+        return model_auc, mpe_guessed, mpe_predicted, mpe_predicted_strict, self.description
+
+    def __calculate_mpe(self, true, predicted):
+        return (np.abs((predicted - true) / predicted + 1)).mean()
+
+    def __calculate_mrse(self, true, predicted):
+        return np.sqrt((predicted - true) ** 2)
+
+    def __group_values_by_update(self, table, colname):
+        res = table.groupby(table['Update'].dt.to_period('M'))[colname].sum().reset_index()
+        res.index = res['Update']
+        return res.drop(columns='Update')
+
+    def __plot_errors(self, guessed, predicted, predicted_strict, frequency):
+        plt.plot(guessed, color='red', label='Guessed Revenue')
+        plt.plot(predicted, color='blue', label='Predicted Revenue')
+        plt.plot(predicted_strict, color='green', label='Strictly Predicted Revenue')
+        plt.legend()
+        plt.ylabel('Mean Root Square Error')
+        title = 'Compare ' + frequency + ' quarterly errors for ' + self.data_name + ' with\n' + self.plot_name
+        plt.title(title)
+        plt_name_begin = './Plots/' + frequency[0] + '_err_'
+        plot_name = plt_name_begin + self.description.lower().replace(" ", "_") + self.data_name.lower().replace(" ",
+                                                                                                                 "_") + '.svg'
+        plt.savefig(plot_name)
+        plt.show()
 
     def calculate_revenue_forecast(self, predictions):
         predictions = predictions[['Opportunity_Name', 'Stage', 'Expected_closing', 'Volume', 'time_diff_to_close',
@@ -179,14 +198,13 @@ class Model(ABC):
             predictions['predicted days to close'], unit='D')
         predictions['Guessed_revenue'] = predictions['Volume'] * predictions['Guessed probabilities']
         predictions['Predicted_revenue'] = predictions['Volume'] * predictions['probability win']
+        predictions['Predicted_revenue_strict'] = np.where(predictions['probability win'] < 0.5, 0,
+                                                           predictions['Volume'])
 
         # Closing dates MPE:
-        mpe_dates_guessed = (np.abs(
-            (predictions['Expected_closing'] - predictions['time_diff_to_close']) / predictions[
-                'time_diff_to_close'] + 1)).mean()
-        mpe_dates_predicted = (np.abs(
-            (predictions['predicted days to close'] - predictions['time_diff_to_close']) / predictions[
-                'time_diff_to_close'] + 1)).mean()
+        mpe_dates_guessed = self.__calculate_mpe(predictions['time_diff_to_close'], predictions['Expected_closing'])
+        mpe_dates_predicted = self.__calculate_mpe(predictions['time_diff_to_close'],
+                                                   predictions['predicted days to close'])
 
         print('MPE for guessed closing dates: {:.2f}'.format(mpe_dates_guessed))
         print('MPE for predicted closing dates: {:.2f}'.format(mpe_dates_predicted))
@@ -194,8 +212,10 @@ class Model(ABC):
         updates = predictions['Update'].unique()
         monthly_errors_guessed = []
         monthly_errors_predicted = []
+        monthly_errors_predicted_strict = []
         quarterly_errors_guessed = []
         quarterly_errors_predicted = []
+        quarterly_errors_predicted_strict = []
         for u in updates:
             df = predictions[predictions['Update'] == u]
 
@@ -205,82 +225,66 @@ class Model(ABC):
 
             actual_revenue = actual_won_opps.groupby('Upload_date')['Volume'].sum().reset_index()
             actual_revenue.columns = ['Update', 'Actual_sum']
-            actual_revenue = actual_revenue.groupby(actual_revenue['Update'].dt.to_period('M'))[
-                'Actual_sum'].sum().reset_index()
-            actual_revenue.index = actual_revenue['Update']
-            actual_revenue = actual_revenue.drop(columns='Update')
+            actual_revenue = self.__group_values_by_update(actual_revenue, 'Actual_sum')
 
             guessed_revenue = df.groupby('Guessed_closing')['Guessed_revenue'].sum().reset_index()
             guessed_revenue.columns = ['Update', 'Guessed_sum']
-            guessed_revenue = guessed_revenue.groupby(guessed_revenue['Update'].dt.to_period('M'))[
-                'Guessed_sum'].sum().reset_index()
-            guessed_revenue.index = guessed_revenue['Update']
-            guessed_revenue = guessed_revenue.drop(columns='Update')
+            guessed_revenue = self.__group_values_by_update(guessed_revenue, 'Guessed_sum')
 
             predicted_revenue = df.groupby('Predicted_closing')['Predicted_revenue'].sum().reset_index()
             predicted_revenue.columns = ['Update', 'Predicted_sum']
-            predicted_revenue = predicted_revenue.groupby(predicted_revenue['Update'].dt.to_period('M'))[
-                'Predicted_sum'].sum().reset_index()
-            predicted_revenue.index = predicted_revenue['Update']
-            predicted_revenue = predicted_revenue.drop(columns='Update')
+            predicted_revenue = self.__group_values_by_update(predicted_revenue, 'Predicted_sum')
 
-            res_montly = pd.concat([guessed_revenue, predicted_revenue], axis=1)
+            predicted_revenue_strict = df.groupby('Predicted_closing')['Predicted_revenue_strict'].sum().reset_index()
+            predicted_revenue_strict.columns = ['Update', 'Predicted_sum_strict']
+            predicted_revenue_strict = self.__group_values_by_update(predicted_revenue_strict, 'Predicted_sum_strict')
+
+            res_montly = pd.concat([guessed_revenue, predicted_revenue, predicted_revenue_strict], axis=1)
             res_montly = pd.concat([res_montly, actual_revenue], axis=1)
             res_montly = res_montly.fillna(0)
-            res_montly['Guessed_percentage_error'] = np.abs(
-                (res_montly['Guessed_sum'] - res_montly['Actual_sum']) / (res_montly['Actual_sum'] + 1))
-            res_montly['Predicted_percentage_error'] = np.abs(
-                (res_montly['Predicted_sum'] - res_montly['Actual_sum']) / (res_montly['Actual_sum'] + 1))
+            res_montly['Guessed_mrse'] = self.__calculate_mrse(res_montly['Actual_sum'], res_montly['Guessed_sum'])
+            res_montly['Predicted_mrse'] = self.__calculate_mrse(res_montly['Actual_sum'], res_montly['Predicted_sum'])
+            res_montly['Predicted_strict_mrse'] = self.__calculate_mrse(res_montly['Actual_sum'],
+                                                                        res_montly['Predicted_sum_strict'])
 
-            monthly_errors_guessed.append(res_montly['Guessed_percentage_error'].mean())
-            monthly_errors_predicted.append(res_montly['Predicted_percentage_error'].mean())
+            monthly_errors_guessed.append(res_montly['Guessed_mrse'].mean())
+            monthly_errors_predicted.append(res_montly['Predicted_mrse'].mean())
+            monthly_errors_predicted_strict.append(res_montly['Predicted_strict_mrse'].mean())
 
-            res_quarterly = res_montly[['Guessed_sum', 'Predicted_sum', 'Actual_sum']].resample('Q-JAN',
-                                                                                                convention='end').agg(
+            res_quarterly = res_montly[['Guessed_sum', 'Predicted_sum', 'Predicted_sum_strict', 'Actual_sum']].resample(
+                'Q-JAN',
+                convention='end').agg(
                 'sum')
-            res_quarterly['Guessed_percentage_error'] = np.abs(
-                (res_quarterly['Guessed_sum'] - res_quarterly['Actual_sum']) / (res_quarterly['Actual_sum'] + 1))
-            res_quarterly['Predicted_percentage_error'] = np.abs(
-                (res_quarterly['Predicted_sum'] - res_quarterly['Actual_sum']) / (res_quarterly['Actual_sum'] + 1))
-            quarterly_errors_guessed.append(res_quarterly['Guessed_percentage_error'].mean())
-            quarterly_errors_predicted.append(res_quarterly['Predicted_percentage_error'].mean())
+            res_quarterly['Guessed_mrse'] = self.__calculate_mrse(res_quarterly['Actual_sum'],
+                                                                  res_quarterly['Guessed_sum'])
+            res_quarterly['Predicted_mrse'] = self.__calculate_mrse(res_quarterly['Actual_sum'],
+                                                                    res_quarterly['Predicted_sum'])
+            res_quarterly['Predicted_strict_mrse'] = self.__calculate_mrse(res_quarterly['Actual_sum'],
+                                                                           res_quarterly['Predicted_sum_strict'])
 
-        mean_monthly_mpe_guessed = sum(monthly_errors_guessed) / len(monthly_errors_guessed)
-        mean_monthly_mpe_predicted = sum(monthly_errors_predicted) / len(monthly_errors_predicted)
-        print('Mean monthly MPE for guessed data: {:.2f}'.format(mean_monthly_mpe_guessed))
-        print('Mean monthly MPE for predicted data: {:.2f}'.format(mean_monthly_mpe_predicted))
+            quarterly_errors_guessed.append(res_quarterly['Guessed_mrse'].mean())
+            quarterly_errors_predicted.append(res_quarterly['Predicted_mrse'].mean())
+            quarterly_errors_predicted_strict.append(res_quarterly['Predicted_strict_mrse'].mean())
 
-        mean_quarterly_mpe_guessed = sum(quarterly_errors_guessed) / len(quarterly_errors_guessed)
-        mean_quarterly_mpe_predicted = sum(quarterly_errors_predicted) / len(quarterly_errors_predicted)
-        print('Mean quarterly MPE for guessed data: {:.2f}'.format(mean_quarterly_mpe_guessed))
-        print('Mean quarterly MPE for predicted data: {:.2f}'.format(mean_quarterly_mpe_predicted))
+        mean_monthly_mrse_guessed = sum(monthly_errors_guessed) / len(monthly_errors_guessed)
+        mean_monthly_mrse_predicted = sum(monthly_errors_predicted) / len(monthly_errors_predicted)
+        mean_monthly_mrse_predicted_strict = sum(monthly_errors_predicted_strict) / len(monthly_errors_predicted_strict)
 
-        monthly_errors_guessed = [1 if x > 1 else x for x in monthly_errors_guessed]
-        monthly_errors_predicted = [1 if x > 1 else x for x in monthly_errors_predicted]
+        print('Mean monthly MRSE for guessed data: {:.2f}'.format(mean_monthly_mrse_guessed))
+        print('Mean monthly MRSE for predicted data: {:.2f}'.format(mean_monthly_mrse_predicted))
+        print('Mean monthly MRSE for strictly predicted data: {:.2f}'.format(mean_monthly_mrse_predicted_strict))
 
-        plt.plot(monthly_errors_guessed, color='red', label='Guessed Revenue')
-        plt.plot(monthly_errors_predicted, color='blue', label='Predicted Revenue')
-        plt.legend()
-        plt.ylabel('Mean Percentage Error')
-        title = 'Compare monthly errors for ' + self.data_name + ' with\n' + self.plot_name
-        plt.title(title)
-        plot_name = './Plots/m_err_' + self.description.lower().replace(" ", "_") + self.data_name.lower().replace(" ",
-                                                                                                                   "_") + '.svg'
-        plt.savefig(plot_name)
-        plt.show()
+        mean_quarterly_mrse_guessed = sum(quarterly_errors_guessed) / len(quarterly_errors_guessed)
+        mean_quarterly_mrse_predicted = sum(quarterly_errors_predicted) / len(quarterly_errors_predicted)
+        mean_quarterly_mrse_predicted_strict = sum(quarterly_errors_predicted_strict) / len(
+            quarterly_errors_predicted_strict)
 
-        quarterly_errors_guessed = [1 if x > 1 else x for x in quarterly_errors_guessed]
-        quarterly_errors_predicted = [1 if x > 1 else x for x in quarterly_errors_predicted]
+        print('Mean quarterly MRSE for guessed data: {:.2f}'.format(mean_quarterly_mrse_guessed))
+        print('Mean quarterly MRSE for predicted data: {:.2f}'.format(mean_quarterly_mrse_predicted))
+        print('Mean quarterly MRSE for strictly predicted data: {:.2f}'.format(mean_quarterly_mrse_predicted_strict))
 
-        plt.plot(quarterly_errors_guessed, color='red', label='Guessed Revenue')
-        plt.plot(quarterly_errors_predicted, color='blue', label='Predicted Revenue')
-        plt.legend()
-        plt.ylabel('Mean Percentage Error')
-        title = 'Compare quarterly errors for ' + self.data_name + ' with\n' + self.plot_name
-        plt.title(title)
-        plot_name = './Plots/q_err_' + self.description.lower().replace(" ", "_") + self.data_name.lower().replace(" ",
-                                                                                                                   "_") + '.svg'
-        plt.savefig(plot_name)
-        plt.show()
+        self.__plot_errors(monthly_errors_guessed, monthly_errors_predicted, monthly_errors_predicted_strict, 'monthly')
+        self.__plot_errors(quarterly_errors_guessed, quarterly_errors_predicted, quarterly_errors_predicted_strict,
+                           'quarterly')
 
-        return mean_quarterly_mpe_guessed, mean_quarterly_mpe_predicted
+        return mean_quarterly_mrse_guessed, mean_quarterly_mrse_predicted, mean_quarterly_mrse_predicted_strict
