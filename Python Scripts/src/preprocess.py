@@ -1,4 +1,3 @@
-from datetime import datetime
 from collections import defaultdict
 import pandas as pd
 import numpy as np
@@ -15,12 +14,6 @@ logging.basicConfig(level=os.environ.get("LOGLEVEL", "DEBUG"))
 log = logging.getLogger('Preprocessing data')
 pd.options.mode.chained_assignment = None  # default='warn'
 random.seed(42)
-
-
-# def prepare_data(data):
-#     data['Stage_simple'] = np.where(~data['Stage'].isin(['Won', 'Lost']), 'Open', data['Stage'])
-#
-#     return data.drop(columns=['Price', 'Amount', 'last_stage', 'Stage'])
 
 
 def timer(start, end):
@@ -117,7 +110,6 @@ def preprocess(data, target, key_columns, update_col, created_col, opp_name_col,
     # split data and reset indexes
     data_won = data_no_duplicates.loc[data_no_duplicates[stage_col] == 'Won']
     data_lost = data_no_duplicates.loc[data_no_duplicates[stage_col] == 'Lost']
-    data_closed = data_no_duplicates.loc[data_no_duplicates[stage_col] != 'Open']
 
     # create temp tables with only key values and date
     data_won_temp = data_won[[opp_name_col, update_col]]
@@ -140,7 +132,6 @@ def preprocess(data, target, key_columns, update_col, created_col, opp_name_col,
     # delete unnecessary columns
     data_first_part = data_no_duplicates.drop(
         columns=['timediff', created_col])
-    # data_second_part = data_no_duplicates.drop(columns=['timediff', created_col])
 
     # FIRST PART
     # data to make predictions for

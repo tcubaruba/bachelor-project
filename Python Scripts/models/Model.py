@@ -6,10 +6,13 @@ from collections import defaultdict
 from sklearn.preprocessing import LabelEncoder
 from src.preprocess import scale_transform
 from sklearn.neural_network import MLPRegressor
+from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import roc_auc_score
 from sklearn.metrics import roc_curve
+from sklearn.metrics import r2_score
+from sklearn.metrics import mean_absolute_error
 
 from src.preprocess import timer
 
@@ -20,6 +23,12 @@ import logging
 mpl_logger = logging.getLogger('matplotlib')
 mpl_logger.setLevel(logging.WARNING)
 model_logger = logging.getLogger('Training Model')
+
+# pd.set_option('display.max_rows', 500)
+# pd.set_option('display.max_columns', 500)
+# pd.set_option('display.width', 1000)
+#
+np.set_printoptions(threshold=np.inf)
 
 
 class Model(ABC):
@@ -42,7 +51,8 @@ class Model(ABC):
         self.update_col = update_col
         self.y_predict = None
         self.win_probability = None
-        self.guessed_win_probabilities_for_test_data = guessed_win_probabilities_for_test_data
+        self.y_proba_guessed = guessed_win_probabilities_for_test_data
+        self.y_guessed = [1 if x >= 0.5 else 0 for x in self.y_proba_guessed]
         self.updates = updates
         self.data_won = data_won
         self.plot_name = ""
@@ -106,8 +116,10 @@ class Model(ABC):
             y_train = y.loc[index_train]
             y_train = np.ravel(y_train)
 
-            model = MLPRegressor(hidden_layer_sizes=(10, 8, 6, 4, 2), activation='tanh', batch_size=100,
-                                 solver='adam', learning_rate='adaptive', random_state=42, alpha=0.001)
+            # model = MLPRegressor(hidden_layer_sizes=(100,100), activation='logistic', batch_size=300,
+            #                      solver='sgd', learning_rate='adaptive', learning_rate_init=0.01, random_state=42, alpha=0.000001)
+            model = RandomForestRegressor(n_estimators=100, random_state=42, criterion='mse', n_jobs=-1,
+                                          min_samples_leaf=5, min_samples_split=0.01)
             model.fit(X_train, y_train)
 
             predictions = model.predict(X_test)
@@ -128,20 +140,25 @@ class Model(ABC):
         model_logger.info('Making predictions for ' + self.description)
         start = time.time()
         print(self.description.upper())
+        print('Guessed probabilities'.upper())
+        print(classification_report(self.y_test, self.y_guessed))
+        print('Confusion matrix'.upper())
+        print(confusion_matrix(self.y_test, self.y_guessed))
+
         predictions_periods = self.predict_closing_dates()
+        print('Predictions'.upper())
         print(classification_report(self.y_test, self.y_predict))
         print('Confusion matrix'.upper())
         print(confusion_matrix(self.y_test, self.y_predict))
         # roc
-        ns_probs = self.guessed_win_probabilities_for_test_data
         # calculate scores
-        ns_auc = roc_auc_score(self.y_test, ns_probs)
+        ns_auc = roc_auc_score(self.y_test, self.y_proba_guessed)
         model_auc = roc_auc_score(self.y_test, self.win_probability)
         print('No Skill: ROC AUC=%.3f' % ns_auc)
         print('Model: ROC AUC=%.3f' % model_auc)
 
         # calculate roc curves
-        ns_fpr, ns_tpr, _ = roc_curve(self.y_test, ns_probs)
+        ns_fpr, ns_tpr, _ = roc_curve(self.y_test, self.y_proba_guessed)
         model_fpr, model_tpr, _ = roc_curve(self.y_test, self.win_probability)
         # plot the roc curve for the model
         plt.plot(ns_fpr, ns_tpr, linestyle='--', label='No Skill')
@@ -162,11 +179,11 @@ class Model(ABC):
 
         return model_auc, mpe_guessed, mpe_predicted, mpe_predicted_strict, self.description
 
-    def __calculate_mpe(self, true, predicted):
-        return (np.abs((predicted - true) / predicted + 1)).mean()
+    def __calculate_mae(self, true, predicted):
+        return mean_absolute_error(true, predicted)
 
-    def __calculate_mrse(self, true, predicted):
-        return np.sqrt((predicted - true) ** 2)
+    # def __calculate_mrse(self, true, predicted):
+    #     return self.__calculate_mae(true, predicted)
 
     def __group_values_by_update(self, table, colname):
         res = table.groupby(table['Update'].dt.to_period('M'))[colname].sum().reset_index()
@@ -179,7 +196,7 @@ class Model(ABC):
         plt.plot(predicted_strict, color='green', label='Strictly Predicted Revenue')
         plt.legend()
         plt.ylabel('Mean Root Square Error')
-        title = 'Compare ' + frequency + ' quarterly errors for ' + self.data_name + ' with\n' + self.plot_name
+        title = 'Compare ' + frequency + ' errors for ' + self.data_name + ' with\n' + self.plot_name
         plt.title(title)
         plt_name_begin = './Plots/' + frequency[0] + '_err_'
         plot_name = plt_name_begin + self.description.lower().replace(" ", "_") + self.data_name.lower().replace(" ",
@@ -191,7 +208,7 @@ class Model(ABC):
         predictions = predictions[['Opportunity_Name', 'Stage', 'Expected_closing', 'Volume', 'time_diff_to_close',
                                    self.predictions_column_name, 'predicted days to close', 'probability win']]
         predictions['Update'] = self.updates
-        predictions['Guessed probabilities'] = self.guessed_win_probabilities_for_test_data
+        predictions['Guessed probabilities'] = self.y_proba_guessed
         predictions['Guessed_closing'] = pd.to_datetime(predictions['Update']) + pd.to_timedelta(
             predictions['Expected_closing'], unit='D')
         predictions['Predicted_closing'] = pd.to_datetime(predictions['Update']) + pd.to_timedelta(
@@ -201,13 +218,13 @@ class Model(ABC):
         predictions['Predicted_revenue_strict'] = np.where(predictions['probability win'] < 0.5, 0,
                                                            predictions['Volume'])
 
-        # Closing dates MPE:
-        mpe_dates_guessed = self.__calculate_mpe(predictions['time_diff_to_close'], predictions['Expected_closing'])
-        mpe_dates_predicted = self.__calculate_mpe(predictions['time_diff_to_close'],
+        # Closing dates MAE:
+        mae_dates_guessed = self.__calculate_mae(predictions['time_diff_to_close'], predictions['Expected_closing'])
+        mae_dates_predicted = self.__calculate_mae(predictions['time_diff_to_close'],
                                                    predictions['predicted days to close'])
 
-        print('MPE for guessed closing dates: {:.2f}'.format(mpe_dates_guessed))
-        print('MPE for predicted closing dates: {:.2f}'.format(mpe_dates_predicted))
+        print('MAE for guessed closing dates: {:.2f}'.format(mae_dates_guessed))
+        print('MAE for predicted closing dates: {:.2f}'.format(mae_dates_predicted))
 
         updates = predictions['Update'].unique()
         monthly_errors_guessed = []
@@ -242,49 +259,44 @@ class Model(ABC):
             res_montly = pd.concat([guessed_revenue, predicted_revenue, predicted_revenue_strict], axis=1)
             res_montly = pd.concat([res_montly, actual_revenue], axis=1)
             res_montly = res_montly.fillna(0)
-            res_montly['Guessed_mrse'] = self.__calculate_mrse(res_montly['Actual_sum'], res_montly['Guessed_sum'])
-            res_montly['Predicted_mrse'] = self.__calculate_mrse(res_montly['Actual_sum'], res_montly['Predicted_sum'])
-            res_montly['Predicted_strict_mrse'] = self.__calculate_mrse(res_montly['Actual_sum'],
-                                                                        res_montly['Predicted_sum_strict'])
 
-            monthly_errors_guessed.append(res_montly['Guessed_mrse'].mean())
-            monthly_errors_predicted.append(res_montly['Predicted_mrse'].mean())
-            monthly_errors_predicted_strict.append(res_montly['Predicted_strict_mrse'].mean())
+            monthly_errors_guessed.append(self.__calculate_mae(res_montly['Actual_sum'], res_montly['Guessed_sum']))
+            monthly_errors_predicted.append(
+                self.__calculate_mae(res_montly['Actual_sum'], res_montly['Predicted_sum']))
+            monthly_errors_predicted_strict.append(self.__calculate_mae(res_montly['Actual_sum'],
+                                                                         res_montly['Predicted_sum_strict']))
 
             res_quarterly = res_montly[['Guessed_sum', 'Predicted_sum', 'Predicted_sum_strict', 'Actual_sum']].resample(
                 'Q-JAN',
                 convention='end').agg(
                 'sum')
-            res_quarterly['Guessed_mrse'] = self.__calculate_mrse(res_quarterly['Actual_sum'],
-                                                                  res_quarterly['Guessed_sum'])
-            res_quarterly['Predicted_mrse'] = self.__calculate_mrse(res_quarterly['Actual_sum'],
-                                                                    res_quarterly['Predicted_sum'])
-            res_quarterly['Predicted_strict_mrse'] = self.__calculate_mrse(res_quarterly['Actual_sum'],
-                                                                           res_quarterly['Predicted_sum_strict'])
 
-            quarterly_errors_guessed.append(res_quarterly['Guessed_mrse'].mean())
-            quarterly_errors_predicted.append(res_quarterly['Predicted_mrse'].mean())
-            quarterly_errors_predicted_strict.append(res_quarterly['Predicted_strict_mrse'].mean())
+            quarterly_errors_guessed.append(self.__calculate_mae(res_quarterly['Actual_sum'],
+                                                                  res_quarterly['Guessed_sum']))
+            quarterly_errors_predicted.append(self.__calculate_mae(res_quarterly['Actual_sum'],
+                                                                    res_quarterly['Predicted_sum']))
+            quarterly_errors_predicted_strict.append(self.__calculate_mae(res_quarterly['Actual_sum'],
+                                                                           res_quarterly['Predicted_sum_strict']))
 
-        mean_monthly_mrse_guessed = sum(monthly_errors_guessed) / len(monthly_errors_guessed)
-        mean_monthly_mrse_predicted = sum(monthly_errors_predicted) / len(monthly_errors_predicted)
-        mean_monthly_mrse_predicted_strict = sum(monthly_errors_predicted_strict) / len(monthly_errors_predicted_strict)
+        mean_monthly_mae_guessed = sum(monthly_errors_guessed) / len(monthly_errors_guessed)
+        mean_monthly_mae_predicted = sum(monthly_errors_predicted) / len(monthly_errors_predicted)
+        mean_monthly_mae_predicted_strict = sum(monthly_errors_predicted_strict) / len(monthly_errors_predicted_strict)
 
-        print('Mean monthly MRSE for guessed data: {:.2f}'.format(mean_monthly_mrse_guessed))
-        print('Mean monthly MRSE for predicted data: {:.2f}'.format(mean_monthly_mrse_predicted))
-        print('Mean monthly MRSE for strictly predicted data: {:.2f}'.format(mean_monthly_mrse_predicted_strict))
+        print('Mean monthly MAE for guessed data: {:.2f}'.format(mean_monthly_mae_guessed))
+        print('Mean monthly MAE for predicted data: {:.2f}'.format(mean_monthly_mae_predicted))
+        print('Mean monthly MAE for strictly predicted data: {:.2f}'.format(mean_monthly_mae_predicted_strict))
 
-        mean_quarterly_mrse_guessed = sum(quarterly_errors_guessed) / len(quarterly_errors_guessed)
-        mean_quarterly_mrse_predicted = sum(quarterly_errors_predicted) / len(quarterly_errors_predicted)
-        mean_quarterly_mrse_predicted_strict = sum(quarterly_errors_predicted_strict) / len(
+        mean_quarterly_mae_guessed = sum(quarterly_errors_guessed) / len(quarterly_errors_guessed)
+        mean_quarterly_mae_predicted = sum(quarterly_errors_predicted) / len(quarterly_errors_predicted)
+        mean_quarterly_mae_predicted_strict = sum(quarterly_errors_predicted_strict) / len(
             quarterly_errors_predicted_strict)
 
-        print('Mean quarterly MRSE for guessed data: {:.2f}'.format(mean_quarterly_mrse_guessed))
-        print('Mean quarterly MRSE for predicted data: {:.2f}'.format(mean_quarterly_mrse_predicted))
-        print('Mean quarterly MRSE for strictly predicted data: {:.2f}'.format(mean_quarterly_mrse_predicted_strict))
+        print('Mean quarterly MAE for guessed data: {:.2f}'.format(mean_quarterly_mae_guessed))
+        print('Mean quarterly MAE for predicted data: {:.2f}'.format(mean_quarterly_mae_predicted))
+        print('Mean quarterly MAE for strictly predicted data: {:.2f}'.format(mean_quarterly_mae_predicted_strict))
 
         self.__plot_errors(monthly_errors_guessed, monthly_errors_predicted, monthly_errors_predicted_strict, 'monthly')
         self.__plot_errors(quarterly_errors_guessed, quarterly_errors_predicted, quarterly_errors_predicted_strict,
                            'quarterly')
 
-        return mean_quarterly_mrse_guessed, mean_quarterly_mrse_predicted, mean_quarterly_mrse_predicted_strict
+        return mean_quarterly_mae_guessed, mean_quarterly_mae_predicted, mean_quarterly_mae_predicted_strict

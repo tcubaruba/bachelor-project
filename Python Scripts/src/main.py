@@ -1,4 +1,6 @@
 import pandas as pd
+import numpy as np
+
 import logging
 import os
 import sys
@@ -43,13 +45,13 @@ def make_predictions(data_raw, data_name):
     y_test = y.loc[index_test]
 
     best_auc = 0
-    best_mrse_guessed = 1000000
-    best_mrse_predicted = 1000000
-    best_mrse_predicted_strict = 1000000
+    best_mae_guessed = np.inf
+    best_mae_predicted = np.inf
+    best_mae_predicted_strict = np.inf
 
     best_model_auc = ""
-    best_model_mrse_predicted = ""
-    best_model_mrse_predicted_strict = ""
+    best_model_mae_predicted = ""
+    best_model_mae_predicted_strict = ""
 
     for nn_activation in nn_activation_list:
         for nn_solver in nn_solver_list:
@@ -60,37 +62,37 @@ def make_predictions(data_raw, data_name):
                                     updates,
                                     data_won, data_name)
                 nn.define_model(solver=nn_solver, activation=nn_activation, n_nodes=nn_nodes)
-                auc, mrse_guessed, mrse_predicted, mrse_predicted_strict, model = nn.make_predicitons()
+                auc, mae_guessed, mae_predicted, mae_predicted_strict, model = nn.make_predicitons()
                 if auc > best_auc:
                     best_auc = auc
                     best_model_auc = model
-                if mrse_guessed < best_mrse_guessed:
-                    best_mrse_guessed = mrse_guessed
-                if mrse_predicted < best_mrse_predicted:
-                    best_mrse_predicted = mrse_predicted
-                    best_model_mrse_predicted = model
-                if mrse_predicted_strict < best_mrse_predicted_strict:
-                    best_mrse_predicted_strict = mrse_predicted_strict
-                    best_model_mrse_predicted_strict = model
+                if mae_guessed < best_mae_guessed:
+                    best_mae_guessed = mae_guessed
+                if mae_predicted < best_mae_predicted:
+                    best_mae_predicted = mae_predicted
+                    best_model_mae_predicted = model
+                if mae_predicted_strict < best_mae_predicted_strict:
+                    best_mae_predicted_strict = mae_predicted_strict
+                    best_model_mae_predicted_strict = model
     print(
         'best nn model by AUC: '.upper() + best_model_auc.upper() + " with AUC {:.2f}".format(best_auc))
     print(
-        'best guessed revenue MRSE:'.upper() + '{:.2f}'.format(best_mrse_guessed))
+        'best guessed revenue MAE: '.upper() + '{:.2f}'.format(best_mae_guessed))
     print(
-        'best nn model by predicted revenue MRSE: '.upper() + best_model_mrse_predicted.upper() + " with MRSE {:.2f}".format(
-            best_mrse_predicted))
+        'best nn model by predicted revenue MAE: '.upper() + best_model_mae_predicted.upper() + " with MAE {:.2f}".format(
+            best_mae_predicted))
     print(
-        'best nn model by strictly predicted revenue MRSE: '.upper() + best_model_mrse_predicted_strict.upper() + " with MRSE {:.2f}".format(
-            best_mrse_predicted_strict))
+        'best nn model by strictly predicted revenue MAE: '.upper() + best_model_mae_predicted_strict.upper() + " with MAE {:.2f}".format(
+            best_mae_predicted_strict))
 
     best_auc = 0
-    best_mrse_guessed = 1000000
-    best_mrse_predicted = 1000000
-    best_mrse_predicted_strict = 1000000
+    best_mae_guessed = np.inf
+    best_mae_predicted = np.inf
+    best_mae_predicted_strict = np.inf
 
     best_model_auc = ""
-    best_model_mrse_predicted = ""
-    best_model_mrse_predicted_strict = ""
+    best_model_mae_predicted = ""
+    best_model_mae_predicted_strict = ""
 
     for lr_solver in lr_solver_list:
         for c in c_list:
@@ -99,28 +101,28 @@ def make_predictions(data_raw, data_name):
                              updates,
                              data_won, data_name)
             lr.define_model(solver=lr_solver, c=c)
-            auc, mrse_guessed, mrse_predicted, mrse_predicted_strict, model = lr.make_predicitons()
+            auc, mae_guessed, mae_predicted, mae_predicted_strict, model = lr.make_predicitons()
             if auc > best_auc:
                 best_auc = auc
                 best_model_auc = model
-            if mrse_guessed < best_mrse_guessed:
-                best_mrse_guessed = mrse_guessed
-            if mrse_predicted < best_mrse_predicted:
-                best_mrse_predicted = mrse_predicted
-                best_model_mrse_predicted = model
-            if mrse_predicted_strict < best_mrse_predicted_strict:
-                best_mrse_predicted_strict = mrse_predicted_strict
-                best_model_mrse_predicted_strict = model
+            if mae_guessed < best_mae_guessed:
+                best_mae_guessed = mae_guessed
+            if mae_predicted < best_mae_predicted:
+                best_mae_predicted = mae_predicted
+                best_model_mae_predicted = model
+            if mae_predicted_strict < best_mae_predicted_strict:
+                best_mae_predicted_strict = mae_predicted_strict
+                best_model_mae_predicted_strict = model
     print(
         'best lr model by AUC: '.upper() + best_model_auc.upper() + " with AUC {:.2f}".format(best_auc))
     print(
-        'best guessed revenue MRSE:'.upper() + '{:.2f}'.format(best_mrse_guessed))
+        'best guessed revenue MAE: '.upper() + '{:.2f}'.format(best_mae_guessed))
     print(
-        'best lr model by predicted revenue MRSE: '.upper() + best_model_mrse_predicted.upper() + " with MRSE {:.2f}".format(
-            best_mrse_predicted))
+        'best lr model by predicted revenue MAE: '.upper() + best_model_mae_predicted.upper() + " with MAE {:.2f}".format(
+            best_mae_predicted))
     print(
-        'best lr model by strictly predicted revenue MRSE: '.upper() + best_model_mrse_predicted_strict.upper() + " with MRSE {:.2f}".format(
-            best_mrse_predicted_strict))
+        'best lr model by strictly predicted revenue MAE: '.upper() + best_model_mae_predicted_strict.upper() + " with MAE {:.2f}".format(
+            best_mae_predicted_strict))
 
 
 print('*' * 30 + ' generated data '.upper() + '*' * 30)
