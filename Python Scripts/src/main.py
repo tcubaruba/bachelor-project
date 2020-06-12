@@ -160,3 +160,4 @@ data_generated = pd.read_csv('./Data/data_complete_no_closed_duplicates.csv', in
 make_predictions(data_generated, "Generated data", regression_model)
 
 sys.stdout.close()
+
