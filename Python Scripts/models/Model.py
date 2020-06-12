@@ -4,14 +4,14 @@ import pandas as pd
 import time
 from collections import defaultdict
 from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import MinMaxScaler
 from src.preprocess import scale_transform
-from sklearn.neural_network import MLPRegressor
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.linear_model import SGDRegressor
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import roc_auc_score
 from sklearn.metrics import roc_curve
-from sklearn.metrics import r2_score
 from sklearn.metrics import mean_absolute_error
 
 from src.preprocess import timer
@@ -24,12 +24,6 @@ mpl_logger = logging.getLogger('matplotlib')
 mpl_logger.setLevel(logging.WARNING)
 model_logger = logging.getLogger('Training Model')
 
-# pd.set_option('display.max_rows', 500)
-# pd.set_option('display.max_columns', 500)
-# pd.set_option('display.width', 1000)
-#
-np.set_printoptions(threshold=np.inf)
-
 
 class Model(ABC):
     model_name = ""
@@ -37,12 +31,12 @@ class Model(ABC):
 
     def __init__(self, X_train, X_test, y_train, y_test, index_test,
                  index_train, second_part_data, target, update_col, guessed_win_probabilities_for_test_data, updates,
-                 data_won, data_name):
-        self.X_train = X_train
-        self.X_test = X_test
-        self.y_train = y_train
-        self.y_test = y_test
-        self.second_part_data = second_part_data
+                 data_won, data_name, regression_model):
+        self.X_train = X_train.copy()
+        self.X_test = X_test.copy()
+        self.y_train = y_train.copy()
+        self.y_test = y_test.copy()
+        self.second_part_data = second_part_data.copy()
         self.index_test = index_test
         self.index_train = index_train
         self.target = target
@@ -51,13 +45,14 @@ class Model(ABC):
         self.update_col = update_col
         self.y_predict = None
         self.win_probability = None
-        self.y_proba_guessed = guessed_win_probabilities_for_test_data
+        self.y_proba_guessed = guessed_win_probabilities_for_test_data.copy()
         self.y_guessed = [1 if x >= 0.5 else 0 for x in self.y_proba_guessed]
-        self.updates = updates
+        self.updates = updates.copy()
         self.data_won = data_won
         self.plot_name = ""
         self.description = ""
         self.data_name = data_name
+        self.regression_model = regression_model
 
     @abstractmethod
     def define_model(self):
@@ -111,18 +106,34 @@ class Model(ABC):
             print('Empty data')
             data['time to close'] = 0
         else:
-            X_train = X.loc[index_train]
+            # X_train = X.loc[index_train]
+            # X_test = X.loc[index_test]
+            # y_train = y.loc[index_train]
+            # y_train = np.ravel(y_train)
+
+            X = data.drop(columns=self.target_second_part)
+            to_change = X.select_dtypes(include=['object', 'datetime'])  # data which need to be encoded
+            to_stay = X.select_dtypes(include='number')  # numerical data
+
+            d = defaultdict(LabelEncoder)  # to be able to decode later
+            x = to_change.apply(lambda f: d[f.name].fit_transform(f))
+            X = x.join(to_stay, how='outer')
+            # scaling values
+            scaler = MinMaxScaler(copy=False)
+            scaled_values = scaler.fit_transform(X)
+            X.loc[:, :] = scaled_values
+            # X_train = X.loc[index_train]
             X_test = X.loc[index_test]
-            y_train = y.loc[index_train]
-            y_train = np.ravel(y_train)
 
-            # model = MLPRegressor(hidden_layer_sizes=(100,100), activation='logistic', batch_size=300,
-            #                      solver='sgd', learning_rate='adaptive', learning_rate_init=0.01, random_state=42, alpha=0.000001)
-            model = RandomForestRegressor(n_estimators=100, random_state=42, criterion='mse', n_jobs=-1,
-                                          min_samples_leaf=5, min_samples_split=0.01)
-            model.fit(X_train, y_train)
+            # # optimal config for generated data
+            # model = RandomForestRegressor(n_estimators=100, random_state=42, criterion='mae', n_jobs=-1,
+            #                               min_samples_leaf=0.02, min_samples_split=0.01)
+            # # optimal config for real data
+            # model = RandomForestRegressor(n_estimators=100, random_state=42, criterion='mae', n_jobs=-1,
+            #                               min_samples_leaf=0.01, min_samples_split=0.3, max_samples=0.8)
+            # model.fit(X_train, y_train)
 
-            predictions = model.predict(X_test)
+            predictions = self.regression_model.predict(X_test)
             predictions = np.around(predictions).astype(int)
             predictions = np.where(predictions < 0, 0, predictions)
 
@@ -264,7 +275,7 @@ class Model(ABC):
             monthly_errors_predicted.append(
                 self.__calculate_mae(res_montly['Actual_sum'], res_montly['Predicted_sum']))
             monthly_errors_predicted_strict.append(self.__calculate_mae(res_montly['Actual_sum'],
-                                                                         res_montly['Predicted_sum_strict']))
+                                                                        res_montly['Predicted_sum_strict']))
 
             res_quarterly = res_montly[['Guessed_sum', 'Predicted_sum', 'Predicted_sum_strict', 'Actual_sum']].resample(
                 'Q-JAN',
@@ -272,11 +283,11 @@ class Model(ABC):
                 'sum')
 
             quarterly_errors_guessed.append(self.__calculate_mae(res_quarterly['Actual_sum'],
-                                                                  res_quarterly['Guessed_sum']))
+                                                                 res_quarterly['Guessed_sum']))
             quarterly_errors_predicted.append(self.__calculate_mae(res_quarterly['Actual_sum'],
-                                                                    res_quarterly['Predicted_sum']))
+                                                                   res_quarterly['Predicted_sum']))
             quarterly_errors_predicted_strict.append(self.__calculate_mae(res_quarterly['Actual_sum'],
-                                                                           res_quarterly['Predicted_sum_strict']))
+                                                                          res_quarterly['Predicted_sum_strict']))
 
         mean_monthly_mae_guessed = sum(monthly_errors_guessed) / len(monthly_errors_guessed)
         mean_monthly_mae_predicted = sum(monthly_errors_predicted) / len(monthly_errors_predicted)
