@@ -107,7 +107,7 @@ def make_predictions(data_raw, data_name, regression_model):
                                     updates,
                                     data_won, data_name, regression_model)
                 nn.define_model(solver=nn_solver, activation=nn_activation, n_nodes=nn_nodes)
-                auc, mae_guessed, mae_predicted, mae_predicted_strict, model = nn.make_predicitons()
+                auc, mae_guessed, mae_predicted, mae_predicted_strict, model = nn.fit_predict()
                 if auc > best_auc:
                     best_auc = auc
                     best_model_auc = model
@@ -139,7 +139,7 @@ def make_predictions(data_raw, data_name, regression_model):
                              index_train, second_part, target, update_col, guessed_win_probabilities_for_test_data,
                              updates, data_won, data_name, regression_model)
             lr.define_model(solver=lr_solver, c=c)
-            auc, mae_guessed, mae_predicted, mae_predicted_strict, model = lr.make_predicitons()
+            auc, mae_guessed, mae_predicted, mae_predicted_strict, model = lr.fit_predict()
             if auc > best_auc:
                 best_auc = auc
                 best_model_auc = model
@@ -164,7 +164,7 @@ def make_predictions(data_raw, data_name, regression_model):
 
 
 def main():
-    sys.stdout = open('../../Outputs/console_output.txt', 'w')  # write output there
+    # sys.stdout = open('../../Outputs/console_output.txt', 'w')  # write output there
 
     # optimal config for real data
     regression_model = RandomForestRegressor(n_estimators=100, random_state=42, criterion='mae', n_jobs=-1,
@@ -180,7 +180,7 @@ def main():
     data_generated = pd.read_csv('../../Data/data_complete_no_closed_duplicates.csv', index_col=0)
     make_predictions(data_generated, "Generated data", regression_model)
 
-    sys.stdout.close()
+    # sys.stdout.close()
 
 
 if __name__ == "__main__":

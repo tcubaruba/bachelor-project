@@ -19,4 +19,4 @@ class NeuralNetModel(Model):
         self.plot_name = 'Neural Networks' + ' with solver: ' + solver + '\n activation function: ' + activation + \
                          ' and number nodes: ' + str(n_nodes)
         self.description = 'Neural Networks' + ' with solver: ' + solver + ', activation function: ' + activation + \
-                         ' and number nodes: ' + str(n_nodes)
+                           ' and number nodes: ' + str(n_nodes)
