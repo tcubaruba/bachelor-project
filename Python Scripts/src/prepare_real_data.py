@@ -19,7 +19,7 @@ real_data = real_data_raw[
 
 # rename columns such that they match to generated data
 real_data.columns = ['Upload_date', 'Opportunity_Name', 'Industry', 'Region', 'Customer', 'Campaign', 'Customer_Type',
-                     'Owner', 'Stage', 'Product', 'Price', 'Amount', 'Volume', 'Expected closing', 'Created']
+                     'Owner', 'Stage', 'Product', 'Price', 'Amount', 'Volume', 'Expected_closing', 'Created']
 
 def change_names(column):
     """
@@ -60,8 +60,8 @@ real_data.drop_duplicates(inplace=True)
 # compute expected closing in days
 date_format = '%d.%m.%Y'
 real_data['Upload_date'] = pd.to_datetime(real_data['Upload_date'], format=date_format)
-real_data['Expected closing'] = pd.to_datetime(real_data['Expected closing'], format=date_format)
-real_data['Expected_closing'] = (real_data['Expected closing'] - real_data['Upload_date']).dt.days
+real_data['Expected_closing'] = pd.to_datetime(real_data['Expected_closing'], format=date_format)
+real_data['Expected_closing'] = (real_data['Expected_closing'] - real_data['Upload_date']).dt.days
 
 # look for deal which were never opened
 # find closed opportunities

@@ -13,7 +13,7 @@ from sklearn.ensemble import RandomForestRegressor
 from collections import defaultdict
 from sklearn.preprocessing import LabelEncoder, MinMaxScaler
 
-sys.stdout = open('./Outputs/output.txt', 'w')
+# sys.stdout = open('./Outputs/output.txt', 'w')
 
 logging.basicConfig(level=os.environ.get("LOGLEVEL", "DEBUG"))
 log = logging.getLogger('Predicting win probability for sales data')
@@ -159,5 +159,5 @@ print('*' * 30 + ' generated data '.upper() + '*' * 30)
 data_generated = pd.read_csv('./Data/data_complete_no_closed_duplicates.csv', index_col=0)
 make_predictions(data_generated, "Generated data", regression_model)
 
-sys.stdout.close()
+# sys.stdout.close()
 

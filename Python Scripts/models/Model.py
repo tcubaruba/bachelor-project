@@ -106,11 +106,6 @@ class Model(ABC):
             print('Empty data')
             data['time to close'] = 0
         else:
-            # X_train = X.loc[index_train]
-            # X_test = X.loc[index_test]
-            # y_train = y.loc[index_train]
-            # y_train = np.ravel(y_train)
-
             X = data.drop(columns=self.target_second_part)
             to_change = X.select_dtypes(include=['object', 'datetime'])  # data which need to be encoded
             to_stay = X.select_dtypes(include='number')  # numerical data
@@ -124,14 +119,6 @@ class Model(ABC):
             X.loc[:, :] = scaled_values
             # X_train = X.loc[index_train]
             X_test = X.loc[index_test]
-
-            # # optimal config for generated data
-            # model = RandomForestRegressor(n_estimators=100, random_state=42, criterion='mae', n_jobs=-1,
-            #                               min_samples_leaf=0.02, min_samples_split=0.01)
-            # # optimal config for real data
-            # model = RandomForestRegressor(n_estimators=100, random_state=42, criterion='mae', n_jobs=-1,
-            #                               min_samples_leaf=0.01, min_samples_split=0.3, max_samples=0.8)
-            # model.fit(X_train, y_train)
 
             predictions = self.regression_model.predict(X_test)
             predictions = np.around(predictions).astype(int)
@@ -288,6 +275,7 @@ class Model(ABC):
                                                                    res_quarterly['Predicted_sum']))
             quarterly_errors_predicted_strict.append(self.__calculate_mae(res_quarterly['Actual_sum'],
                                                                           res_quarterly['Predicted_sum_strict']))
+
 
         mean_monthly_mae_guessed = sum(monthly_errors_guessed) / len(monthly_errors_guessed)
         mean_monthly_mae_predicted = sum(monthly_errors_predicted) / len(monthly_errors_predicted)

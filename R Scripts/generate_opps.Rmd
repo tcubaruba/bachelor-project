@@ -9,7 +9,6 @@ Each opportunity has following dimensions: upload date, opportunity name, custom
 ```{r}
 # Upload and estimated close date
 created_dates <- seq.Date(from = as.Date("2017-01-01"), to = as.Date("2020-01-01"), by = "day")
-# fc_dates <- seq.Date(from = as.Date("2019-10-01"), to = as.Date("2021-10-01"), by = "week")
 
 # Opportunity name
 opp_names <- c()
@@ -259,13 +258,13 @@ owners_bc <- c('Owner_1', 'Owner_2', 'Owner_3', 'Owner_5', 'Owner_5')
 owners_wc <- c('Owner_6', 'Owner_7', 'Owner_8', 'Owner_9', 'Owner_10')
 owners_nc <- c('Owner_11', 'Owner_12', 'Owner_13', 'Owner_14', 'Owner_15')
 
-industry_bc <- c('Industry_1', 'Industry_2', 'Industry_3', 'Industry_4', 'Industry_5')
-industry_wc <- c('Industry_6', 'Industry_7', 'Industry_8', 'Industry_9', 'Industry_10')
-industry_nc <- c('Industry_11', 'Industry_12', 'Industry_13', 'Industry_14', 'Industry_15')
+industry_bc <- c('Industry_1', 'Industry_2', 'Industry_3')
+industry_wc <- c('Industry_4', 'Industry_5', 'Industry_6')
+industry_nc <- c('Industry_7', 'Industry_8', 'Industry_9', 'Industry_10')
 
-region_bc <- c('Region_1', 'Region_2', 'Region_3', 'Region_4', 'Region_5')
-region_wc <- c('Region_6', 'Region_7', 'Region_8', 'Region_9', 'Region_10')
-region_nc <- c('Region_11', 'Region_12', 'Region_13', 'Region_14', 'Region_15')
+region_bc <- c('Region_1', 'Region_2', 'Region_3')
+region_wc <- c('Region_4', 'Region_5', 'Region_6')
+region_nc <- c('Region_7', 'Region_8', 'Region_9', 'Region_10')
 
 
 
@@ -339,10 +338,12 @@ data_closed <- data_closed[data_closed$Stage != data_closed$last_stage,]
 
 data_dropped_closed_duplicates <- rbind(data_open, data_closed)
 data_for_plot <- data.frame(table(data_dropped_closed_duplicates$Stage, data_dropped_closed_duplicates$Upload_date))
-data_for_plot$Var2 <- as.Date(data_for_plot$Var2)
+data_for_plot$Upload <- as.Date(data_for_plot$Var2)
 print(data_for_plot)
 library(tidyverse)
-ggplot(data_for_plot) + geom_area(mapping = aes(x = Var2, y = Freq, fill = Var1))
+ggplot(data_for_plot) + geom_area(mapping = aes(x = Upload, y = Freq, fill = Var1))
+library(ggplot2)
+ggsave('generated_data_plot.pdf', width = 30, height = 20, units = "cm")
 ```
 
 ## Save data with dropped duplocates for closed opportunities
