@@ -1,25 +1,5 @@
 import pandas as pd
 
-pd.set_option('display.max_rows', 500)
-pd.set_option('display.max_columns', 500)
-pd.set_option('display.width', 1000)
-
-# this data has wrong stages, so they will be replaced
-real_data_raw = pd.read_csv('./Data/Movement_Data.csv', engine='python', sep=';')
-
-# this dataframe has correct stages
-stage_data = pd.read_csv('./Data/Raw_Movement_Data.csv', engine='python', sep=';')
-
-real_data_raw = real_data_raw.merge(stage_data, on = ['OP Opportunity', 'DT Date'])
-
-# select only columns that we need
-real_data = real_data_raw[
-    ['DT Date', 'OP Opportunity', 'Industry', 'Region N', 'Account', 'CA Campaign', 'Customer Type', 'OWN Owner',
-     'SG Stage', 'Product Code', 'Price', 'Quantity', 'Value', 'Estimated Close Month (Step 1)', 'Created on']]
-
-# rename columns such that they match to generated data
-real_data.columns = ['Upload_date', 'Opportunity_Name', 'Industry', 'Region', 'Customer', 'Campaign', 'Customer_Type',
-                     'Owner', 'Stage', 'Product', 'Price', 'Amount', 'Volume', 'Expected_closing', 'Created']
 
 def change_names(column):
     """
@@ -35,6 +15,23 @@ def change_names(column):
     col_dict = dict(zip(old_names_list, new_names))
     real_data[column] = real_data[column].replace(col_dict)
 
+
+# this data has wrong stages, so they will be replaced
+real_data_raw = pd.read_csv('./Data/Movement_Data.csv', engine='python', sep=';')
+
+# this dataframe has correct stages
+stage_data = pd.read_csv('./Data/Raw_Movement_Data.csv', engine='python', sep=';')
+
+real_data_raw = real_data_raw.merge(stage_data, on=['OP Opportunity', 'DT Date'])
+
+# select only columns that we need
+real_data = real_data_raw[
+    ['DT Date', 'OP Opportunity', 'Industry', 'Region N', 'Account', 'CA Campaign', 'Customer Type', 'OWN Owner',
+     'SG Stage', 'Product Code', 'Price', 'Quantity', 'Value', 'Estimated Close Month (Step 1)', 'Created on']]
+
+# rename columns such that they match to generated data
+real_data.columns = ['Upload_date', 'Opportunity_Name', 'Industry', 'Region', 'Customer', 'Campaign', 'Customer_Type',
+                     'Owner', 'Stage', 'Product', 'Price', 'Amount', 'Volume', 'Expected_closing', 'Created']
 
 change_names('Industry')
 change_names('Region')

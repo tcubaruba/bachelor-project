@@ -1,4 +1,4 @@
-from models.Model import Model
+from src.models.Model import Model
 from sklearn.linear_model import LogisticRegression
 
 

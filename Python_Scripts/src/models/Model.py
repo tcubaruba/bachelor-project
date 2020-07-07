@@ -5,16 +5,14 @@ import time
 from collections import defaultdict
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import MinMaxScaler
-from src.preprocess import scale_transform
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.linear_model import SGDRegressor
+from src.utils.preprocess import scale_transform
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import roc_auc_score
 from sklearn.metrics import roc_curve
 from sklearn.metrics import mean_absolute_error
 
-from src.preprocess import timer
+from src.utils.preprocess import timer
 
 import matplotlib.pyplot as plt
 
@@ -164,7 +162,7 @@ class Model(ABC):
         plt.legend()
         title = 'ROC Curve for ' + self.data_name + ' with ' + self.plot_name
         plt.title(title)
-        plot_name = './Plots/roc_' + self.description.lower().replace(" ", "_") + self.data_name.lower().replace(" ",
+        plot_name = '../../Plots/roc_' + self.description.lower().replace(" ", "_") + self.data_name.lower().replace(" ",
                                                                                                                  "_") + '.svg'
         plt.savefig(plot_name)
         plt.show()
@@ -196,7 +194,7 @@ class Model(ABC):
         plt.ylabel('Mean Root Square Error')
         title = 'Compare ' + frequency + ' errors for ' + self.data_name + ' with\n' + self.plot_name
         plt.title(title)
-        plt_name_begin = './Plots/' + frequency[0] + '_err_'
+        plt_name_begin = '../../Plots/' + frequency[0] + '_err_'
         plot_name = plt_name_begin + self.description.lower().replace(" ", "_") + self.data_name.lower().replace(" ",
                                                                                                                  "_") + '.svg'
         plt.savefig(plot_name)
