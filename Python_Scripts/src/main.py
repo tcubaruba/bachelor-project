@@ -2,7 +2,11 @@ import pandas as pd
 import numpy as np
 
 import sys
-from src.utils.preprocess import preprocess
+import os
+path = '/src'
+print(os.getcwd())
+# os.chdir(path)
+from utils.preprocess import preprocess
 
 from src.models.NeuralNetModel import NeuralNetModel
 from src.models.LogRegModel import LogRegModel
