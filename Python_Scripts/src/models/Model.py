@@ -46,7 +46,7 @@ class Model(ABC):
         self.y_predict = None
         self.win_probability = None
         self.y_probability_guessed = guessed_win_probabilities_for_test_data.copy()
-        self.y_guessed = [1 if x >= 0.5 else 0 for x in self.y_probability_guessed]
+        # self.y_guessed = [1 if x >= 0.5 else 0 for x in self.y_probability_guessed]
         self.updates = updates.copy()
         self.data_won = data_won
         self.plot_name = ""
@@ -54,7 +54,7 @@ class Model(ABC):
         self.data_name = data_name
         self.regression_model = regression_model
         self.predict_col_name = 'predict_class'
-        self.period_columns_name = 'predicted_days_to_close'
+        self.period_column_name = 'predicted_days_to_close'
 
     @abstractmethod
     def define_model(self):
@@ -76,18 +76,22 @@ class Model(ABC):
 
         return y_predict_classification
 
-    def prepare_data_for_second_part(self, y_predict):
+    def prepare_data_for_second_part(self, classification_results):
         """
         Set values for classification task column for regression task. Train data gets real values, in the test data
         the values are set to the predictions made
-        :param y_predict: predictions from the first part
+        :param classification_results: predictions from the first part
         :return:
         """
         self.second_part_data.loc[self.index_train, self.predict_col_name] = self.second_part_data[self.target]
-        self.second_part_data.loc[self.index_test, self.predict_col_name] = y_predict['predict']
+        self.second_part_data.loc[self.index_test, self.predict_col_name] = classification_results['predict']
         self.second_part_data = self.second_part_data.drop(columns=self.target)
 
-    def predict_period(self):
+    def predict_closing_period(self):
+        """
+        makes predictions for closing dates with regression model after classification step
+        :return:
+        """
         data = self.second_part_data
 
         X = data.drop(columns=self.target_second_part)
@@ -105,51 +109,50 @@ class Model(ABC):
 
         predictions = self.regression_model.predict(X_test)
         predictions = np.around(predictions).astype(int)
-        predictions = np.where(predictions < 0, 0, predictions)
+        predictions = np.where(predictions < 0, 0, predictions)  # period can't be negative
 
         predictions_periods = pd.DataFrame(predictions)
-        predictions_periods.columns = [self.period_columns_name]
+        predictions_periods.columns = [self.period_column_name]
         predictions_periods = predictions_periods.set_index(self.index_test, drop=True)
-        data[self.period_columns_name] = 0
-        data.loc[self.index_test, self.period_columns_name] = predictions_periods[self.period_columns_name]
+        data[self.period_column_name] = 0
+        data.loc[self.index_test, self.period_column_name] = predictions_periods[self.period_column_name]
         return data
 
-    def predict_class_and_closing_dates(self):
+    def predict(self):
         """
         makes predictions first for the class and then for closing dates
         :return: data frame with complete predictions
         """
-        y_predict = self.predict_classification()
-        self.prepare_data_for_second_part(y_predict)
-        predictions_final = self.predict_period()
+        classification_results = self.predict_classification()
+        self.prepare_data_for_second_part(classification_results)
+        predictions_final = self.predict_closing_period()
         predictions_final.index = predictions_final.index.map(int)
-        predictions_final.loc[self.index_test, 'probability win'] = y_predict['probability win']
+        predictions_final.loc[self.index_test, 'probability win'] = classification_results['probability win']
         return predictions_final
 
     def fit_predict(self):
+        """
+        makes complete predictions and prints/plots the results
+        :return: model accuracy metrics and description
+        """
         model_logger.info('Making predictions for ' + self.description)
         start = time.time()
         print(self.description.upper())
-        print('Guessed probabilities'.upper())
-        print(classification_report(self.y_test, self.y_guessed))
-        print('Confusion matrix'.upper())
-        print(confusion_matrix(self.y_test, self.y_guessed))
 
-        predictions_periods = self.predict_class_and_closing_dates()
+        predictions_periods = self.predict()
         print('Predictions'.upper())
         print(classification_report(self.y_test, self.y_predict))
         print('Confusion matrix'.upper())
         print(confusion_matrix(self.y_test, self.y_predict))
-        # roc
-        # calculate scores
-        ns_auc = roc_auc_score(self.y_test, self.y_probability_guessed)
-        model_auc = roc_auc_score(self.y_test, self.win_probability)
-        print('No Skill: ROC AUC=%.3f' % ns_auc)
-        print('Model: ROC AUC=%.3f' % model_auc)
 
-        # calculate roc curves
+        # roc
+        # calculate score
+        model_auc = roc_auc_score(self.y_test, self.win_probability)
+        print('Model: ROC AUC=%.3f' % model_auc)
+        # calculate curves
         ns_fpr, ns_tpr, _ = roc_curve(self.y_test, self.y_probability_guessed)
         model_fpr, model_tpr, _ = roc_curve(self.y_test, self.win_probability)
+
         # plot the roc curve for the model
         plt.plot(ns_fpr, ns_tpr, linestyle='--', label='No Skill')
         plt.plot(model_fpr, model_tpr, marker='.', label='Trained Model')
@@ -157,8 +160,7 @@ class Model(ABC):
         title = 'ROC Curve for ' + self.data_name + ' with ' + self.plot_name
         plt.title(title)
         plot_name = '../../Plots/roc_' + self.description.lower().replace(" ", "_") + self.data_name.lower().replace(
-            " ",
-            "_") + '.svg'
+            " ", "_") + '.svg'
         plt.savefig(plot_name)
         plt.show()
 
@@ -170,57 +172,77 @@ class Model(ABC):
 
         return model_auc, mpe_guessed, mpe_predicted, mpe_predicted_strict, self.description
 
-    def __calculate_mae(self, true, predicted):
-        return mean_absolute_error(true, predicted)
+    @staticmethod
+    def __group_values_by_update(table, sum_values_column, group_col, values_col, period='M', upd_column='Update'):
+        """
+        Groups table by defined time period
+        :param table: input table
+        :param sum_values_column: Column with values which will be grouped
+        :param period: grouping period
+        :param upd_column: Datetime column
+        :return: grouped table with new index
+        """
+        df = table.groupby(group_col)[values_col].sum().reset_index()
+        df.columns = [upd_column, sum_values_column]
+        res = df.groupby(df[upd_column].dt.to_period(period))[sum_values_column].sum().reset_index()
+        res.index = res[upd_column]
+        return res.drop(columns=upd_column)
 
-    def __group_values_by_update(self, table, colname):
-        res = table.groupby(table['Update'].dt.to_period('M'))[colname].sum().reset_index()
-        res.index = res['Update']
-        return res.drop(columns='Update')
-
-    def __plot_errors(self, guessed, predicted, predicted_strict, frequency):
+    def __plot_errors(self, guessed, weighted, unweighted, frequency):
+        """
+        Plots error graphs
+        :param guessed: guessed values
+        :param weighted: weighted predictions
+        :param unweighted: unweighted predictions
+        :param frequency: time frequency
+        :return:
+        """
         plt.plot(guessed, color='red', label='Guessed Revenue')
-        plt.plot(predicted, color='blue', label='Predicted Revenue')
-        plt.plot(predicted_strict, color='green', label='Strictly Predicted Revenue')
+        plt.plot(weighted, color='blue', label='Predicted Revenue')
+        plt.plot(unweighted, color='green', label='Strictly Predicted Revenue')
         plt.legend()
         plt.ylabel('Mean Root Square Error')
         title = 'Compare ' + frequency + ' errors for ' + self.data_name + ' with\n' + self.plot_name
         plt.title(title)
-        plt_name_begin = '../../Plots/' + frequency[0] + '_err_'
-        plot_name = plt_name_begin + self.description.lower().replace(" ", "_") + self.data_name.lower().replace(" ",
-                                                                                                                 "_") + '.svg'
+        plot_name = '../../Plots/' + frequency[0] + '_err_' + self.description.lower().replace(" ", "_") + \
+                    self.data_name.lower().replace(" ", "_") + '.svg'
         plt.savefig(plot_name)
         plt.show()
 
     def calculate_revenue_forecast(self, predictions):
+        """
+
+        :param predictions:
+        :return:
+        """
         predictions = predictions[['Opportunity_Name', 'Stage', 'Expected_closing', 'Volume', self.target_second_part,
-                                   self.predict_col_name, self.period_columns_name, 'probability win']]
+                                   self.predict_col_name, self.period_column_name, 'probability win']]
         predictions['Update'] = self.updates
         predictions['Guessed probabilities'] = self.y_probability_guessed
         predictions['Guessed_closing'] = pd.to_datetime(predictions['Update']) + pd.to_timedelta(
             predictions['Expected_closing'], unit='D')
         predictions['Predicted_closing'] = pd.to_datetime(predictions['Update']) + pd.to_timedelta(
-            predictions[self.period_columns_name], unit='D')
+            predictions[self.period_column_name], unit='D')
         predictions['Guessed_revenue'] = predictions['Volume'] * predictions['Guessed probabilities']
         predictions['Predicted_revenue'] = predictions['Volume'] * predictions['probability win']
         predictions['Predicted_revenue_strict'] = np.where(predictions['probability win'] < 0.5, 0,
                                                            predictions['Volume'])
 
         # Closing dates MAE:
-        mae_dates_guessed = self.__calculate_mae(predictions[self.target_second_part], predictions['Expected_closing'])
-        mae_dates_predicted = self.__calculate_mae(predictions[self.target_second_part],
-                                                   predictions[self.period_columns_name])
+        mae_dates_guessed = mean_absolute_error(predictions[self.target_second_part], predictions['Expected_closing'])
+        mae_dates_predicted = mean_absolute_error(predictions[self.target_second_part],
+                                                  predictions[self.period_column_name])
 
         print('MAE for guessed closing dates: {:.2f}'.format(mae_dates_guessed))
         print('MAE for predicted closing dates: {:.2f}'.format(mae_dates_predicted))
 
         updates = predictions['Update'].unique()
         monthly_errors_guessed = []
-        monthly_errors_predicted = []
-        monthly_errors_predicted_strict = []
+        monthly_errors_weighted = []
+        monthly_errors_unweighted = []
         quarterly_errors_guessed = []
-        quarterly_errors_predicted = []
-        quarterly_errors_predicted_strict = []
+        quarterly_errors_weighted = []
+        quarterly_errors_unweighted = []
         for u in updates:
             df = predictions[predictions['Update'] == u]
 
@@ -228,63 +250,51 @@ class Model(ABC):
             actual_won_opps = self.data_won[self.data_won['Opportunity_Name'].isin(test_opps)]
             actual_won_opps = actual_won_opps[['Opportunity_Name', 'Upload_date', 'Volume']]
 
-            actual_revenue = actual_won_opps.groupby('Upload_date')['Volume'].sum().reset_index()
-            actual_revenue.columns = ['Update', 'Actual_sum']
-            actual_revenue = self.__group_values_by_update(actual_revenue, 'Actual_sum')
+            actual_revenue = self.__group_values_by_update(actual_won_opps, 'Actual_sum', 'Upload_date', 'Volume')
+            guessed_revenue = self.__group_values_by_update(df, 'Guessed_sum', 'Guessed_closing', 'Guessed_revenue')
+            weighted_revenue = self.__group_values_by_update(df, 'Weighted_sum', 'Predicted_closing', 'Predicted_revenue')
+            unweighted_revenue = self.__group_values_by_update(df, 'Unweighted_sum', 'Predicted_closing', 'Predicted_revenue_strict')
 
-            guessed_revenue = df.groupby('Guessed_closing')['Guessed_revenue'].sum().reset_index()
-            guessed_revenue.columns = ['Update', 'Guessed_sum']
-            guessed_revenue = self.__group_values_by_update(guessed_revenue, 'Guessed_sum')
-
-            predicted_revenue = df.groupby('Predicted_closing')['Predicted_revenue'].sum().reset_index()
-            predicted_revenue.columns = ['Update', 'Predicted_sum']
-            predicted_revenue = self.__group_values_by_update(predicted_revenue, 'Predicted_sum')
-
-            predicted_revenue_strict = df.groupby('Predicted_closing')['Predicted_revenue_strict'].sum().reset_index()
-            predicted_revenue_strict.columns = ['Update', 'Predicted_sum_strict']
-            predicted_revenue_strict = self.__group_values_by_update(predicted_revenue_strict, 'Predicted_sum_strict')
-
-            res_montly = pd.concat([guessed_revenue, predicted_revenue, predicted_revenue_strict], axis=1)
+            res_montly = pd.concat([guessed_revenue, weighted_revenue, unweighted_revenue], axis=1)
             res_montly = pd.concat([res_montly, actual_revenue], axis=1)
             res_montly = res_montly.fillna(0)
 
-            monthly_errors_guessed.append(self.__calculate_mae(res_montly['Actual_sum'], res_montly['Guessed_sum']))
-            monthly_errors_predicted.append(
-                self.__calculate_mae(res_montly['Actual_sum'], res_montly['Predicted_sum']))
-            monthly_errors_predicted_strict.append(self.__calculate_mae(res_montly['Actual_sum'],
-                                                                        res_montly['Predicted_sum_strict']))
+            monthly_errors_guessed.append(mean_absolute_error(res_montly['Actual_sum'], res_montly['Guessed_sum']))
+            monthly_errors_weighted.append(
+                mean_absolute_error(res_montly['Actual_sum'], res_montly['Weighted_sum']))
+            monthly_errors_unweighted.append(mean_absolute_error(res_montly['Actual_sum'], res_montly['Unweighted_sum']))
 
-            res_quarterly = res_montly[['Guessed_sum', 'Predicted_sum', 'Predicted_sum_strict', 'Actual_sum']].resample(
+            res_quarterly = res_montly[['Guessed_sum', 'Weighted_sum', 'Unweighted_sum', 'Actual_sum']].resample(
                 'Q-JAN',
                 convention='end').agg(
                 'sum')
 
-            quarterly_errors_guessed.append(self.__calculate_mae(res_quarterly['Actual_sum'],
-                                                                 res_quarterly['Guessed_sum']))
-            quarterly_errors_predicted.append(self.__calculate_mae(res_quarterly['Actual_sum'],
-                                                                   res_quarterly['Predicted_sum']))
-            quarterly_errors_predicted_strict.append(self.__calculate_mae(res_quarterly['Actual_sum'],
-                                                                          res_quarterly['Predicted_sum_strict']))
+            quarterly_errors_guessed.append(mean_absolute_error(res_quarterly['Actual_sum'],
+                                                                res_quarterly['Guessed_sum']))
+            quarterly_errors_weighted.append(mean_absolute_error(res_quarterly['Actual_sum'],
+                                                                  res_quarterly['Weighted_sum']))
+            quarterly_errors_unweighted.append(mean_absolute_error(res_quarterly['Actual_sum'],
+                                                                         res_quarterly['Unweighted_sum']))
 
         mean_monthly_mae_guessed = sum(monthly_errors_guessed) / len(monthly_errors_guessed)
-        mean_monthly_mae_predicted = sum(monthly_errors_predicted) / len(monthly_errors_predicted)
-        mean_monthly_mae_predicted_strict = sum(monthly_errors_predicted_strict) / len(monthly_errors_predicted_strict)
+        mean_monthly_mae_predicted = sum(monthly_errors_weighted) / len(monthly_errors_weighted)
+        mean_monthly_mae_predicted_strict = sum(monthly_errors_unweighted) / len(monthly_errors_unweighted)
 
         print('Mean monthly MAE for guessed data: {:.2f}'.format(mean_monthly_mae_guessed))
         print('Mean monthly MAE for predicted data: {:.2f}'.format(mean_monthly_mae_predicted))
         print('Mean monthly MAE for strictly predicted data: {:.2f}'.format(mean_monthly_mae_predicted_strict))
 
         mean_quarterly_mae_guessed = sum(quarterly_errors_guessed) / len(quarterly_errors_guessed)
-        mean_quarterly_mae_predicted = sum(quarterly_errors_predicted) / len(quarterly_errors_predicted)
-        mean_quarterly_mae_predicted_strict = sum(quarterly_errors_predicted_strict) / len(
-            quarterly_errors_predicted_strict)
+        mean_quarterly_mae_predicted = sum(quarterly_errors_weighted) / len(quarterly_errors_weighted)
+        mean_quarterly_mae_predicted_strict = sum(quarterly_errors_unweighted) / len(
+            quarterly_errors_unweighted)
 
         print('Mean quarterly MAE for guessed data: {:.2f}'.format(mean_quarterly_mae_guessed))
         print('Mean quarterly MAE for predicted data: {:.2f}'.format(mean_quarterly_mae_predicted))
         print('Mean quarterly MAE for strictly predicted data: {:.2f}'.format(mean_quarterly_mae_predicted_strict))
 
-        self.__plot_errors(monthly_errors_guessed, monthly_errors_predicted, monthly_errors_predicted_strict, 'monthly')
-        self.__plot_errors(quarterly_errors_guessed, quarterly_errors_predicted, quarterly_errors_predicted_strict,
+        self.__plot_errors(monthly_errors_guessed, monthly_errors_weighted, monthly_errors_unweighted, 'monthly')
+        self.__plot_errors(quarterly_errors_guessed, quarterly_errors_weighted, quarterly_errors_unweighted,
                            'quarterly')
 
         return mean_quarterly_mae_guessed, mean_quarterly_mae_predicted, mean_quarterly_mae_predicted_strict

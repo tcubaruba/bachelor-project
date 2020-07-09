@@ -10,6 +10,9 @@ from src.models.LogRegModel import LogRegModel
 from sklearn.ensemble import RandomForestRegressor
 from collections import defaultdict
 from sklearn.preprocessing import LabelEncoder, MinMaxScaler
+from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import roc_auc_score
 
 
 def train_regression_model(regression_model, data, index_train, target):
@@ -46,14 +49,13 @@ def initialize_metrics():
     :return: initialized metrics
     """
     best_auc = 0
-    best_mae_guessed = np.inf
     best_mae_predicted_weighted = np.inf
     best_mae_predicted_unweighted = np.inf
 
     best_model_auc = ""
     best_model_mae_predicted_weighted = ""
     best_model_mae_predicted_unweighted = ""
-    return best_auc, best_mae_guessed, best_mae_predicted_weighted, best_mae_predicted_unweighted, best_model_auc, \
+    return best_auc, best_mae_predicted_weighted, best_mae_predicted_unweighted, best_model_auc, \
            best_model_mae_predicted_weighted, best_model_mae_predicted_unweighted
 
 
@@ -84,7 +86,7 @@ def make_predictions(data_raw, data_name, regression_model):
     c_list = [x * .1 for x in range(1, 11)]
 
     # preprocess data
-    X, y, index_train, index_test, second_part, guessed_win_probabilities_for_test_data, updates, data_won = preprocess(
+    X, y, index_train, index_test, second_part, y_proba_guessed, updates, data_won = preprocess(
         data_raw, target, key_columns, update_col, created_col, opp_name_col, product_name_col)
 
     # train model for periods prediction first, because the same model will be used each time
@@ -95,72 +97,74 @@ def make_predictions(data_raw, data_name, regression_model):
     y_train = y.loc[index_train]
     y_test = y.loc[index_test]
 
-    best_auc, best_mae_guessed, best_mae_predicted_weighted, best_mae_predicted_unweighted, best_model_auc, \
-    best_model_mae_predicted_weighted, best_model_mae_predicted_unweighted = initialize_metrics()
+    y_guessed = [1 if x >= 0.5 else 0 for x in y_proba_guessed]
+    print('Guessed probabilities'.upper())
+    print(classification_report(y_test, y_guessed))
+    print('Confusion matrix'.upper())
+    print(confusion_matrix(y_test, y_guessed))
+    ns_auc = roc_auc_score(y_test, y_proba_guessed)
+    print('No Skill: ROC AUC=%.3f' % ns_auc)
+
+    best_auc, best_mae_weighted, best_mae_unweighted, best_model_auc, best_model_mae_weighted, best_model_mae_unweighted = initialize_metrics()
 
     for nn_activation in nn_activation_list:
         for nn_solver in nn_solver_list:
             for nn_nodes in nn_nodes_list:
                 nn = NeuralNetModel(X_train, X_test, y_train, y_test, index_test,
                                     index_train, second_part, target, update_col,
-                                    guessed_win_probabilities_for_test_data,
+                                    y_proba_guessed,
                                     updates,
                                     data_won, data_name, regression_model)
                 nn.define_model(solver=nn_solver, activation=nn_activation, n_nodes=nn_nodes)
-                auc, mae_guessed, mae_predicted, mae_predicted_strict, model = nn.fit_predict()
+                auc, mae_guessed, mae_weighted, mae_unweighted, model = nn.fit_predict()
                 if auc > best_auc:
                     best_auc = auc
                     best_model_auc = model
-                if mae_guessed < best_mae_guessed:
-                    best_mae_guessed = mae_guessed
-                if mae_predicted < best_mae_predicted_weighted:
-                    best_mae_predicted_weighted = mae_predicted
-                    best_model_mae_predicted_weighted = model
-                if mae_predicted_strict < best_mae_predicted_unweighted:
-                    best_mae_predicted_unweighted = mae_predicted_strict
-                    best_model_mae_predicted_unweighted = model
+                if mae_weighted < best_mae_weighted:
+                    best_mae_weighted = mae_weighted
+                    best_model_mae_weighted = model
+                if mae_unweighted < best_mae_unweighted:
+                    best_mae_unweighted = mae_unweighted
+                    best_model_mae_unweighted = model
     print(
         'best nn model by AUC: '.upper() + best_model_auc.upper() + " with AUC {:.2f}".format(best_auc))
     print(
-        'best guessed revenue MAE: '.upper() + '{:.2f}'.format(best_mae_guessed))
+        'best guessed revenue MAE: '.upper() + '{:.2f}'.format(mae_guessed))
     print(
-        'best nn model by predicted revenue MAE: '.upper() + best_model_mae_predicted_weighted.upper() +
-        " with MAE {:.2f}".format(best_mae_predicted_weighted))
+        'best nn model by predicted revenue MAE: '.upper() + best_model_mae_weighted.upper() +
+        " with MAE {:.2f}".format(best_mae_weighted))
     print(
-        'best nn model by strictly predicted revenue MAE: '.upper() + best_model_mae_predicted_unweighted.upper() +
-        " with MAE {:.2f}".format(best_mae_predicted_unweighted))
+        'best nn model by strictly predicted revenue MAE: '.upper() + best_model_mae_unweighted.upper() +
+        " with MAE {:.2f}".format(best_mae_unweighted))
 
-    best_auc, best_mae_guessed, best_mae_predicted_weighted, best_mae_predicted_unweighted, best_model_auc, \
-    best_model_mae_predicted_weighted, best_model_mae_predicted_unweighted = initialize_metrics()
+    best_auc, best_mae_weighted, best_mae_unweighted, best_model_auc, best_model_mae_weighted, best_model_mae_unweighted = initialize_metrics()
 
     for lr_solver in lr_solver_list:
         for c in c_list:
             lr = LogRegModel(X_train, X_test, y_train, y_test, index_test,
-                             index_train, second_part, target, update_col, guessed_win_probabilities_for_test_data,
+                             index_train, second_part, target, update_col, y_proba_guessed,
                              updates, data_won, data_name, regression_model)
             lr.define_model(solver=lr_solver, c=c)
-            auc, mae_guessed, mae_predicted, mae_predicted_strict, model = lr.fit_predict()
+            auc, mae_guessed, mae_weighted, mae_unweighted, model = lr.fit_predict()
             if auc > best_auc:
                 best_auc = auc
                 best_model_auc = model
-            if mae_guessed < best_mae_guessed:
-                best_mae_guessed = mae_guessed
-            if mae_predicted < best_mae_predicted_weighted:
-                best_mae_predicted_weighted = mae_predicted
-                best_model_mae_predicted_weighted = model
-            if mae_predicted_strict < best_mae_predicted_unweighted:
-                best_mae_predicted_unweighted = mae_predicted_strict
-                best_model_mae_predicted_unweighted = model
+            if mae_weighted < best_mae_weighted:
+                best_mae_weighted = mae_weighted
+                best_model_mae_weighted = model
+            if mae_unweighted < best_mae_unweighted:
+                best_mae_unweighted = mae_unweighted
+                best_model_mae_unweighted = model
     print(
         'best lr model by AUC: '.upper() + best_model_auc.upper() + " with AUC {:.2f}".format(best_auc))
     print(
-        'best guessed revenue MAE: '.upper() + '{:.2f}'.format(best_mae_guessed))
+        'best guessed revenue MAE: '.upper() + '{:.2f}'.format(mae_guessed))
     print(
-        'best lr model by predicted revenue MAE: '.upper() + best_model_mae_predicted_weighted.upper() +
-        " with MAE {:.2f}".format(best_mae_predicted_weighted))
+        'best lr model by predicted revenue MAE: '.upper() + best_model_mae_weighted.upper() +
+        " with MAE {:.2f}".format(best_mae_weighted))
     print(
-        'best lr model by strictly predicted revenue MAE: '.upper() + best_model_mae_predicted_unweighted.upper() +
-        " with MAE {:.2f}".format(best_mae_predicted_unweighted))
+        'best lr model by strictly predicted revenue MAE: '.upper() + best_model_mae_unweighted.upper() +
+        " with MAE {:.2f}".format(best_mae_unweighted))
 
 
 def main():
