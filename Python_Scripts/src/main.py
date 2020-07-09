@@ -2,14 +2,11 @@ import pandas as pd
 import numpy as np
 
 import sys
-import os
-path = '/src'
-print(os.getcwd())
-# os.chdir(path)
+
 from utils.preprocess import preprocess
 
-from src.models.NeuralNetModel import NeuralNetModel
-from src.models.LogRegModel import LogRegModel
+from models.NeuralNetModel import NeuralNetModel
+from models.LogRegModel import LogRegModel
 from sklearn.ensemble import RandomForestRegressor
 from collections import defaultdict
 from sklearn.preprocessing import LabelEncoder, MinMaxScaler
