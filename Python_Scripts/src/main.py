@@ -168,23 +168,23 @@ def make_predictions(data_raw, data_name, regression_model):
 
 
 def main():
-    # sys.stdout = open('../../Outputs/console_output.txt', 'w')  # write output there
+    sys.stdout = open('../../Outputs/console_output.txt', 'w')  # write output there
 
     # optimal config for real data
     regression_model = RandomForestRegressor(n_estimators=100, random_state=42, criterion='mae', n_jobs=-1,
                                              min_samples_leaf=0.01, min_samples_split=0.3, max_samples=0.8)
     print('\n' + '*' * 30 + ' real data '.upper() + '*' * 30)
-    data_real = pd.read_csv('../../Data/real_data_cleaned.csv', index_col=0)
+    data_real = pd.read_csv('../../Data/real_data.csv', index_col=0)
     make_predictions(data_real, "Real data", regression_model)
 
     # optimal config for generated data
     regression_model = RandomForestRegressor(n_estimators=100, random_state=42, criterion='mae', n_jobs=-1,
                                              min_samples_leaf=0.02, min_samples_split=0.01)
     print('*' * 30 + ' generated data '.upper() + '*' * 30)
-    data_generated = pd.read_csv('../../Data/data_complete_no_closed_duplicates.csv', index_col=0)
+    data_generated = pd.read_csv('../../Data/generated_data.csv', index_col=0)
     make_predictions(data_generated, "Generated data", regression_model)
 
-    # sys.stdout.close()
+    sys.stdout.close()
 
 
 if __name__ == "__main__":

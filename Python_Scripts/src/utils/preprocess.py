@@ -58,6 +58,17 @@ def scale_transform(to_change, to_stay, dict):
 
 
 def preprocess(data, target, key_columns, update_col, created_col, opp_name_col, product_name_col):
+    """
+    Prepare data for predictions
+    :param data: pandas data frame to prepare
+    :param target: column to predict
+    :param key_columns: columns which make key value
+    :param update_col: column name for updates
+    :param created_col: column name for date of creation
+    :param opp_name_col: column name for the name of opportunity
+    :param product_name_col: column name for the name of product
+    :return:
+    """
     log.info('Start preprocessing data')
     start = time.time()
 
@@ -103,34 +114,30 @@ def preprocess(data, target, key_columns, update_col, created_col, opp_name_col,
         'last') - data['timediff'] + 7, data.groupby(opp_name_col)['timediff'].transform(
         'first') - data['timediff'])
 
-    # TODO rename dataset or keep dropping duplicates
-    # data_no_duplicates = data.loc[(data['Stage'] != data['last_stage']) | (data['timediff'] == 0)]
-    data_no_duplicates = data
-
     # split data and reset indexes
-    data_won = data_no_duplicates.loc[data_no_duplicates[stage_col] == 'Won']
-    data_lost = data_no_duplicates.loc[data_no_duplicates[stage_col] == 'Lost']
+    data_won = data.loc[data[stage_col] == 'Won']
+    data_lost = data.loc[data[stage_col] == 'Lost']
 
     # create temp tables with only key values and date
     data_won_temp = data_won[[opp_name_col, update_col]]
     data_lost_temp = data_lost[[opp_name_col, update_col]]
 
     # define the future stage
-    data_no_duplicates['future stage'] = np.where(data_no_duplicates[opp_name_col].isin(data_won_temp[opp_name_col]),
+    data['future stage'] = np.where(data[opp_name_col].isin(data_won_temp[opp_name_col]),
                                                   'Won',
                                                   np.where(
-                                                      data_no_duplicates[opp_name_col].isin(
+                                                      data[opp_name_col].isin(
                                                           data_lost_temp[opp_name_col]),
                                                       'Lost', 'Open'))
 
-    data_no_duplicates['future stage'] = np.where(data_no_duplicates[stage_col] != 'Open', 'none',
-                                                  data_no_duplicates['future stage'])
+    data['future stage'] = np.where(data[stage_col] != 'Open', 'none',
+                                                  data['future stage'])
 
     # drop rows which are still not closed, because we can not check the prediction accuracy for them
-    data_no_duplicates = data_no_duplicates.loc[data_no_duplicates['future stage'] != 'Open']
+    data = data.loc[data['future stage'] != 'Open']
 
     # delete unnecessary columns
-    data_first_part = data_no_duplicates.drop(
+    data_first_part = data.drop(
         columns=['timediff', created_col])
 
     # FIRST PART
@@ -162,8 +169,8 @@ def preprocess(data, target, key_columns, update_col, created_col, opp_name_col,
         'Won': 1.,
         'Lost': 0.
     }
-    data_no_duplicates['Estimated_win_probability'] = data_no_duplicates['Stage'].replace(probability_dict)
-    guessed_win_probabilities = data_no_duplicates['Estimated_win_probability']
+    data['Estimated_win_probability'] = data['Stage'].replace(probability_dict)
+    guessed_win_probabilities = data['Estimated_win_probability']
     guessed_win_probabilities_for_test_data = guessed_win_probabilities.loc[index_test]
 
     # convert datatypes

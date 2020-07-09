@@ -1,0 +1,4751 @@
+
+****************************** REAL DATA ******************************
+GUESSED PROBABILITIES
+              precision    recall  f1-score   support
+
+           0       0.95      0.57      0.72      1262
+           1       0.19      0.78      0.30       158
+
+    accuracy                           0.60      1420
+   macro avg       0.57      0.68      0.51      1420
+weighted avg       0.87      0.60      0.67      1420
+
+CONFUSION MATRIX
+[[725 537]
+ [ 35 123]]
+No Skill: ROC AUC=0.704
+NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: IDENTITY AND NUMBER NODES: (2, 2, 2)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.93      0.82      0.87      1262
+           1       0.26      0.51      0.34       158
+
+    accuracy                           0.78      1420
+   macro avg       0.59      0.66      0.61      1420
+weighted avg       0.86      0.78      0.81      1420
+
+CONFUSION MATRIX
+[[1034  228]
+ [  78   80]]
+Model: ROC AUC=0.763
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 143.28
+Mean monthly MAE for guessed data: 747759.58
+Mean monthly MAE for predicted data: 378285.79
+Mean monthly MAE for strictly predicted data: 391688.11
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 478184.04
+Mean quarterly MAE for strictly predicted data: 501147.48
+Making predictions finished. Execution time: 00:00:02.97
+NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: IDENTITY AND NUMBER NODES: (100, 100)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.93      0.87      0.90      1262
+           1       0.33      0.50      0.40       158
+
+    accuracy                           0.83      1420
+   macro avg       0.63      0.69      0.65      1420
+weighted avg       0.87      0.83      0.85      1420
+
+CONFUSION MATRIX
+[[1102  160]
+ [  79   79]]
+Model: ROC AUC=0.759
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 131.97
+Mean monthly MAE for guessed data: 756694.24
+Mean monthly MAE for predicted data: 310216.95
+Mean monthly MAE for strictly predicted data: 297789.43
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 361584.31
+Mean quarterly MAE for strictly predicted data: 348980.54
+Making predictions finished. Execution time: 00:00:03.56
+NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: IDENTITY AND NUMBER NODES: (20, 16, 10, 4)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.92      0.92      1262
+           1       0.36      0.37      0.37       158
+
+    accuracy                           0.86      1420
+   macro avg       0.64      0.65      0.64      1420
+weighted avg       0.86      0.86      0.86      1420
+
+CONFUSION MATRIX
+[[1159  103]
+ [  99   59]]
+Model: ROC AUC=0.733
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 125.27
+Mean monthly MAE for guessed data: 756119.84
+Mean monthly MAE for predicted data: 228954.45
+Mean monthly MAE for strictly predicted data: 207798.01
+Mean quarterly MAE for guessed data: 1148747.80
+Mean quarterly MAE for predicted data: 272043.27
+Mean quarterly MAE for strictly predicted data: 249740.51
+Making predictions finished. Execution time: 00:00:02.96
+NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: IDENTITY AND NUMBER NODES: (100, 80, 60, 40)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.87      0.90      1262
+           1       0.29      0.42      0.34       158
+
+    accuracy                           0.82      1420
+   macro avg       0.61      0.64      0.62      1420
+weighted avg       0.85      0.82      0.83      1420
+
+CONFUSION MATRIX
+[[1100  162]
+ [  92   66]]
+Model: ROC AUC=0.754
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 130.28
+Mean monthly MAE for guessed data: 750191.14
+Mean monthly MAE for predicted data: 263166.23
+Mean monthly MAE for strictly predicted data: 267529.96
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 318077.24
+Mean quarterly MAE for strictly predicted data: 325282.70
+Making predictions finished. Execution time: 00:00:03.41
+NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: IDENTITY AND NUMBER NODES: (2, 2, 2)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.89      1.00      0.94      1262
+           1       0.00      0.00      0.00       158
+
+    accuracy                           0.89      1420
+   macro avg       0.44      0.50      0.47      1420
+weighted avg       0.79      0.89      0.84      1420
+
+CONFUSION MATRIX
+[[1262    0]
+ [ 158    0]]
+Model: ROC AUC=0.668
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 127.71
+Mean monthly MAE for guessed data: 808193.24
+Mean monthly MAE for predicted data: 674397.06
+Mean monthly MAE for strictly predicted data: 119120.11
+Mean quarterly MAE for guessed data: 1177558.45
+Mean quarterly MAE for predicted data: 937699.56
+Mean quarterly MAE for strictly predicted data: 168683.89
+Making predictions finished. Execution time: 00:00:03.60
+NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: IDENTITY AND NUMBER NODES: (100, 100)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.89      1.00      0.94      1262
+           1       0.00      0.00      0.00       158
+
+    accuracy                           0.89      1420
+   macro avg       0.44      0.50      0.47      1420
+weighted avg       0.79      0.89      0.84      1420
+
+CONFUSION MATRIX
+[[1262    0]
+ [ 158    0]]
+Model: ROC AUC=0.576
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 127.71
+Mean monthly MAE for guessed data: 808193.24
+Mean monthly MAE for predicted data: 670938.39
+Mean monthly MAE for strictly predicted data: 119120.11
+Mean quarterly MAE for guessed data: 1177558.45
+Mean quarterly MAE for predicted data: 934700.78
+Mean quarterly MAE for strictly predicted data: 168683.89
+Making predictions finished. Execution time: 00:00:04.67
+NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: IDENTITY AND NUMBER NODES: (20, 16, 10, 4)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.89      1.00      0.94      1262
+           1       0.00      0.00      0.00       158
+
+    accuracy                           0.89      1420
+   macro avg       0.44      0.50      0.47      1420
+weighted avg       0.79      0.89      0.84      1420
+
+CONFUSION MATRIX
+[[1262    0]
+ [ 158    0]]
+Model: ROC AUC=0.530
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 127.71
+Mean monthly MAE for guessed data: 808193.24
+Mean monthly MAE for predicted data: 598527.52
+Mean monthly MAE for strictly predicted data: 119120.11
+Mean quarterly MAE for guessed data: 1177558.45
+Mean quarterly MAE for predicted data: 832269.86
+Mean quarterly MAE for strictly predicted data: 168683.89
+Making predictions finished. Execution time: 00:00:03.81
+NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: IDENTITY AND NUMBER NODES: (100, 80, 60, 40)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.89      1.00      0.94      1262
+           1       0.00      0.00      0.00       158
+
+    accuracy                           0.89      1420
+   macro avg       0.44      0.50      0.47      1420
+weighted avg       0.79      0.89      0.84      1420
+
+CONFUSION MATRIX
+[[1262    0]
+ [ 158    0]]
+Model: ROC AUC=0.426
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 127.71
+Mean monthly MAE for guessed data: 808193.24
+Mean monthly MAE for predicted data: 689901.04
+Mean monthly MAE for strictly predicted data: 119120.11
+Mean quarterly MAE for guessed data: 1177558.45
+Mean quarterly MAE for predicted data: 960176.92
+Mean quarterly MAE for strictly predicted data: 168683.89
+Making predictions finished. Execution time: 00:00:05.09
+NEURAL NETWORKS WITH SOLVER: ADAM, ACTIVATION FUNCTION: IDENTITY AND NUMBER NODES: (2, 2, 2)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.89      1.00      0.94      1262
+           1       0.75      0.06      0.11       158
+
+    accuracy                           0.89      1420
+   macro avg       0.82      0.53      0.52      1420
+weighted avg       0.88      0.89      0.85      1420
+
+CONFUSION MATRIX
+[[1259    3]
+ [ 149    9]]
+Model: ROC AUC=0.599
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 126.77
+Mean monthly MAE for guessed data: 796956.59
+Mean monthly MAE for predicted data: 746455.86
+Mean monthly MAE for strictly predicted data: 119196.67
+Mean quarterly MAE for guessed data: 1174145.42
+Mean quarterly MAE for predicted data: 1052599.67
+Mean quarterly MAE for strictly predicted data: 169039.03
+Making predictions finished. Execution time: 00:00:02.94
+NEURAL NETWORKS WITH SOLVER: ADAM, ACTIVATION FUNCTION: IDENTITY AND NUMBER NODES: (100, 100)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.91      0.89      0.90      1262
+           1       0.26      0.32      0.29       158
+
+    accuracy                           0.82      1420
+   macro avg       0.59      0.61      0.60      1420
+weighted avg       0.84      0.82      0.83      1420
+
+CONFUSION MATRIX
+[[1120  142]
+ [ 107   51]]
+Model: ROC AUC=0.725
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 131.93
+Mean monthly MAE for guessed data: 750940.67
+Mean monthly MAE for predicted data: 360823.77
+Mean monthly MAE for strictly predicted data: 297679.67
+Mean quarterly MAE for guessed data: 1148747.80
+Mean quarterly MAE for predicted data: 427034.82
+Mean quarterly MAE for strictly predicted data: 353934.74
+Making predictions finished. Execution time: 00:00:03.29
+NEURAL NETWORKS WITH SOLVER: ADAM, ACTIVATION FUNCTION: IDENTITY AND NUMBER NODES: (20, 16, 10, 4)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.91      0.85      0.88      1262
+           1       0.22      0.34      0.27       158
+
+    accuracy                           0.79      1420
+   macro avg       0.57      0.59      0.57      1420
+weighted avg       0.83      0.79      0.81      1420
+
+CONFUSION MATRIX
+[[1070  192]
+ [ 104   54]]
+Model: ROC AUC=0.704
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 135.09
+Mean monthly MAE for guessed data: 750802.78
+Mean monthly MAE for predicted data: 400813.37
+Mean monthly MAE for strictly predicted data: 358930.36
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 484146.42
+Mean quarterly MAE for strictly predicted data: 440557.06
+Making predictions finished. Execution time: 00:00:03.19
+NEURAL NETWORKS WITH SOLVER: ADAM, ACTIVATION FUNCTION: IDENTITY AND NUMBER NODES: (100, 80, 60, 40)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.82      0.86      1262
+           1       0.22      0.42      0.29       158
+
+    accuracy                           0.77      1420
+   macro avg       0.57      0.62      0.58      1420
+weighted avg       0.84      0.77      0.80      1420
+
+CONFUSION MATRIX
+[[1031  231]
+ [  91   67]]
+Model: ROC AUC=0.739
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 137.04
+Mean monthly MAE for guessed data: 750767.19
+Mean monthly MAE for predicted data: 410636.88
+Mean monthly MAE for strictly predicted data: 394625.03
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 502511.43
+Mean quarterly MAE for strictly predicted data: 494275.06
+Making predictions finished. Execution time: 00:00:03.38
+NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: LOGISTIC AND NUMBER NODES: (2, 2, 2)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.93      0.88      0.91      1262
+           1       0.35      0.50      0.41       158
+
+    accuracy                           0.84      1420
+   macro avg       0.64      0.69      0.66      1420
+weighted avg       0.87      0.84      0.85      1420
+
+CONFUSION MATRIX
+[[1115  147]
+ [  79   79]]
+Model: ROC AUC=0.786
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 133.41
+Mean monthly MAE for guessed data: 750982.93
+Mean monthly MAE for predicted data: 341501.13
+Mean monthly MAE for strictly predicted data: 319285.71
+Mean quarterly MAE for guessed data: 1149879.72
+Mean quarterly MAE for predicted data: 412246.34
+Mean quarterly MAE for strictly predicted data: 381795.60
+Making predictions finished. Execution time: 00:00:03.63
+NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: LOGISTIC AND NUMBER NODES: (100, 100)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.87      0.89      1262
+           1       0.28      0.42      0.34       158
+
+    accuracy                           0.82      1420
+   macro avg       0.60      0.64      0.61      1420
+weighted avg       0.85      0.82      0.83      1420
+
+CONFUSION MATRIX
+[[1092  170]
+ [  92   66]]
+Model: ROC AUC=0.718
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 133.07
+Mean monthly MAE for guessed data: 748388.46
+Mean monthly MAE for predicted data: 339762.32
+Mean monthly MAE for strictly predicted data: 322557.72
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 402077.49
+Mean quarterly MAE for strictly predicted data: 381842.80
+Making predictions finished. Execution time: 00:00:04.50
+NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: LOGISTIC AND NUMBER NODES: (20, 16, 10, 4)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.89      1.00      0.94      1262
+           1       0.00      0.00      0.00       158
+
+    accuracy                           0.89      1420
+   macro avg       0.44      0.50      0.47      1420
+weighted avg       0.79      0.89      0.84      1420
+
+CONFUSION MATRIX
+[[1262    0]
+ [ 158    0]]
+Model: ROC AUC=0.462
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 127.71
+Mean monthly MAE for guessed data: 808193.24
+Mean monthly MAE for predicted data: 355383.13
+Mean monthly MAE for strictly predicted data: 119120.11
+Mean quarterly MAE for guessed data: 1177558.45
+Mean quarterly MAE for predicted data: 483537.75
+Mean quarterly MAE for strictly predicted data: 168683.89
+Making predictions finished. Execution time: 00:00:02.82
+NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: LOGISTIC AND NUMBER NODES: (100, 80, 60, 40)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.89      1.00      0.94      1262
+           1       0.00      0.00      0.00       158
+
+    accuracy                           0.89      1420
+   macro avg       0.44      0.50      0.47      1420
+weighted avg       0.79      0.89      0.84      1420
+
+CONFUSION MATRIX
+[[1262    0]
+ [ 158    0]]
+Model: ROC AUC=0.467
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 127.71
+Mean monthly MAE for guessed data: 808193.24
+Mean monthly MAE for predicted data: 355548.07
+Mean monthly MAE for strictly predicted data: 119120.11
+Mean quarterly MAE for guessed data: 1177558.45
+Mean quarterly MAE for predicted data: 483771.60
+Mean quarterly MAE for strictly predicted data: 168683.89
+Making predictions finished. Execution time: 00:00:03.04
+NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: LOGISTIC AND NUMBER NODES: (2, 2, 2)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.89      1.00      0.94      1262
+           1       0.00      0.00      0.00       158
+
+    accuracy                           0.89      1420
+   macro avg       0.44      0.50      0.47      1420
+weighted avg       0.79      0.89      0.84      1420
+
+CONFUSION MATRIX
+[[1262    0]
+ [ 158    0]]
+Model: ROC AUC=0.643
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 127.71
+Mean monthly MAE for guessed data: 808193.24
+Mean monthly MAE for predicted data: 944856.11
+Mean monthly MAE for strictly predicted data: 119120.11
+Mean quarterly MAE for guessed data: 1177558.45
+Mean quarterly MAE for predicted data: 1330165.78
+Mean quarterly MAE for strictly predicted data: 168683.89
+Making predictions finished. Execution time: 00:00:03.62
+NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: LOGISTIC AND NUMBER NODES: (100, 100)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.89      1.00      0.94      1262
+           1       0.00      0.00      0.00       158
+
+    accuracy                           0.89      1420
+   macro avg       0.44      0.50      0.47      1420
+weighted avg       0.79      0.89      0.84      1420
+
+CONFUSION MATRIX
+[[1262    0]
+ [ 158    0]]
+Model: ROC AUC=0.565
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 127.71
+Mean monthly MAE for guessed data: 808193.24
+Mean monthly MAE for predicted data: 705631.49
+Mean monthly MAE for strictly predicted data: 119120.11
+Mean quarterly MAE for guessed data: 1177558.45
+Mean quarterly MAE for predicted data: 983538.28
+Mean quarterly MAE for strictly predicted data: 168683.89
+Making predictions finished. Execution time: 00:00:04.66
+NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: LOGISTIC AND NUMBER NODES: (20, 16, 10, 4)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.89      1.00      0.94      1262
+           1       0.00      0.00      0.00       158
+
+    accuracy                           0.89      1420
+   macro avg       0.44      0.50      0.47      1420
+weighted avg       0.79      0.89      0.84      1420
+
+CONFUSION MATRIX
+[[1262    0]
+ [ 158    0]]
+Model: ROC AUC=0.509
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 127.71
+Mean monthly MAE for guessed data: 808193.24
+Mean monthly MAE for predicted data: 835713.03
+Mean monthly MAE for strictly predicted data: 119120.11
+Mean quarterly MAE for guessed data: 1177558.45
+Mean quarterly MAE for predicted data: 1170943.03
+Mean quarterly MAE for strictly predicted data: 168683.89
+Making predictions finished. Execution time: 00:00:03.62
+NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: LOGISTIC AND NUMBER NODES: (100, 80, 60, 40)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.89      1.00      0.94      1262
+           1       0.00      0.00      0.00       158
+
+    accuracy                           0.89      1420
+   macro avg       0.44      0.50      0.47      1420
+weighted avg       0.79      0.89      0.84      1420
+
+CONFUSION MATRIX
+[[1262    0]
+ [ 158    0]]
+Model: ROC AUC=0.439
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 127.71
+Mean monthly MAE for guessed data: 808193.24
+Mean monthly MAE for predicted data: 795894.56
+Mean monthly MAE for strictly predicted data: 119120.11
+Mean quarterly MAE for guessed data: 1177558.45
+Mean quarterly MAE for predicted data: 1113085.96
+Mean quarterly MAE for strictly predicted data: 168683.89
+Making predictions finished. Execution time: 00:00:04.98
+NEURAL NETWORKS WITH SOLVER: ADAM, ACTIVATION FUNCTION: LOGISTIC AND NUMBER NODES: (2, 2, 2)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.89      1.00      0.94      1262
+           1       0.00      0.00      0.00       158
+
+    accuracy                           0.89      1420
+   macro avg       0.44      0.50      0.47      1420
+weighted avg       0.79      0.89      0.84      1420
+
+CONFUSION MATRIX
+[[1262    0]
+ [ 158    0]]
+Model: ROC AUC=0.601
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 127.71
+Mean monthly MAE for guessed data: 808193.24
+Mean monthly MAE for predicted data: 948626.90
+Mean monthly MAE for strictly predicted data: 119120.11
+Mean quarterly MAE for guessed data: 1177558.45
+Mean quarterly MAE for predicted data: 1335668.62
+Mean quarterly MAE for strictly predicted data: 168683.89
+Making predictions finished. Execution time: 00:00:02.79
+NEURAL NETWORKS WITH SOLVER: ADAM, ACTIVATION FUNCTION: LOGISTIC AND NUMBER NODES: (100, 100)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.89      1.00      0.94      1262
+           1       0.00      0.00      0.00       158
+
+    accuracy                           0.89      1420
+   macro avg       0.44      0.50      0.47      1420
+weighted avg       0.79      0.89      0.84      1420
+
+CONFUSION MATRIX
+[[1262    0]
+ [ 158    0]]
+Model: ROC AUC=0.599
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 127.71
+Mean monthly MAE for guessed data: 808193.24
+Mean monthly MAE for predicted data: 409102.98
+Mean monthly MAE for strictly predicted data: 119120.11
+Mean quarterly MAE for guessed data: 1177558.45
+Mean quarterly MAE for predicted data: 560063.44
+Mean quarterly MAE for strictly predicted data: 168683.89
+Making predictions finished. Execution time: 00:00:03.49
+NEURAL NETWORKS WITH SOLVER: ADAM, ACTIVATION FUNCTION: LOGISTIC AND NUMBER NODES: (20, 16, 10, 4)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.89      1.00      0.94      1262
+           1       0.00      0.00      0.00       158
+
+    accuracy                           0.89      1420
+   macro avg       0.44      0.50      0.47      1420
+weighted avg       0.79      0.89      0.84      1420
+
+CONFUSION MATRIX
+[[1262    0]
+ [ 158    0]]
+Model: ROC AUC=0.611
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 127.71
+Mean monthly MAE for guessed data: 808193.24
+Mean monthly MAE for predicted data: 822624.23
+Mean monthly MAE for strictly predicted data: 119120.11
+Mean quarterly MAE for guessed data: 1177558.45
+Mean quarterly MAE for predicted data: 1151848.99
+Mean quarterly MAE for strictly predicted data: 168683.89
+Making predictions finished. Execution time: 00:00:03.78
+NEURAL NETWORKS WITH SOLVER: ADAM, ACTIVATION FUNCTION: LOGISTIC AND NUMBER NODES: (100, 80, 60, 40)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.89      1.00      0.94      1262
+           1       0.00      0.00      0.00       158
+
+    accuracy                           0.89      1420
+   macro avg       0.44      0.50      0.47      1420
+weighted avg       0.79      0.89      0.84      1420
+
+CONFUSION MATRIX
+[[1262    0]
+ [ 158    0]]
+Model: ROC AUC=0.548
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 127.71
+Mean monthly MAE for guessed data: 808193.24
+Mean monthly MAE for predicted data: 772804.78
+Mean monthly MAE for strictly predicted data: 119120.11
+Mean quarterly MAE for guessed data: 1177558.45
+Mean quarterly MAE for predicted data: 1079940.73
+Mean quarterly MAE for strictly predicted data: 168683.89
+Making predictions finished. Execution time: 00:00:03.52
+NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: TANH AND NUMBER NODES: (2, 2, 2)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.94      0.89      0.91      1262
+           1       0.38      0.53      0.44       158
+
+    accuracy                           0.85      1420
+   macro avg       0.66      0.71      0.68      1420
+weighted avg       0.88      0.85      0.86      1420
+
+CONFUSION MATRIX
+[[1123  139]
+ [  74   84]]
+Model: ROC AUC=0.770
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 126.57
+Mean monthly MAE for guessed data: 748660.42
+Mean monthly MAE for predicted data: 229434.36
+Mean monthly MAE for strictly predicted data: 226733.28
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 257232.06
+Mean quarterly MAE for strictly predicted data: 254177.15
+Making predictions finished. Execution time: 00:00:03.15
+NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: TANH AND NUMBER NODES: (100, 100)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.93      0.90      0.91      1262
+           1       0.34      0.44      0.38       158
+
+    accuracy                           0.84      1420
+   macro avg       0.64      0.67      0.65      1420
+weighted avg       0.86      0.84      0.85      1420
+
+CONFUSION MATRIX
+[[1130  132]
+ [  89   69]]
+Model: ROC AUC=0.758
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 129.03
+Mean monthly MAE for guessed data: 760117.58
+Mean monthly MAE for predicted data: 326093.66
+Mean monthly MAE for strictly predicted data: 251957.29
+Mean quarterly MAE for guessed data: 1148747.80
+Mean quarterly MAE for predicted data: 405117.73
+Mean quarterly MAE for strictly predicted data: 300507.74
+Making predictions finished. Execution time: 00:00:03.83
+NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: TANH AND NUMBER NODES: (20, 16, 10, 4)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.93      0.90      0.92      1262
+           1       0.36      0.43      0.39       158
+
+    accuracy                           0.85      1420
+   macro avg       0.64      0.67      0.65      1420
+weighted avg       0.86      0.85      0.86      1420
+
+CONFUSION MATRIX
+[[1141  121]
+ [  90   68]]
+Model: ROC AUC=0.748
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 127.72
+Mean monthly MAE for guessed data: 751388.67
+Mean monthly MAE for predicted data: 242485.41
+Mean monthly MAE for strictly predicted data: 251387.58
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 286889.76
+Mean quarterly MAE for strictly predicted data: 296909.30
+Making predictions finished. Execution time: 00:00:03.50
+NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: TANH AND NUMBER NODES: (100, 80, 60, 40)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.93      0.86      0.89      1262
+           1       0.31      0.50      0.38       158
+
+    accuracy                           0.82      1420
+   macro avg       0.62      0.68      0.64      1420
+weighted avg       0.86      0.82      0.84      1420
+
+CONFUSION MATRIX
+[[1085  177]
+ [  79   79]]
+Model: ROC AUC=0.745
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 132.27
+Mean monthly MAE for guessed data: 751804.30
+Mean monthly MAE for predicted data: 269083.44
+Mean monthly MAE for strictly predicted data: 290535.27
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 313586.93
+Mean quarterly MAE for strictly predicted data: 346647.10
+Making predictions finished. Execution time: 00:00:03.89
+NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: TANH AND NUMBER NODES: (2, 2, 2)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.89      1.00      0.94      1262
+           1       0.00      0.00      0.00       158
+
+    accuracy                           0.89      1420
+   macro avg       0.44      0.50      0.47      1420
+weighted avg       0.79      0.89      0.84      1420
+
+CONFUSION MATRIX
+[[1262    0]
+ [ 158    0]]
+Model: ROC AUC=0.657
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 127.71
+Mean monthly MAE for guessed data: 808193.24
+Mean monthly MAE for predicted data: 888005.83
+Mean monthly MAE for strictly predicted data: 119120.11
+Mean quarterly MAE for guessed data: 1177558.45
+Mean quarterly MAE for predicted data: 1247424.56
+Mean quarterly MAE for strictly predicted data: 168683.89
+Making predictions finished. Execution time: 00:00:03.49
+NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: TANH AND NUMBER NODES: (100, 100)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.89      1.00      0.94      1262
+           1       0.00      0.00      0.00       158
+
+    accuracy                           0.89      1420
+   macro avg       0.44      0.50      0.47      1420
+weighted avg       0.79      0.89      0.84      1420
+
+CONFUSION MATRIX
+[[1262    0]
+ [ 158    0]]
+Model: ROC AUC=0.580
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 127.71
+Mean monthly MAE for guessed data: 808193.24
+Mean monthly MAE for predicted data: 700218.98
+Mean monthly MAE for strictly predicted data: 119120.11
+Mean quarterly MAE for guessed data: 1177558.45
+Mean quarterly MAE for predicted data: 976471.29
+Mean quarterly MAE for strictly predicted data: 168683.89
+Making predictions finished. Execution time: 00:00:04.84
+NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: TANH AND NUMBER NODES: (20, 16, 10, 4)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.89      1.00      0.94      1262
+           1       0.00      0.00      0.00       158
+
+    accuracy                           0.89      1420
+   macro avg       0.44      0.50      0.47      1420
+weighted avg       0.79      0.89      0.84      1420
+
+CONFUSION MATRIX
+[[1262    0]
+ [ 158    0]]
+Model: ROC AUC=0.551
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 127.71
+Mean monthly MAE for guessed data: 808193.24
+Mean monthly MAE for predicted data: 644827.60
+Mean monthly MAE for strictly predicted data: 119120.11
+Mean quarterly MAE for guessed data: 1177558.45
+Mean quarterly MAE for predicted data: 897230.57
+Mean quarterly MAE for strictly predicted data: 168683.89
+Making predictions finished. Execution time: 00:00:03.83
+NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: TANH AND NUMBER NODES: (100, 80, 60, 40)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.89      1.00      0.94      1262
+           1       0.00      0.00      0.00       158
+
+    accuracy                           0.89      1420
+   macro avg       0.44      0.50      0.47      1420
+weighted avg       0.79      0.89      0.84      1420
+
+CONFUSION MATRIX
+[[1261    1]
+ [ 158    0]]
+Model: ROC AUC=0.428
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 127.62
+Mean monthly MAE for guessed data: 807431.48
+Mean monthly MAE for predicted data: 741844.44
+Mean monthly MAE for strictly predicted data: 120553.93
+Mean quarterly MAE for guessed data: 1177558.45
+Mean quarterly MAE for predicted data: 1035439.47
+Mean quarterly MAE for strictly predicted data: 171205.95
+Making predictions finished. Execution time: 00:00:05.09
+NEURAL NETWORKS WITH SOLVER: ADAM, ACTIVATION FUNCTION: TANH AND NUMBER NODES: (2, 2, 2)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.90      0.97      0.94      1262
+           1       0.41      0.16      0.23       158
+
+    accuracy                           0.88      1420
+   macro avg       0.66      0.56      0.58      1420
+weighted avg       0.85      0.88      0.86      1420
+
+CONFUSION MATRIX
+[[1226   36]
+ [ 133   25]]
+Model: ROC AUC=0.588
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 123.01
+Mean monthly MAE for guessed data: 774129.88
+Mean monthly MAE for predicted data: 871029.47
+Mean monthly MAE for strictly predicted data: 130771.68
+Mean quarterly MAE for guessed data: 1156867.12
+Mean quarterly MAE for predicted data: 1245394.42
+Mean quarterly MAE for strictly predicted data: 181356.02
+Making predictions finished. Execution time: 00:00:02.78
+NEURAL NETWORKS WITH SOLVER: ADAM, ACTIVATION FUNCTION: TANH AND NUMBER NODES: (100, 100)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.91      0.91      0.91      1262
+           1       0.30      0.32      0.31       158
+
+    accuracy                           0.84      1420
+   macro avg       0.61      0.61      0.61      1420
+weighted avg       0.85      0.84      0.84      1420
+
+CONFUSION MATRIX
+[[1146  116]
+ [ 108   50]]
+Model: ROC AUC=0.727
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 131.81
+Mean monthly MAE for guessed data: 751517.21
+Mean monthly MAE for predicted data: 354818.00
+Mean monthly MAE for strictly predicted data: 270327.43
+Mean quarterly MAE for guessed data: 1148747.80
+Mean quarterly MAE for predicted data: 417883.68
+Mean quarterly MAE for strictly predicted data: 309720.12
+Making predictions finished. Execution time: 00:00:03.38
+NEURAL NETWORKS WITH SOLVER: ADAM, ACTIVATION FUNCTION: TANH AND NUMBER NODES: (20, 16, 10, 4)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.91      0.83      0.87      1262
+           1       0.21      0.36      0.27       158
+
+    accuracy                           0.78      1420
+   macro avg       0.56      0.60      0.57      1420
+weighted avg       0.83      0.78      0.80      1420
+
+CONFUSION MATRIX
+[[1047  215]
+ [ 101   57]]
+Model: ROC AUC=0.701
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 135.67
+Mean monthly MAE for guessed data: 750173.90
+Mean monthly MAE for predicted data: 482523.01
+Mean monthly MAE for strictly predicted data: 366092.74
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 609761.77
+Mean quarterly MAE for strictly predicted data: 455673.21
+Making predictions finished. Execution time: 00:00:03.29
+NEURAL NETWORKS WITH SOLVER: ADAM, ACTIVATION FUNCTION: TANH AND NUMBER NODES: (100, 80, 60, 40)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.82      0.87      1262
+           1       0.22      0.42      0.29       158
+
+    accuracy                           0.77      1420
+   macro avg       0.57      0.62      0.58      1420
+weighted avg       0.84      0.77      0.80      1420
+
+CONFUSION MATRIX
+[[1033  229]
+ [  92   66]]
+Model: ROC AUC=0.738
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 137.22
+Mean monthly MAE for guessed data: 750767.19
+Mean monthly MAE for predicted data: 405986.42
+Mean monthly MAE for strictly predicted data: 391922.52
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 493986.43
+Mean quarterly MAE for strictly predicted data: 489853.62
+Making predictions finished. Execution time: 00:00:03.38
+NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: RELU AND NUMBER NODES: (2, 2, 2)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.89      1.00      0.94      1262
+           1       0.00      0.00      0.00       158
+
+    accuracy                           0.89      1420
+   macro avg       0.44      0.50      0.47      1420
+weighted avg       0.79      0.89      0.84      1420
+
+CONFUSION MATRIX
+[[1262    0]
+ [ 158    0]]
+Model: ROC AUC=0.500
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 127.71
+Mean monthly MAE for guessed data: 808193.24
+Mean monthly MAE for predicted data: 355448.89
+Mean monthly MAE for strictly predicted data: 119120.11
+Mean quarterly MAE for guessed data: 1177558.45
+Mean quarterly MAE for predicted data: 483630.41
+Mean quarterly MAE for strictly predicted data: 168683.89
+Making predictions finished. Execution time: 00:00:02.73
+NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: RELU AND NUMBER NODES: (100, 100)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.93      0.89      0.91      1262
+           1       0.35      0.47      0.41       158
+
+    accuracy                           0.85      1420
+   macro avg       0.64      0.68      0.66      1420
+weighted avg       0.87      0.85      0.85      1420
+
+CONFUSION MATRIX
+[[1125  137]
+ [  83   75]]
+Model: ROC AUC=0.750
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 127.69
+Mean monthly MAE for guessed data: 752704.26
+Mean monthly MAE for predicted data: 284141.44
+Mean monthly MAE for strictly predicted data: 263074.06
+Mean quarterly MAE for guessed data: 1148747.80
+Mean quarterly MAE for predicted data: 331902.19
+Mean quarterly MAE for strictly predicted data: 300571.48
+Making predictions finished. Execution time: 00:00:03.98
+NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: RELU AND NUMBER NODES: (20, 16, 10, 4)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.93      0.89      0.91      1262
+           1       0.34      0.46      0.39       158
+
+    accuracy                           0.84      1420
+   macro avg       0.64      0.68      0.65      1420
+weighted avg       0.86      0.84      0.85      1420
+
+CONFUSION MATRIX
+[[1122  140]
+ [  85   73]]
+Model: ROC AUC=0.769
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 127.04
+Mean monthly MAE for guessed data: 747245.84
+Mean monthly MAE for predicted data: 221123.88
+Mean monthly MAE for strictly predicted data: 222642.76
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 241465.41
+Mean quarterly MAE for strictly predicted data: 244019.52
+Making predictions finished. Execution time: 00:00:03.32
+NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: RELU AND NUMBER NODES: (100, 80, 60, 40)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.92      0.92      1262
+           1       0.34      0.34      0.34       158
+
+    accuracy                           0.85      1420
+   macro avg       0.63      0.63      0.63      1420
+weighted avg       0.85      0.85      0.85      1420
+
+CONFUSION MATRIX
+[[1159  103]
+ [ 104   54]]
+Model: ROC AUC=0.745
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 124.99
+Mean monthly MAE for guessed data: 754128.72
+Mean monthly MAE for predicted data: 227625.25
+Mean monthly MAE for strictly predicted data: 205434.42
+Mean quarterly MAE for guessed data: 1148747.80
+Mean quarterly MAE for predicted data: 282194.23
+Mean quarterly MAE for strictly predicted data: 248666.85
+Making predictions finished. Execution time: 00:00:03.85
+NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: RELU AND NUMBER NODES: (2, 2, 2)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.89      1.00      0.94      1262
+           1       0.00      0.00      0.00       158
+
+    accuracy                           0.89      1420
+   macro avg       0.44      0.50      0.47      1420
+weighted avg       0.79      0.89      0.84      1420
+
+CONFUSION MATRIX
+[[1262    0]
+ [ 158    0]]
+Model: ROC AUC=0.500
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 127.71
+Mean monthly MAE for guessed data: 808193.24
+Mean monthly MAE for predicted data: 695519.92
+Mean monthly MAE for strictly predicted data: 119120.11
+Mean quarterly MAE for guessed data: 1177558.45
+Mean quarterly MAE for predicted data: 969002.52
+Mean quarterly MAE for strictly predicted data: 168683.89
+Making predictions finished. Execution time: 00:00:03.66
+NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: RELU AND NUMBER NODES: (100, 100)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.89      1.00      0.94      1262
+           1       1.00      0.01      0.01       158
+
+    accuracy                           0.89      1420
+   macro avg       0.94      0.50      0.48      1420
+weighted avg       0.90      0.89      0.84      1420
+
+CONFUSION MATRIX
+[[1262    0]
+ [ 157    1]]
+Model: ROC AUC=0.667
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 127.64
+Mean monthly MAE for guessed data: 806384.20
+Mean monthly MAE for predicted data: 848688.29
+Mean monthly MAE for strictly predicted data: 119531.53
+Mean quarterly MAE for guessed data: 1177558.45
+Mean quarterly MAE for predicted data: 1192996.63
+Mean quarterly MAE for strictly predicted data: 169496.39
+Making predictions finished. Execution time: 00:00:05.10
+NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: RELU AND NUMBER NODES: (20, 16, 10, 4)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.89      1.00      0.94      1262
+           1       0.00      0.00      0.00       158
+
+    accuracy                           0.89      1420
+   macro avg       0.44      0.50      0.47      1420
+weighted avg       0.79      0.89      0.84      1420
+
+CONFUSION MATRIX
+[[1262    0]
+ [ 158    0]]
+Model: ROC AUC=0.471
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 127.71
+Mean monthly MAE for guessed data: 808193.24
+Mean monthly MAE for predicted data: 748517.19
+Mean monthly MAE for strictly predicted data: 119120.11
+Mean quarterly MAE for guessed data: 1177558.45
+Mean quarterly MAE for predicted data: 1045756.91
+Mean quarterly MAE for strictly predicted data: 168683.89
+Making predictions finished. Execution time: 00:00:03.85
+NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: RELU AND NUMBER NODES: (100, 80, 60, 40)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.89      1.00      0.94      1262
+           1       0.00      0.00      0.00       158
+
+    accuracy                           0.89      1420
+   macro avg       0.44      0.50      0.47      1420
+weighted avg       0.79      0.89      0.84      1420
+
+CONFUSION MATRIX
+[[1262    0]
+ [ 158    0]]
+Model: ROC AUC=0.503
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 127.71
+Mean monthly MAE for guessed data: 808193.24
+Mean monthly MAE for predicted data: 850736.53
+Mean monthly MAE for strictly predicted data: 119120.11
+Mean quarterly MAE for guessed data: 1177558.45
+Mean quarterly MAE for predicted data: 1192708.91
+Mean quarterly MAE for strictly predicted data: 168683.89
+Making predictions finished. Execution time: 00:00:06.20
+NEURAL NETWORKS WITH SOLVER: ADAM, ACTIVATION FUNCTION: RELU AND NUMBER NODES: (2, 2, 2)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.89      1.00      0.94      1262
+           1       0.00      0.00      0.00       158
+
+    accuracy                           0.89      1420
+   macro avg       0.44      0.50      0.47      1420
+weighted avg       0.79      0.89      0.84      1420
+
+CONFUSION MATRIX
+[[1262    0]
+ [ 158    0]]
+Model: ROC AUC=0.500
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 127.71
+Mean monthly MAE for guessed data: 808193.24
+Mean monthly MAE for predicted data: 697508.74
+Mean monthly MAE for strictly predicted data: 119120.11
+Mean quarterly MAE for guessed data: 1177558.45
+Mean quarterly MAE for predicted data: 971857.38
+Mean quarterly MAE for strictly predicted data: 168683.89
+Making predictions finished. Execution time: 00:00:03.25
+NEURAL NETWORKS WITH SOLVER: ADAM, ACTIVATION FUNCTION: RELU AND NUMBER NODES: (100, 100)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.84      0.87      1262
+           1       0.23      0.39      0.29       158
+
+    accuracy                           0.79      1420
+   macro avg       0.57      0.61      0.58      1420
+weighted avg       0.84      0.79      0.81      1420
+
+CONFUSION MATRIX
+[[1055  207]
+ [  97   61]]
+Model: ROC AUC=0.741
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 133.33
+Mean monthly MAE for guessed data: 750802.78
+Mean monthly MAE for predicted data: 408146.48
+Mean monthly MAE for strictly predicted data: 380638.92
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 499106.57
+Mean quarterly MAE for strictly predicted data: 475374.39
+Making predictions finished. Execution time: 00:00:03.86
+NEURAL NETWORKS WITH SOLVER: ADAM, ACTIVATION FUNCTION: RELU AND NUMBER NODES: (20, 16, 10, 4)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.90      0.99      0.95      1262
+           1       0.76      0.16      0.27       158
+
+    accuracy                           0.90      1420
+   macro avg       0.83      0.58      0.61      1420
+weighted avg       0.89      0.90      0.87      1420
+
+CONFUSION MATRIX
+[[1254    8]
+ [ 132   26]]
+Model: ROC AUC=0.707
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 125.45
+Mean monthly MAE for guessed data: 791242.50
+Mean monthly MAE for predicted data: 241263.98
+Mean monthly MAE for strictly predicted data: 134691.87
+Mean quarterly MAE for guessed data: 1177558.45
+Mean quarterly MAE for predicted data: 318352.00
+Mean quarterly MAE for strictly predicted data: 177969.12
+Making predictions finished. Execution time: 00:00:03.92
+NEURAL NETWORKS WITH SOLVER: ADAM, ACTIVATION FUNCTION: RELU AND NUMBER NODES: (100, 80, 60, 40)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.85      0.89      1262
+           1       0.25      0.39      0.31       158
+
+    accuracy                           0.80      1420
+   macro avg       0.59      0.62      0.60      1420
+weighted avg       0.84      0.80      0.82      1420
+
+CONFUSION MATRIX
+[[1079  183]
+ [  96   62]]
+Model: ROC AUC=0.708
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 134.57
+Mean monthly MAE for guessed data: 746850.52
+Mean monthly MAE for predicted data: 356083.86
+Mean monthly MAE for strictly predicted data: 348884.58
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 422066.07
+Mean quarterly MAE for strictly predicted data: 433297.51
+Making predictions finished. Execution time: 00:00:06.03
+BEST NN MODEL BY AUC: NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: LOGISTIC AND NUMBER NODES: (2, 2, 2) with AUC 0.79
+BEST GUESSED REVENUE MAE: 1146427.00
+BEST NN MODEL BY PREDICTED REVENUE MAE: NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: RELU AND NUMBER NODES: (20, 16, 10, 4) with MAE 241465.41
+BEST NN MODEL BY STRICTLY PREDICTED REVENUE MAE: NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: IDENTITY AND NUMBER NODES: (2, 2, 2) with MAE 168683.89
+LOGISTIC REGRESSION WITH SOLVER: NEWTON-CG AND C = 0.1
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.93      0.81      0.86      1262
+           1       0.24      0.49      0.32       158
+
+    accuracy                           0.77      1420
+   macro avg       0.58      0.65      0.59      1420
+weighted avg       0.85      0.77      0.80      1420
+
+CONFUSION MATRIX
+[[1018  244]
+ [  81   77]]
+Model: ROC AUC=0.737
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 136.38
+Mean monthly MAE for guessed data: 753936.27
+Mean monthly MAE for predicted data: 524898.41
+Mean monthly MAE for strictly predicted data: 409758.55
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 671422.20
+Mean quarterly MAE for strictly predicted data: 516549.45
+Making predictions finished. Execution time: 00:00:03.96
+LOGISTIC REGRESSION WITH SOLVER: NEWTON-CG AND C = 0.2
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.81      0.86      1262
+           1       0.23      0.45      0.30       158
+
+    accuracy                           0.77      1420
+   macro avg       0.58      0.63      0.58      1420
+weighted avg       0.84      0.77      0.80      1420
+
+CONFUSION MATRIX
+[[1025  237]
+ [  87   71]]
+Model: ROC AUC=0.739
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 135.33
+Mean monthly MAE for guessed data: 748536.67
+Mean monthly MAE for predicted data: 482605.89
+Mean monthly MAE for strictly predicted data: 399435.29
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 612425.90
+Mean quarterly MAE for strictly predicted data: 505190.24
+Making predictions finished. Execution time: 00:00:03.29
+LOGISTIC REGRESSION WITH SOLVER: NEWTON-CG AND C = 0.30000000000000004
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.81      0.86      1262
+           1       0.23      0.46      0.31       158
+
+    accuracy                           0.77      1420
+   macro avg       0.58      0.63      0.59      1420
+weighted avg       0.85      0.77      0.80      1420
+
+CONFUSION MATRIX
+[[1025  237]
+ [  86   72]]
+Model: ROC AUC=0.738
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 135.39
+Mean monthly MAE for guessed data: 748536.67
+Mean monthly MAE for predicted data: 463313.73
+Mean monthly MAE for strictly predicted data: 400539.99
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 582937.21
+Mean quarterly MAE for strictly predicted data: 507031.42
+Making predictions finished. Execution time: 00:00:03.38
+LOGISTIC REGRESSION WITH SOLVER: NEWTON-CG AND C = 0.4
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.81      0.86      1262
+           1       0.23      0.46      0.31       158
+
+    accuracy                           0.77      1420
+   macro avg       0.58      0.63      0.59      1420
+weighted avg       0.85      0.77      0.80      1420
+
+CONFUSION MATRIX
+[[1026  236]
+ [  86   72]]
+Model: ROC AUC=0.739
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 135.12
+Mean monthly MAE for guessed data: 748536.67
+Mean monthly MAE for predicted data: 451192.24
+Mean monthly MAE for strictly predicted data: 398915.84
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 564447.19
+Mean quarterly MAE for strictly predicted data: 504360.18
+Making predictions finished. Execution time: 00:00:03.14
+LOGISTIC REGRESSION WITH SOLVER: NEWTON-CG AND C = 0.5
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.82      0.87      1262
+           1       0.24      0.46      0.31       158
+
+    accuracy                           0.78      1420
+   macro avg       0.58      0.64      0.59      1420
+weighted avg       0.85      0.78      0.81      1420
+
+CONFUSION MATRIX
+[[1032  230]
+ [  86   72]]
+Model: ROC AUC=0.744
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 134.50
+Mean monthly MAE for guessed data: 747627.61
+Mean monthly MAE for predicted data: 442158.83
+Mean monthly MAE for strictly predicted data: 390333.68
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 552192.39
+Mean quarterly MAE for strictly predicted data: 491604.30
+Making predictions finished. Execution time: 00:00:03.19
+LOGISTIC REGRESSION WITH SOLVER: NEWTON-CG AND C = 0.6000000000000001
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.82      0.87      1262
+           1       0.24      0.46      0.31       158
+
+    accuracy                           0.78      1420
+   macro avg       0.58      0.64      0.59      1420
+weighted avg       0.85      0.78      0.81      1420
+
+CONFUSION MATRIX
+[[1033  229]
+ [  86   72]]
+Model: ROC AUC=0.746
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 134.43
+Mean monthly MAE for guessed data: 747627.61
+Mean monthly MAE for predicted data: 435810.68
+Mean monthly MAE for strictly predicted data: 389106.85
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 543091.53
+Mean quarterly MAE for strictly predicted data: 489423.25
+Making predictions finished. Execution time: 00:00:03.58
+LOGISTIC REGRESSION WITH SOLVER: NEWTON-CG AND C = 0.7000000000000001
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.82      0.87      1262
+           1       0.24      0.46      0.31       158
+
+    accuracy                           0.78      1420
+   macro avg       0.58      0.64      0.59      1420
+weighted avg       0.85      0.78      0.81      1420
+
+CONFUSION MATRIX
+[[1033  229]
+ [  86   72]]
+Model: ROC AUC=0.748
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 134.43
+Mean monthly MAE for guessed data: 747627.61
+Mean monthly MAE for predicted data: 430831.23
+Mean monthly MAE for strictly predicted data: 389106.85
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 535981.66
+Mean quarterly MAE for strictly predicted data: 489423.25
+Making predictions finished. Execution time: 00:00:03.34
+LOGISTIC REGRESSION WITH SOLVER: NEWTON-CG AND C = 0.8
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.82      0.87      1262
+           1       0.24      0.46      0.31       158
+
+    accuracy                           0.78      1420
+   macro avg       0.58      0.64      0.59      1420
+weighted avg       0.85      0.78      0.81      1420
+
+CONFUSION MATRIX
+[[1033  229]
+ [  86   72]]
+Model: ROC AUC=0.748
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 134.43
+Mean monthly MAE for guessed data: 747627.61
+Mean monthly MAE for predicted data: 426793.51
+Mean monthly MAE for strictly predicted data: 389106.85
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 530218.87
+Mean quarterly MAE for strictly predicted data: 489423.25
+Making predictions finished. Execution time: 00:00:03.25
+LOGISTIC REGRESSION WITH SOLVER: NEWTON-CG AND C = 0.9
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.82      0.87      1262
+           1       0.24      0.46      0.32       158
+
+    accuracy                           0.78      1420
+   macro avg       0.58      0.64      0.59      1420
+weighted avg       0.85      0.78      0.81      1420
+
+CONFUSION MATRIX
+[[1037  225]
+ [  86   72]]
+Model: ROC AUC=0.749
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 134.18
+Mean monthly MAE for guessed data: 747627.61
+Mean monthly MAE for predicted data: 425024.61
+Mean monthly MAE for strictly predicted data: 378820.88
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 525429.00
+Mean quarterly MAE for strictly predicted data: 474212.59
+Making predictions finished. Execution time: 00:00:03.41
+LOGISTIC REGRESSION WITH SOLVER: NEWTON-CG AND C = 1.0
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.82      0.87      1262
+           1       0.24      0.46      0.32       158
+
+    accuracy                           0.78      1420
+   macro avg       0.58      0.64      0.59      1420
+weighted avg       0.85      0.78      0.81      1420
+
+CONFUSION MATRIX
+[[1038  224]
+ [  86   72]]
+Model: ROC AUC=0.749
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 134.00
+Mean monthly MAE for guessed data: 747627.61
+Mean monthly MAE for predicted data: 422156.52
+Mean monthly MAE for strictly predicted data: 378152.43
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 521362.54
+Mean quarterly MAE for strictly predicted data: 473395.59
+Making predictions finished. Execution time: 00:00:03.20
+LOGISTIC REGRESSION WITH SOLVER: LBFGS AND C = 0.1
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.93      0.81      0.86      1262
+           1       0.24      0.49      0.32       158
+
+    accuracy                           0.77      1420
+   macro avg       0.58      0.65      0.59      1420
+weighted avg       0.85      0.77      0.80      1420
+
+CONFUSION MATRIX
+[[1018  244]
+ [  81   77]]
+Model: ROC AUC=0.737
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 136.38
+Mean monthly MAE for guessed data: 753936.27
+Mean monthly MAE for predicted data: 524895.66
+Mean monthly MAE for strictly predicted data: 409758.55
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 671417.71
+Mean quarterly MAE for strictly predicted data: 516549.45
+Making predictions finished. Execution time: 00:00:03.01
+LOGISTIC REGRESSION WITH SOLVER: LBFGS AND C = 0.2
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.81      0.86      1262
+           1       0.23      0.45      0.30       158
+
+    accuracy                           0.77      1420
+   macro avg       0.58      0.63      0.58      1420
+weighted avg       0.84      0.77      0.80      1420
+
+CONFUSION MATRIX
+[[1025  237]
+ [  87   71]]
+Model: ROC AUC=0.739
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 135.33
+Mean monthly MAE for guessed data: 748536.67
+Mean monthly MAE for predicted data: 482604.14
+Mean monthly MAE for strictly predicted data: 399435.29
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 612423.44
+Mean quarterly MAE for strictly predicted data: 505190.24
+Making predictions finished. Execution time: 00:00:03.04
+LOGISTIC REGRESSION WITH SOLVER: LBFGS AND C = 0.30000000000000004
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.81      0.86      1262
+           1       0.23      0.46      0.31       158
+
+    accuracy                           0.77      1420
+   macro avg       0.58      0.63      0.59      1420
+weighted avg       0.85      0.77      0.80      1420
+
+CONFUSION MATRIX
+[[1025  237]
+ [  86   72]]
+Model: ROC AUC=0.738
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 135.39
+Mean monthly MAE for guessed data: 748536.67
+Mean monthly MAE for predicted data: 463313.81
+Mean monthly MAE for strictly predicted data: 400539.99
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 582937.13
+Mean quarterly MAE for strictly predicted data: 507031.42
+Making predictions finished. Execution time: 00:00:02.92
+LOGISTIC REGRESSION WITH SOLVER: LBFGS AND C = 0.4
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.81      0.86      1262
+           1       0.23      0.46      0.31       158
+
+    accuracy                           0.77      1420
+   macro avg       0.58      0.63      0.59      1420
+weighted avg       0.85      0.77      0.80      1420
+
+CONFUSION MATRIX
+[[1026  236]
+ [  86   72]]
+Model: ROC AUC=0.739
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 135.12
+Mean monthly MAE for guessed data: 748536.67
+Mean monthly MAE for predicted data: 451188.85
+Mean monthly MAE for strictly predicted data: 398915.84
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 564441.99
+Mean quarterly MAE for strictly predicted data: 504360.18
+Making predictions finished. Execution time: 00:00:02.90
+LOGISTIC REGRESSION WITH SOLVER: LBFGS AND C = 0.5
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.82      0.87      1262
+           1       0.24      0.46      0.31       158
+
+    accuracy                           0.78      1420
+   macro avg       0.58      0.64      0.59      1420
+weighted avg       0.85      0.78      0.81      1420
+
+CONFUSION MATRIX
+[[1032  230]
+ [  86   72]]
+Model: ROC AUC=0.744
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 134.50
+Mean monthly MAE for guessed data: 747627.61
+Mean monthly MAE for predicted data: 442155.72
+Mean monthly MAE for strictly predicted data: 390333.68
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 552187.35
+Mean quarterly MAE for strictly predicted data: 491604.30
+Making predictions finished. Execution time: 00:00:02.94
+LOGISTIC REGRESSION WITH SOLVER: LBFGS AND C = 0.6000000000000001
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.82      0.87      1262
+           1       0.24      0.46      0.31       158
+
+    accuracy                           0.78      1420
+   macro avg       0.58      0.64      0.59      1420
+weighted avg       0.85      0.78      0.81      1420
+
+CONFUSION MATRIX
+[[1033  229]
+ [  86   72]]
+Model: ROC AUC=0.746
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 134.43
+Mean monthly MAE for guessed data: 747627.61
+Mean monthly MAE for predicted data: 435810.15
+Mean monthly MAE for strictly predicted data: 389106.85
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 543089.98
+Mean quarterly MAE for strictly predicted data: 489423.25
+Making predictions finished. Execution time: 00:00:02.96
+LOGISTIC REGRESSION WITH SOLVER: LBFGS AND C = 0.7000000000000001
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.82      0.87      1262
+           1       0.24      0.46      0.31       158
+
+    accuracy                           0.78      1420
+   macro avg       0.58      0.64      0.59      1420
+weighted avg       0.85      0.78      0.81      1420
+
+CONFUSION MATRIX
+[[1033  229]
+ [  86   72]]
+Model: ROC AUC=0.748
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 134.43
+Mean monthly MAE for guessed data: 747627.61
+Mean monthly MAE for predicted data: 430823.87
+Mean monthly MAE for strictly predicted data: 389106.85
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 535970.95
+Mean quarterly MAE for strictly predicted data: 489423.25
+Making predictions finished. Execution time: 00:00:02.95
+LOGISTIC REGRESSION WITH SOLVER: LBFGS AND C = 0.8
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.82      0.87      1262
+           1       0.24      0.46      0.31       158
+
+    accuracy                           0.78      1420
+   macro avg       0.58      0.64      0.59      1420
+weighted avg       0.85      0.78      0.81      1420
+
+CONFUSION MATRIX
+[[1033  229]
+ [  86   72]]
+Model: ROC AUC=0.748
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 134.43
+Mean monthly MAE for guessed data: 747627.61
+Mean monthly MAE for predicted data: 426791.81
+Mean monthly MAE for strictly predicted data: 389106.85
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 530216.21
+Mean quarterly MAE for strictly predicted data: 489423.25
+Making predictions finished. Execution time: 00:00:02.94
+LOGISTIC REGRESSION WITH SOLVER: LBFGS AND C = 0.9
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.82      0.87      1262
+           1       0.24      0.46      0.32       158
+
+    accuracy                           0.78      1420
+   macro avg       0.58      0.64      0.59      1420
+weighted avg       0.85      0.78      0.81      1420
+
+CONFUSION MATRIX
+[[1037  225]
+ [  86   72]]
+Model: ROC AUC=0.749
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 134.18
+Mean monthly MAE for guessed data: 747627.61
+Mean monthly MAE for predicted data: 425025.13
+Mean monthly MAE for strictly predicted data: 378820.88
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 525430.03
+Mean quarterly MAE for strictly predicted data: 474212.59
+Making predictions finished. Execution time: 00:00:02.96
+LOGISTIC REGRESSION WITH SOLVER: LBFGS AND C = 1.0
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.82      0.87      1262
+           1       0.24      0.46      0.32       158
+
+    accuracy                           0.78      1420
+   macro avg       0.58      0.64      0.59      1420
+weighted avg       0.85      0.78      0.81      1420
+
+CONFUSION MATRIX
+[[1038  224]
+ [  86   72]]
+Model: ROC AUC=0.749
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 134.00
+Mean monthly MAE for guessed data: 747627.61
+Mean monthly MAE for predicted data: 422156.53
+Mean monthly MAE for strictly predicted data: 378152.43
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 521361.95
+Mean quarterly MAE for strictly predicted data: 473395.59
+Making predictions finished. Execution time: 00:00:02.81
+LOGISTIC REGRESSION WITH SOLVER: LIBLINEAR AND C = 0.1
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.93      0.81      0.86      1262
+           1       0.24      0.49      0.32       158
+
+    accuracy                           0.77      1420
+   macro avg       0.58      0.65      0.59      1420
+weighted avg       0.85      0.77      0.80      1420
+
+CONFUSION MATRIX
+[[1019  243]
+ [  81   77]]
+Model: ROC AUC=0.738
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 136.33
+Mean monthly MAE for guessed data: 753936.27
+Mean monthly MAE for predicted data: 524813.33
+Mean monthly MAE for strictly predicted data: 409450.06
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 671219.19
+Mean quarterly MAE for strictly predicted data: 516048.16
+Making predictions finished. Execution time: 00:00:02.72
+LOGISTIC REGRESSION WITH SOLVER: LIBLINEAR AND C = 0.2
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.81      0.86      1262
+           1       0.23      0.46      0.31       158
+
+    accuracy                           0.77      1420
+   macro avg       0.58      0.63      0.59      1420
+weighted avg       0.85      0.77      0.80      1420
+
+CONFUSION MATRIX
+[[1026  236]
+ [  86   72]]
+Model: ROC AUC=0.742
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 135.35
+Mean monthly MAE for guessed data: 748536.67
+Mean monthly MAE for predicted data: 482514.12
+Mean monthly MAE for strictly predicted data: 400231.51
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 612185.95
+Mean quarterly MAE for strictly predicted data: 506530.13
+Making predictions finished. Execution time: 00:00:02.73
+LOGISTIC REGRESSION WITH SOLVER: LIBLINEAR AND C = 0.30000000000000004
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.81      0.86      1262
+           1       0.23      0.46      0.31       158
+
+    accuracy                           0.77      1420
+   macro avg       0.58      0.63      0.59      1420
+weighted avg       0.85      0.77      0.80      1420
+
+CONFUSION MATRIX
+[[1026  236]
+ [  86   72]]
+Model: ROC AUC=0.742
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 135.35
+Mean monthly MAE for guessed data: 748536.67
+Mean monthly MAE for predicted data: 463158.58
+Mean monthly MAE for strictly predicted data: 400231.51
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 582592.43
+Mean quarterly MAE for strictly predicted data: 506530.13
+Making predictions finished. Execution time: 00:00:03.17
+LOGISTIC REGRESSION WITH SOLVER: LIBLINEAR AND C = 0.4
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.82      0.87      1262
+           1       0.24      0.46      0.31       158
+
+    accuracy                           0.78      1420
+   macro avg       0.58      0.64      0.59      1420
+weighted avg       0.85      0.78      0.81      1420
+
+CONFUSION MATRIX
+[[1032  230]
+ [  86   72]]
+Model: ROC AUC=0.743
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 134.50
+Mean monthly MAE for guessed data: 747627.61
+Mean monthly MAE for predicted data: 450395.05
+Mean monthly MAE for strictly predicted data: 390333.68
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 563986.84
+Mean quarterly MAE for strictly predicted data: 491604.30
+Making predictions finished. Execution time: 00:00:02.82
+LOGISTIC REGRESSION WITH SOLVER: LIBLINEAR AND C = 0.5
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.82      0.87      1262
+           1       0.24      0.46      0.31       158
+
+    accuracy                           0.78      1420
+   macro avg       0.58      0.64      0.59      1420
+weighted avg       0.85      0.78      0.81      1420
+
+CONFUSION MATRIX
+[[1032  230]
+ [  86   72]]
+Model: ROC AUC=0.744
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 134.50
+Mean monthly MAE for guessed data: 747627.61
+Mean monthly MAE for predicted data: 441846.21
+Mean monthly MAE for strictly predicted data: 390333.68
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 551578.78
+Mean quarterly MAE for strictly predicted data: 491604.30
+Making predictions finished. Execution time: 00:00:02.77
+LOGISTIC REGRESSION WITH SOLVER: LIBLINEAR AND C = 0.6000000000000001
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.82      0.87      1262
+           1       0.24      0.46      0.31       158
+
+    accuracy                           0.78      1420
+   macro avg       0.58      0.64      0.59      1420
+weighted avg       0.85      0.78      0.81      1420
+
+CONFUSION MATRIX
+[[1034  228]
+ [  86   72]]
+Model: ROC AUC=0.748
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 134.37
+Mean monthly MAE for guessed data: 747627.61
+Mean monthly MAE for predicted data: 435434.07
+Mean monthly MAE for strictly predicted data: 388879.47
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 542419.00
+Mean quarterly MAE for strictly predicted data: 489053.76
+Making predictions finished. Execution time: 00:00:02.69
+LOGISTIC REGRESSION WITH SOLVER: LIBLINEAR AND C = 0.7000000000000001
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.82      0.87      1262
+           1       0.24      0.46      0.31       158
+
+    accuracy                           0.78      1420
+   macro avg       0.58      0.64      0.59      1420
+weighted avg       0.85      0.78      0.81      1420
+
+CONFUSION MATRIX
+[[1034  228]
+ [  86   72]]
+Model: ROC AUC=0.749
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 134.37
+Mean monthly MAE for guessed data: 747627.61
+Mean monthly MAE for predicted data: 430412.39
+Mean monthly MAE for strictly predicted data: 388879.47
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 535250.66
+Mean quarterly MAE for strictly predicted data: 489053.76
+Making predictions finished. Execution time: 00:00:02.68
+LOGISTIC REGRESSION WITH SOLVER: LIBLINEAR AND C = 0.8
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.82      0.87      1262
+           1       0.24      0.46      0.32       158
+
+    accuracy                           0.78      1420
+   macro avg       0.58      0.64      0.59      1420
+weighted avg       0.85      0.78      0.81      1420
+
+CONFUSION MATRIX
+[[1038  224]
+ [  86   72]]
+Model: ROC AUC=0.750
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 134.36
+Mean monthly MAE for guessed data: 747627.61
+Mean monthly MAE for predicted data: 428005.44
+Mean monthly MAE for strictly predicted data: 378533.48
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 529438.49
+Mean quarterly MAE for strictly predicted data: 473810.24
+Making predictions finished. Execution time: 00:00:02.91
+LOGISTIC REGRESSION WITH SOLVER: LIBLINEAR AND C = 0.9
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.82      0.87      1262
+           1       0.24      0.46      0.32       158
+
+    accuracy                           0.78      1420
+   macro avg       0.58      0.64      0.59      1420
+weighted avg       0.85      0.78      0.81      1420
+
+CONFUSION MATRIX
+[[1038  224]
+ [  86   72]]
+Model: ROC AUC=0.750
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 134.36
+Mean monthly MAE for guessed data: 747627.61
+Mean monthly MAE for predicted data: 424603.98
+Mean monthly MAE for strictly predicted data: 378533.48
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 524615.30
+Mean quarterly MAE for strictly predicted data: 473810.24
+Making predictions finished. Execution time: 00:00:02.88
+LOGISTIC REGRESSION WITH SOLVER: LIBLINEAR AND C = 1.0
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.83      0.87      1262
+           1       0.25      0.46      0.32       158
+
+    accuracy                           0.79      1420
+   macro avg       0.59      0.64      0.60      1420
+weighted avg       0.85      0.79      0.81      1420
+
+CONFUSION MATRIX
+[[1043  219]
+ [  86   72]]
+Model: ROC AUC=0.751
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 134.17
+Mean monthly MAE for guessed data: 747627.61
+Mean monthly MAE for predicted data: 421695.38
+Mean monthly MAE for strictly predicted data: 374444.29
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 520491.35
+Mean quarterly MAE for strictly predicted data: 470650.59
+Making predictions finished. Execution time: 00:00:02.73
+LOGISTIC REGRESSION WITH SOLVER: SAG AND C = 0.1
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.93      0.81      0.86      1262
+           1       0.24      0.49      0.32       158
+
+    accuracy                           0.77      1420
+   macro avg       0.58      0.65      0.59      1420
+weighted avg       0.85      0.77      0.80      1420
+
+CONFUSION MATRIX
+[[1018  244]
+ [  81   77]]
+Model: ROC AUC=0.737
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 136.38
+Mean monthly MAE for guessed data: 753936.27
+Mean monthly MAE for predicted data: 524882.36
+Mean monthly MAE for strictly predicted data: 409758.55
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 671398.04
+Mean quarterly MAE for strictly predicted data: 516549.45
+Making predictions finished. Execution time: 00:00:03.23
+LOGISTIC REGRESSION WITH SOLVER: SAG AND C = 0.2
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.81      0.86      1262
+           1       0.23      0.45      0.30       158
+
+    accuracy                           0.77      1420
+   macro avg       0.58      0.63      0.58      1420
+weighted avg       0.84      0.77      0.80      1420
+
+CONFUSION MATRIX
+[[1025  237]
+ [  87   71]]
+Model: ROC AUC=0.739
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 135.33
+Mean monthly MAE for guessed data: 748536.67
+Mean monthly MAE for predicted data: 482636.05
+Mean monthly MAE for strictly predicted data: 399435.29
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 612471.42
+Mean quarterly MAE for strictly predicted data: 505190.24
+Making predictions finished. Execution time: 00:00:03.62
+LOGISTIC REGRESSION WITH SOLVER: SAG AND C = 0.30000000000000004
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.81      0.86      1262
+           1       0.23      0.46      0.31       158
+
+    accuracy                           0.77      1420
+   macro avg       0.58      0.63      0.59      1420
+weighted avg       0.85      0.77      0.80      1420
+
+CONFUSION MATRIX
+[[1025  237]
+ [  86   72]]
+Model: ROC AUC=0.738
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 135.39
+Mean monthly MAE for guessed data: 748536.67
+Mean monthly MAE for predicted data: 463327.06
+Mean monthly MAE for strictly predicted data: 400539.99
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 582957.31
+Mean quarterly MAE for strictly predicted data: 507031.42
+Making predictions finished. Execution time: 00:00:03.59
+LOGISTIC REGRESSION WITH SOLVER: SAG AND C = 0.4
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.81      0.86      1262
+           1       0.23      0.46      0.31       158
+
+    accuracy                           0.77      1420
+   macro avg       0.58      0.63      0.59      1420
+weighted avg       0.85      0.77      0.80      1420
+
+CONFUSION MATRIX
+[[1026  236]
+ [  86   72]]
+Model: ROC AUC=0.739
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 135.12
+Mean monthly MAE for guessed data: 748536.67
+Mean monthly MAE for predicted data: 451187.46
+Mean monthly MAE for strictly predicted data: 398915.84
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 564441.04
+Mean quarterly MAE for strictly predicted data: 504360.18
+Making predictions finished. Execution time: 00:00:03.32
+LOGISTIC REGRESSION WITH SOLVER: SAG AND C = 0.5
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.82      0.87      1262
+           1       0.24      0.46      0.31       158
+
+    accuracy                           0.78      1420
+   macro avg       0.58      0.64      0.59      1420
+weighted avg       0.85      0.78      0.81      1420
+
+CONFUSION MATRIX
+[[1032  230]
+ [  86   72]]
+Model: ROC AUC=0.744
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 134.50
+Mean monthly MAE for guessed data: 747627.61
+Mean monthly MAE for predicted data: 442151.36
+Mean monthly MAE for strictly predicted data: 390333.68
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 552181.16
+Mean quarterly MAE for strictly predicted data: 491604.30
+Making predictions finished. Execution time: 00:00:03.39
+LOGISTIC REGRESSION WITH SOLVER: SAG AND C = 0.6000000000000001
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.82      0.87      1262
+           1       0.24      0.46      0.31       158
+
+    accuracy                           0.78      1420
+   macro avg       0.58      0.64      0.59      1420
+weighted avg       0.85      0.78      0.81      1420
+
+CONFUSION MATRIX
+[[1033  229]
+ [  86   72]]
+Model: ROC AUC=0.746
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 134.43
+Mean monthly MAE for guessed data: 747627.61
+Mean monthly MAE for predicted data: 435790.59
+Mean monthly MAE for strictly predicted data: 389106.85
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 543062.48
+Mean quarterly MAE for strictly predicted data: 489423.25
+Making predictions finished. Execution time: 00:00:03.57
+LOGISTIC REGRESSION WITH SOLVER: SAG AND C = 0.7000000000000001
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.82      0.87      1262
+           1       0.24      0.46      0.31       158
+
+    accuracy                           0.78      1420
+   macro avg       0.58      0.64      0.59      1420
+weighted avg       0.85      0.78      0.81      1420
+
+CONFUSION MATRIX
+[[1033  229]
+ [  86   72]]
+Model: ROC AUC=0.748
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 134.43
+Mean monthly MAE for guessed data: 747627.61
+Mean monthly MAE for predicted data: 430825.30
+Mean monthly MAE for strictly predicted data: 389106.85
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 535973.60
+Mean quarterly MAE for strictly predicted data: 489423.25
+Making predictions finished. Execution time: 00:00:03.68
+LOGISTIC REGRESSION WITH SOLVER: SAG AND C = 0.8
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.82      0.87      1262
+           1       0.24      0.46      0.31       158
+
+    accuracy                           0.78      1420
+   macro avg       0.58      0.64      0.59      1420
+weighted avg       0.85      0.78      0.81      1420
+
+CONFUSION MATRIX
+[[1033  229]
+ [  86   72]]
+Model: ROC AUC=0.748
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 134.43
+Mean monthly MAE for guessed data: 747627.61
+Mean monthly MAE for predicted data: 426816.73
+Mean monthly MAE for strictly predicted data: 389106.85
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 530252.19
+Mean quarterly MAE for strictly predicted data: 489423.25
+Making predictions finished. Execution time: 00:00:03.88
+LOGISTIC REGRESSION WITH SOLVER: SAG AND C = 0.9
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.82      0.87      1262
+           1       0.24      0.46      0.32       158
+
+    accuracy                           0.78      1420
+   macro avg       0.58      0.64      0.59      1420
+weighted avg       0.85      0.78      0.81      1420
+
+CONFUSION MATRIX
+[[1037  225]
+ [  86   72]]
+Model: ROC AUC=0.749
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 134.18
+Mean monthly MAE for guessed data: 747627.61
+Mean monthly MAE for predicted data: 425017.35
+Mean monthly MAE for strictly predicted data: 378820.88
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 525417.02
+Mean quarterly MAE for strictly predicted data: 474212.59
+Making predictions finished. Execution time: 00:00:03.78
+LOGISTIC REGRESSION WITH SOLVER: SAG AND C = 1.0
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.82      0.87      1262
+           1       0.24      0.46      0.32       158
+
+    accuracy                           0.78      1420
+   macro avg       0.58      0.64      0.59      1420
+weighted avg       0.85      0.78      0.81      1420
+
+CONFUSION MATRIX
+[[1038  224]
+ [  86   72]]
+Model: ROC AUC=0.749
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 134.00
+Mean monthly MAE for guessed data: 747627.61
+Mean monthly MAE for predicted data: 422149.64
+Mean monthly MAE for strictly predicted data: 378152.43
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 521350.79
+Mean quarterly MAE for strictly predicted data: 473395.59
+Making predictions finished. Execution time: 00:00:03.68
+LOGISTIC REGRESSION WITH SOLVER: SAGA AND C = 0.1
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.93      0.81      0.86      1262
+           1       0.24      0.49      0.32       158
+
+    accuracy                           0.77      1420
+   macro avg       0.58      0.65      0.59      1420
+weighted avg       0.85      0.77      0.80      1420
+
+CONFUSION MATRIX
+[[1018  244]
+ [  81   77]]
+Model: ROC AUC=0.737
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 136.38
+Mean monthly MAE for guessed data: 753936.27
+Mean monthly MAE for predicted data: 524898.63
+Mean monthly MAE for strictly predicted data: 409758.55
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 671422.46
+Mean quarterly MAE for strictly predicted data: 516549.45
+Making predictions finished. Execution time: 00:00:03.28
+LOGISTIC REGRESSION WITH SOLVER: SAGA AND C = 0.2
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.81      0.86      1262
+           1       0.23      0.45      0.30       158
+
+    accuracy                           0.77      1420
+   macro avg       0.58      0.63      0.58      1420
+weighted avg       0.84      0.77      0.80      1420
+
+CONFUSION MATRIX
+[[1025  237]
+ [  87   71]]
+Model: ROC AUC=0.739
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 135.33
+Mean monthly MAE for guessed data: 748536.67
+Mean monthly MAE for predicted data: 482606.48
+Mean monthly MAE for strictly predicted data: 399435.29
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 612426.08
+Mean quarterly MAE for strictly predicted data: 505190.24
+Making predictions finished. Execution time: 00:00:03.39
+LOGISTIC REGRESSION WITH SOLVER: SAGA AND C = 0.30000000000000004
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.81      0.86      1262
+           1       0.23      0.46      0.31       158
+
+    accuracy                           0.77      1420
+   macro avg       0.58      0.63      0.59      1420
+weighted avg       0.85      0.77      0.80      1420
+
+CONFUSION MATRIX
+[[1025  237]
+ [  86   72]]
+Model: ROC AUC=0.738
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 135.39
+Mean monthly MAE for guessed data: 748536.67
+Mean monthly MAE for predicted data: 463311.28
+Mean monthly MAE for strictly predicted data: 400539.99
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 582932.36
+Mean quarterly MAE for strictly predicted data: 507031.42
+Making predictions finished. Execution time: 00:00:03.77
+LOGISTIC REGRESSION WITH SOLVER: SAGA AND C = 0.4
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.81      0.86      1262
+           1       0.23      0.46      0.31       158
+
+    accuracy                           0.77      1420
+   macro avg       0.58      0.63      0.59      1420
+weighted avg       0.85      0.77      0.80      1420
+
+CONFUSION MATRIX
+[[1026  236]
+ [  86   72]]
+Model: ROC AUC=0.739
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 135.12
+Mean monthly MAE for guessed data: 748536.67
+Mean monthly MAE for predicted data: 451187.43
+Mean monthly MAE for strictly predicted data: 398915.84
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 564438.36
+Mean quarterly MAE for strictly predicted data: 504360.18
+Making predictions finished. Execution time: 00:00:03.79
+LOGISTIC REGRESSION WITH SOLVER: SAGA AND C = 0.5
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.82      0.87      1262
+           1       0.24      0.46      0.31       158
+
+    accuracy                           0.78      1420
+   macro avg       0.58      0.64      0.59      1420
+weighted avg       0.85      0.78      0.81      1420
+
+CONFUSION MATRIX
+[[1032  230]
+ [  86   72]]
+Model: ROC AUC=0.744
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 134.50
+Mean monthly MAE for guessed data: 747627.61
+Mean monthly MAE for predicted data: 442154.64
+Mean monthly MAE for strictly predicted data: 390333.68
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 552181.93
+Mean quarterly MAE for strictly predicted data: 491604.30
+Making predictions finished. Execution time: 00:00:03.88
+LOGISTIC REGRESSION WITH SOLVER: SAGA AND C = 0.6000000000000001
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.82      0.87      1262
+           1       0.24      0.46      0.31       158
+
+    accuracy                           0.78      1420
+   macro avg       0.58      0.64      0.59      1420
+weighted avg       0.85      0.78      0.81      1420
+
+CONFUSION MATRIX
+[[1033  229]
+ [  86   72]]
+Model: ROC AUC=0.746
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 134.43
+Mean monthly MAE for guessed data: 747627.61
+Mean monthly MAE for predicted data: 435804.57
+Mean monthly MAE for strictly predicted data: 389106.85
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 543080.90
+Mean quarterly MAE for strictly predicted data: 489423.25
+Making predictions finished. Execution time: 00:00:04.10
+LOGISTIC REGRESSION WITH SOLVER: SAGA AND C = 0.7000000000000001
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.82      0.87      1262
+           1       0.24      0.46      0.31       158
+
+    accuracy                           0.78      1420
+   macro avg       0.58      0.64      0.59      1420
+weighted avg       0.85      0.78      0.81      1420
+
+CONFUSION MATRIX
+[[1033  229]
+ [  86   72]]
+Model: ROC AUC=0.748
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 134.43
+Mean monthly MAE for guessed data: 747627.61
+Mean monthly MAE for predicted data: 430822.38
+Mean monthly MAE for strictly predicted data: 389106.85
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 535967.06
+Mean quarterly MAE for strictly predicted data: 489423.25
+Making predictions finished. Execution time: 00:00:03.94
+LOGISTIC REGRESSION WITH SOLVER: SAGA AND C = 0.8
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.82      0.87      1262
+           1       0.24      0.46      0.31       158
+
+    accuracy                           0.78      1420
+   macro avg       0.58      0.64      0.59      1420
+weighted avg       0.85      0.78      0.81      1420
+
+CONFUSION MATRIX
+[[1033  229]
+ [  86   72]]
+Model: ROC AUC=0.748
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 134.43
+Mean monthly MAE for guessed data: 747627.61
+Mean monthly MAE for predicted data: 426784.01
+Mean monthly MAE for strictly predicted data: 389106.85
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 530203.20
+Mean quarterly MAE for strictly predicted data: 489423.25
+Making predictions finished. Execution time: 00:00:04.28
+LOGISTIC REGRESSION WITH SOLVER: SAGA AND C = 0.9
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.82      0.87      1262
+           1       0.24      0.46      0.32       158
+
+    accuracy                           0.78      1420
+   macro avg       0.58      0.64      0.59      1420
+weighted avg       0.85      0.78      0.81      1420
+
+CONFUSION MATRIX
+[[1037  225]
+ [  86   72]]
+Model: ROC AUC=0.749
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 134.18
+Mean monthly MAE for guessed data: 747627.61
+Mean monthly MAE for predicted data: 425012.60
+Mean monthly MAE for strictly predicted data: 378820.88
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 525407.52
+Mean quarterly MAE for strictly predicted data: 474212.59
+Making predictions finished. Execution time: 00:00:04.28
+LOGISTIC REGRESSION WITH SOLVER: SAGA AND C = 1.0
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.92      0.82      0.87      1262
+           1       0.24      0.46      0.32       158
+
+    accuracy                           0.78      1420
+   macro avg       0.58      0.64      0.59      1420
+weighted avg       0.85      0.78      0.81      1420
+
+CONFUSION MATRIX
+[[1038  224]
+ [  86   72]]
+Model: ROC AUC=0.749
+MAE for guessed closing dates: 185.20
+MAE for predicted closing dates: 134.00
+Mean monthly MAE for guessed data: 747627.61
+Mean monthly MAE for predicted data: 422141.59
+Mean monthly MAE for strictly predicted data: 378152.43
+Mean quarterly MAE for guessed data: 1146427.00
+Mean quarterly MAE for predicted data: 521336.66
+Mean quarterly MAE for strictly predicted data: 473395.59
+Making predictions finished. Execution time: 00:00:04.81
+BEST LR MODEL BY AUC: LOGISTIC REGRESSION WITH SOLVER: LIBLINEAR AND C = 1.0 with AUC 0.75
+BEST GUESSED REVENUE MAE: 1146427.00
+BEST LR MODEL BY PREDICTED REVENUE MAE: LOGISTIC REGRESSION WITH SOLVER: LIBLINEAR AND C = 1.0 with MAE 520491.35
+BEST LR MODEL BY STRICTLY PREDICTED REVENUE MAE: LOGISTIC REGRESSION WITH SOLVER: LIBLINEAR AND C = 1.0 with MAE 470650.59
+****************************** GENERATED DATA ******************************
+GUESSED PROBABILITIES
+              precision    recall  f1-score   support
+
+           0       0.79      0.80      0.79      1606
+           1       0.39      0.37      0.38       553
+
+    accuracy                           0.69      2159
+   macro avg       0.59      0.59      0.59      2159
+weighted avg       0.69      0.69      0.69      2159
+
+CONFUSION MATRIX
+[[1285  321]
+ [ 347  206]]
+No Skill: ROC AUC=0.623
+NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: IDENTITY AND NUMBER NODES: (2, 2, 2)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.79      0.87      0.83      1606
+           1       0.46      0.32      0.38       553
+
+    accuracy                           0.73      2159
+   macro avg       0.63      0.60      0.60      2159
+weighted avg       0.70      0.73      0.71      2159
+
+CONFUSION MATRIX
+[[1397  209]
+ [ 374  179]]
+Model: ROC AUC=0.660
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.93
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 25358.43
+Mean monthly MAE for strictly predicted data: 25181.96
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 43947.42
+Mean quarterly MAE for strictly predicted data: 43701.41
+Making predictions finished. Execution time: 00:00:06.42
+NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: IDENTITY AND NUMBER NODES: (100, 100)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.80      0.87      0.83      1606
+           1       0.48      0.35      0.41       553
+
+    accuracy                           0.74      2159
+   macro avg       0.64      0.61      0.62      2159
+weighted avg       0.71      0.74      0.72      2159
+
+CONFUSION MATRIX
+[[1392  214]
+ [ 358  195]]
+Model: ROC AUC=0.636
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 26038.42
+Mean monthly MAE for strictly predicted data: 26113.59
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 45497.12
+Mean quarterly MAE for strictly predicted data: 45681.82
+Making predictions finished. Execution time: 00:00:09.18
+NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: IDENTITY AND NUMBER NODES: (20, 16, 10, 4)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.79      0.87      0.83      1606
+           1       0.46      0.31      0.37       553
+
+    accuracy                           0.73      2159
+   macro avg       0.62      0.59      0.60      2159
+weighted avg       0.70      0.73      0.71      2159
+
+CONFUSION MATRIX
+[[1402  204]
+ [ 379  174]]
+Model: ROC AUC=0.648
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 25428.90
+Mean monthly MAE for strictly predicted data: 25374.96
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 44850.54
+Mean quarterly MAE for strictly predicted data: 45218.18
+Making predictions finished. Execution time: 00:00:07.73
+NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: IDENTITY AND NUMBER NODES: (100, 80, 60, 40)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.80      0.86      0.83      1606
+           1       0.49      0.38      0.43       553
+
+    accuracy                           0.74      2159
+   macro avg       0.64      0.62      0.63      2159
+weighted avg       0.72      0.74      0.73      2159
+
+CONFUSION MATRIX
+[[1386  220]
+ [ 343  210]]
+Model: ROC AUC=0.640
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 26069.03
+Mean monthly MAE for strictly predicted data: 26138.91
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 46025.13
+Mean quarterly MAE for strictly predicted data: 46203.46
+Making predictions finished. Execution time: 00:00:10.48
+NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: IDENTITY AND NUMBER NODES: (2, 2, 2)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.80      0.87      0.83      1606
+           1       0.49      0.37      0.42       553
+
+    accuracy                           0.74      2159
+   macro avg       0.65      0.62      0.63      2159
+weighted avg       0.72      0.74      0.73      2159
+
+CONFUSION MATRIX
+[[1394  212]
+ [ 348  205]]
+Model: ROC AUC=0.682
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.93
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 29134.61
+Mean monthly MAE for strictly predicted data: 26356.49
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 51075.28
+Mean quarterly MAE for strictly predicted data: 47666.34
+Making predictions finished. Execution time: 00:00:10.92
+NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: IDENTITY AND NUMBER NODES: (100, 100)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.74      1.00      0.85      1606
+           1       0.00      0.00      0.00       553
+
+    accuracy                           0.74      2159
+   macro avg       0.37      0.50      0.43      2159
+weighted avg       0.55      0.74      0.63      2159
+
+CONFUSION MATRIX
+[[1606    0]
+ [ 553    0]]
+Model: ROC AUC=0.622
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 35943.59
+Mean monthly MAE for strictly predicted data: 17708.80
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 64135.76
+Mean quarterly MAE for strictly predicted data: 41963.42
+Making predictions finished. Execution time: 00:00:12.58
+NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: IDENTITY AND NUMBER NODES: (20, 16, 10, 4)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.74      1.00      0.85      1606
+           1       0.00      0.00      0.00       553
+
+    accuracy                           0.74      2159
+   macro avg       0.37      0.50      0.43      2159
+weighted avg       0.55      0.74      0.63      2159
+
+CONFUSION MATRIX
+[[1606    0]
+ [ 553    0]]
+Model: ROC AUC=0.553
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 37783.13
+Mean monthly MAE for strictly predicted data: 17708.80
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 67283.11
+Mean quarterly MAE for strictly predicted data: 41963.42
+Making predictions finished. Execution time: 00:00:09.32
+NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: IDENTITY AND NUMBER NODES: (100, 80, 60, 40)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.79      0.86      0.82      1606
+           1       0.46      0.35      0.39       553
+
+    accuracy                           0.73      2159
+   macro avg       0.62      0.60      0.61      2159
+weighted avg       0.71      0.73      0.71      2159
+
+CONFUSION MATRIX
+[[1378  228]
+ [ 361  192]]
+Model: ROC AUC=0.644
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 27630.67
+Mean monthly MAE for strictly predicted data: 25247.92
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 49061.75
+Mean quarterly MAE for strictly predicted data: 45706.06
+Making predictions finished. Execution time: 00:00:22.29
+NEURAL NETWORKS WITH SOLVER: ADAM, ACTIVATION FUNCTION: IDENTITY AND NUMBER NODES: (2, 2, 2)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.80      0.89      0.84      1606
+           1       0.53      0.37      0.43       553
+
+    accuracy                           0.75      2159
+   macro avg       0.66      0.63      0.64      2159
+weighted avg       0.73      0.75      0.74      2159
+
+CONFUSION MATRIX
+[[1424  182]
+ [ 351  202]]
+Model: ROC AUC=0.666
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.93
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 29384.07
+Mean monthly MAE for strictly predicted data: 24682.88
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 52851.39
+Mean quarterly MAE for strictly predicted data: 45544.37
+Making predictions finished. Execution time: 00:00:06.87
+NEURAL NETWORKS WITH SOLVER: ADAM, ACTIVATION FUNCTION: IDENTITY AND NUMBER NODES: (100, 100)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.81      0.87      0.84      1606
+           1       0.51      0.39      0.44       553
+
+    accuracy                           0.75      2159
+   macro avg       0.66      0.63      0.64      2159
+weighted avg       0.73      0.75      0.74      2159
+
+CONFUSION MATRIX
+[[1405  201]
+ [ 340  213]]
+Model: ROC AUC=0.659
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.93
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 31643.13
+Mean monthly MAE for strictly predicted data: 26435.27
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 56234.44
+Mean quarterly MAE for strictly predicted data: 46348.59
+Making predictions finished. Execution time: 00:00:07.18
+NEURAL NETWORKS WITH SOLVER: ADAM, ACTIVATION FUNCTION: IDENTITY AND NUMBER NODES: (20, 16, 10, 4)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.80      0.84      0.82      1606
+           1       0.46      0.40      0.43       553
+
+    accuracy                           0.73      2159
+   macro avg       0.63      0.62      0.62      2159
+weighted avg       0.72      0.73      0.72      2159
+
+CONFUSION MATRIX
+[[1347  259]
+ [ 331  222]]
+Model: ROC AUC=0.665
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.93
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 32113.44
+Mean monthly MAE for strictly predicted data: 28844.50
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 57021.89
+Mean quarterly MAE for strictly predicted data: 51142.10
+Making predictions finished. Execution time: 00:00:07.19
+NEURAL NETWORKS WITH SOLVER: ADAM, ACTIVATION FUNCTION: IDENTITY AND NUMBER NODES: (100, 80, 60, 40)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.79      0.85      0.82      1606
+           1       0.45      0.36      0.40       553
+
+    accuracy                           0.72      2159
+   macro avg       0.62      0.60      0.61      2159
+weighted avg       0.70      0.72      0.71      2159
+
+CONFUSION MATRIX
+[[1359  247]
+ [ 354  199]]
+Model: ROC AUC=0.624
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.91
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 28931.19
+Mean monthly MAE for strictly predicted data: 26996.45
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 52460.69
+Mean quarterly MAE for strictly predicted data: 48780.84
+Making predictions finished. Execution time: 00:00:06.92
+NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: LOGISTIC AND NUMBER NODES: (2, 2, 2)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.81      0.88      0.84      1606
+           1       0.53      0.38      0.45       553
+
+    accuracy                           0.76      2159
+   macro avg       0.67      0.63      0.65      2159
+weighted avg       0.74      0.76      0.74      2159
+
+CONFUSION MATRIX
+[[1421  185]
+ [ 341  212]]
+Model: ROC AUC=0.706
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.93
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 28006.22
+Mean monthly MAE for strictly predicted data: 24816.80
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 47955.27
+Mean quarterly MAE for strictly predicted data: 42767.10
+Making predictions finished. Execution time: 00:00:08.20
+NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: LOGISTIC AND NUMBER NODES: (100, 100)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.80      0.87      0.83      1606
+           1       0.50      0.38      0.43       553
+
+    accuracy                           0.74      2159
+   macro avg       0.65      0.62      0.63      2159
+weighted avg       0.72      0.74      0.73      2159
+
+CONFUSION MATRIX
+[[1395  211]
+ [ 345  208]]
+Model: ROC AUC=0.686
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 25083.18
+Mean monthly MAE for strictly predicted data: 25024.25
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 43253.04
+Mean quarterly MAE for strictly predicted data: 42897.73
+Making predictions finished. Execution time: 00:00:12.68
+NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: LOGISTIC AND NUMBER NODES: (20, 16, 10, 4)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.74      1.00      0.85      1606
+           1       0.00      0.00      0.00       553
+
+    accuracy                           0.74      2159
+   macro avg       0.37      0.50      0.43      2159
+weighted avg       0.55      0.74      0.63      2159
+
+CONFUSION MATRIX
+[[1606    0]
+ [ 553    0]]
+Model: ROC AUC=0.495
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 36448.72
+Mean monthly MAE for strictly predicted data: 17708.80
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 65115.57
+Mean quarterly MAE for strictly predicted data: 41963.42
+Making predictions finished. Execution time: 00:00:05.38
+NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: LOGISTIC AND NUMBER NODES: (100, 80, 60, 40)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.74      1.00      0.85      1606
+           1       0.00      0.00      0.00       553
+
+    accuracy                           0.74      2159
+   macro avg       0.37      0.50      0.43      2159
+weighted avg       0.55      0.74      0.63      2159
+
+CONFUSION MATRIX
+[[1606    0]
+ [ 553    0]]
+Model: ROC AUC=0.484
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 36449.48
+Mean monthly MAE for strictly predicted data: 17708.80
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 65116.88
+Mean quarterly MAE for strictly predicted data: 41963.42
+Making predictions finished. Execution time: 00:00:05.87
+NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: LOGISTIC AND NUMBER NODES: (2, 2, 2)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.74      1.00      0.85      1606
+           1       0.00      0.00      0.00       553
+
+    accuracy                           0.74      2159
+   macro avg       0.37      0.50      0.43      2159
+weighted avg       0.55      0.74      0.63      2159
+
+CONFUSION MATRIX
+[[1606    0]
+ [ 553    0]]
+Model: ROC AUC=0.497
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 48033.66
+Mean monthly MAE for strictly predicted data: 17708.80
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 86661.16
+Mean quarterly MAE for strictly predicted data: 41963.42
+Making predictions finished. Execution time: 00:00:07.21
+NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: LOGISTIC AND NUMBER NODES: (100, 100)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.74      1.00      0.85      1606
+           1       0.00      0.00      0.00       553
+
+    accuracy                           0.74      2159
+   macro avg       0.37      0.50      0.43      2159
+weighted avg       0.55      0.74      0.63      2159
+
+CONFUSION MATRIX
+[[1606    0]
+ [ 553    0]]
+Model: ROC AUC=0.477
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 40219.96
+Mean monthly MAE for strictly predicted data: 17708.80
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 71724.34
+Mean quarterly MAE for strictly predicted data: 41963.42
+Making predictions finished. Execution time: 00:00:12.09
+NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: LOGISTIC AND NUMBER NODES: (20, 16, 10, 4)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.74      1.00      0.85      1606
+           1       0.00      0.00      0.00       553
+
+    accuracy                           0.74      2159
+   macro avg       0.37      0.50      0.43      2159
+weighted avg       0.55      0.74      0.63      2159
+
+CONFUSION MATRIX
+[[1606    0]
+ [ 553    0]]
+Model: ROC AUC=0.525
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 47986.97
+Mean monthly MAE for strictly predicted data: 17708.80
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 86569.26
+Mean quarterly MAE for strictly predicted data: 41963.42
+Making predictions finished. Execution time: 00:00:08.73
+NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: LOGISTIC AND NUMBER NODES: (100, 80, 60, 40)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.74      1.00      0.85      1606
+           1       0.00      0.00      0.00       553
+
+    accuracy                           0.74      2159
+   macro avg       0.37      0.50      0.43      2159
+weighted avg       0.55      0.74      0.63      2159
+
+CONFUSION MATRIX
+[[1606    0]
+ [ 553    0]]
+Model: ROC AUC=0.490
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 43030.70
+Mean monthly MAE for strictly predicted data: 17708.80
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 76987.59
+Mean quarterly MAE for strictly predicted data: 41963.42
+Making predictions finished. Execution time: 00:00:12.58
+NEURAL NETWORKS WITH SOLVER: ADAM, ACTIVATION FUNCTION: LOGISTIC AND NUMBER NODES: (2, 2, 2)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.74      1.00      0.85      1606
+           1       0.00      0.00      0.00       553
+
+    accuracy                           0.74      2159
+   macro avg       0.37      0.50      0.43      2159
+weighted avg       0.55      0.74      0.63      2159
+
+CONFUSION MATRIX
+[[1606    0]
+ [ 553    0]]
+Model: ROC AUC=0.563
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 48565.99
+Mean monthly MAE for strictly predicted data: 17708.80
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 87706.63
+Mean quarterly MAE for strictly predicted data: 41963.42
+Making predictions finished. Execution time: 00:00:05.93
+NEURAL NETWORKS WITH SOLVER: ADAM, ACTIVATION FUNCTION: LOGISTIC AND NUMBER NODES: (100, 100)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.80      0.84      0.82      1606
+           1       0.45      0.38      0.41       553
+
+    accuracy                           0.72      2159
+   macro avg       0.63      0.61      0.62      2159
+weighted avg       0.71      0.72      0.72      2159
+
+CONFUSION MATRIX
+[[1352  254]
+ [ 343  210]]
+Model: ROC AUC=0.665
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.93
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 34015.79
+Mean monthly MAE for strictly predicted data: 29960.82
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 60027.46
+Mean quarterly MAE for strictly predicted data: 52408.33
+Making predictions finished. Execution time: 00:00:08.67
+NEURAL NETWORKS WITH SOLVER: ADAM, ACTIVATION FUNCTION: LOGISTIC AND NUMBER NODES: (20, 16, 10, 4)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.74      1.00      0.85      1606
+           1       0.00      0.00      0.00       553
+
+    accuracy                           0.74      2159
+   macro avg       0.37      0.50      0.43      2159
+weighted avg       0.55      0.74      0.63      2159
+
+CONFUSION MATRIX
+[[1606    0]
+ [ 553    0]]
+Model: ROC AUC=0.564
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 47230.73
+Mean monthly MAE for strictly predicted data: 17708.80
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 85089.57
+Mean quarterly MAE for strictly predicted data: 41963.42
+Making predictions finished. Execution time: 00:00:06.22
+NEURAL NETWORKS WITH SOLVER: ADAM, ACTIVATION FUNCTION: LOGISTIC AND NUMBER NODES: (100, 80, 60, 40)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.80      0.83      0.82      1606
+           1       0.45      0.40      0.42       553
+
+    accuracy                           0.72      2159
+   macro avg       0.63      0.62      0.62      2159
+weighted avg       0.71      0.72      0.72      2159
+
+CONFUSION MATRIX
+[[1334  272]
+ [ 331  222]]
+Model: ROC AUC=0.659
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.93
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 30766.95
+Mean monthly MAE for strictly predicted data: 29429.77
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 53728.25
+Mean quarterly MAE for strictly predicted data: 51424.24
+Making predictions finished. Execution time: 00:00:09.09
+NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: TANH AND NUMBER NODES: (2, 2, 2)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.80      0.62      0.69      1606
+           1       0.33      0.54      0.41       553
+
+    accuracy                           0.60      2159
+   macro avg       0.56      0.58      0.55      2159
+weighted avg       0.68      0.60      0.62      2159
+
+CONFUSION MATRIX
+[[988 618]
+ [253 300]]
+Model: ROC AUC=0.628
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 41560.28
+Mean monthly MAE for strictly predicted data: 41702.85
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 74649.78
+Mean quarterly MAE for strictly predicted data: 74677.92
+Making predictions finished. Execution time: 00:00:11.88
+NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: TANH AND NUMBER NODES: (100, 100)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.79      0.87      0.83      1606
+           1       0.48      0.34      0.40       553
+
+    accuracy                           0.74      2159
+   macro avg       0.64      0.61      0.61      2159
+weighted avg       0.71      0.74      0.72      2159
+
+CONFUSION MATRIX
+[[1403  203]
+ [ 365  188]]
+Model: ROC AUC=0.637
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.94
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 25072.93
+Mean monthly MAE for strictly predicted data: 24838.43
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 45959.10
+Mean quarterly MAE for strictly predicted data: 45801.19
+Making predictions finished. Execution time: 00:00:09.53
+NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: TANH AND NUMBER NODES: (20, 16, 10, 4)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.79      0.78      0.78      1606
+           1       0.39      0.41      0.40       553
+
+    accuracy                           0.68      2159
+   macro avg       0.59      0.59      0.59      2159
+weighted avg       0.69      0.68      0.69      2159
+
+CONFUSION MATRIX
+[[1246  360]
+ [ 325  228]]
+Model: ROC AUC=0.592
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 31263.27
+Mean monthly MAE for strictly predicted data: 31277.23
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 53558.07
+Mean quarterly MAE for strictly predicted data: 53546.00
+Making predictions finished. Execution time: 00:00:08.39
+NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: TANH AND NUMBER NODES: (100, 80, 60, 40)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.79      0.79      0.79      1606
+           1       0.39      0.39      0.39       553
+
+    accuracy                           0.69      2159
+   macro avg       0.59      0.59      0.59      2159
+weighted avg       0.69      0.69      0.69      2159
+
+CONFUSION MATRIX
+[[1272  334]
+ [ 337  216]]
+Model: ROC AUC=0.658
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 31392.90
+Mean monthly MAE for strictly predicted data: 31529.34
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 55062.39
+Mean quarterly MAE for strictly predicted data: 55405.30
+Making predictions finished. Execution time: 00:00:18.53
+NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: TANH AND NUMBER NODES: (2, 2, 2)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.74      1.00      0.85      1606
+           1       0.00      0.00      0.00       553
+
+    accuracy                           0.74      2159
+   macro avg       0.37      0.50      0.43      2159
+weighted avg       0.55      0.74      0.63      2159
+
+CONFUSION MATRIX
+[[1606    0]
+ [ 553    0]]
+Model: ROC AUC=0.538
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 41012.37
+Mean monthly MAE for strictly predicted data: 17708.80
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 73280.64
+Mean quarterly MAE for strictly predicted data: 41963.42
+Making predictions finished. Execution time: 00:00:07.23
+NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: TANH AND NUMBER NODES: (100, 100)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.74      1.00      0.85      1606
+           1       0.00      0.00      0.00       553
+
+    accuracy                           0.74      2159
+   macro avg       0.37      0.50      0.43      2159
+weighted avg       0.55      0.74      0.63      2159
+
+CONFUSION MATRIX
+[[1606    0]
+ [ 553    0]]
+Model: ROC AUC=0.507
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 41823.57
+Mean monthly MAE for strictly predicted data: 17708.80
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 74866.07
+Mean quarterly MAE for strictly predicted data: 41963.42
+Making predictions finished. Execution time: 00:00:12.02
+NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: TANH AND NUMBER NODES: (20, 16, 10, 4)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.74      1.00      0.85      1606
+           1       0.00      0.00      0.00       553
+
+    accuracy                           0.74      2159
+   macro avg       0.37      0.50      0.43      2159
+weighted avg       0.55      0.74      0.63      2159
+
+CONFUSION MATRIX
+[[1606    0]
+ [ 553    0]]
+Model: ROC AUC=0.539
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 39838.19
+Mean monthly MAE for strictly predicted data: 17708.80
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 70968.31
+Mean quarterly MAE for strictly predicted data: 41963.42
+Making predictions finished. Execution time: 00:00:08.58
+NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: TANH AND NUMBER NODES: (100, 80, 60, 40)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.79      0.85      0.82      1606
+           1       0.44      0.33      0.38       553
+
+    accuracy                           0.72      2159
+   macro avg       0.61      0.59      0.60      2159
+weighted avg       0.70      0.72      0.71      2159
+
+CONFUSION MATRIX
+[[1371  235]
+ [ 368  185]]
+Model: ROC AUC=0.651
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.94
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 30612.67
+Mean monthly MAE for strictly predicted data: 25096.59
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 53321.73
+Mean quarterly MAE for strictly predicted data: 44854.76
+Making predictions finished. Execution time: 00:00:50.34
+NEURAL NETWORKS WITH SOLVER: ADAM, ACTIVATION FUNCTION: TANH AND NUMBER NODES: (2, 2, 2)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.80      0.90      0.85      1606
+           1       0.55      0.36      0.44       553
+
+    accuracy                           0.76      2159
+   macro avg       0.68      0.63      0.64      2159
+weighted avg       0.74      0.76      0.74      2159
+
+CONFUSION MATRIX
+[[1440  166]
+ [ 352  201]]
+Model: ROC AUC=0.674
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.93
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 35804.42
+Mean monthly MAE for strictly predicted data: 24825.09
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 63161.19
+Mean quarterly MAE for strictly predicted data: 45016.88
+Making predictions finished. Execution time: 00:00:06.64
+NEURAL NETWORKS WITH SOLVER: ADAM, ACTIVATION FUNCTION: TANH AND NUMBER NODES: (100, 100)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.81      0.88      0.84      1606
+           1       0.52      0.39      0.44       553
+
+    accuracy                           0.75      2159
+   macro avg       0.66      0.63      0.64      2159
+weighted avg       0.73      0.75      0.74      2159
+
+CONFUSION MATRIX
+[[1409  197]
+ [ 340  213]]
+Model: ROC AUC=0.659
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.93
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 31472.78
+Mean monthly MAE for strictly predicted data: 26370.11
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 55894.63
+Mean quarterly MAE for strictly predicted data: 46246.43
+Making predictions finished. Execution time: 00:00:07.22
+NEURAL NETWORKS WITH SOLVER: ADAM, ACTIVATION FUNCTION: TANH AND NUMBER NODES: (20, 16, 10, 4)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.80      0.84      0.82      1606
+           1       0.46      0.39      0.42       553
+
+    accuracy                           0.73      2159
+   macro avg       0.63      0.62      0.62      2159
+weighted avg       0.71      0.73      0.72      2159
+
+CONFUSION MATRIX
+[[1349  257]
+ [ 335  218]]
+Model: ROC AUC=0.666
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.93
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 31724.48
+Mean monthly MAE for strictly predicted data: 28409.19
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 56149.49
+Mean quarterly MAE for strictly predicted data: 50103.68
+Making predictions finished. Execution time: 00:00:06.37
+NEURAL NETWORKS WITH SOLVER: ADAM, ACTIVATION FUNCTION: TANH AND NUMBER NODES: (100, 80, 60, 40)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.80      0.84      0.82      1606
+           1       0.44      0.38      0.41       553
+
+    accuracy                           0.72      2159
+   macro avg       0.62      0.61      0.61      2159
+weighted avg       0.70      0.72      0.71      2159
+
+CONFUSION MATRIX
+[[1342  264]
+ [ 345  208]]
+Model: ROC AUC=0.626
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.91
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 29557.14
+Mean monthly MAE for strictly predicted data: 27961.50
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 53572.80
+Mean quarterly MAE for strictly predicted data: 51146.65
+Making predictions finished. Execution time: 00:00:07.19
+NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: RELU AND NUMBER NODES: (2, 2, 2)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.74      1.00      0.85      1606
+           1       0.00      0.00      0.00       553
+
+    accuracy                           0.74      2159
+   macro avg       0.37      0.50      0.43      2159
+weighted avg       0.55      0.74      0.63      2159
+
+CONFUSION MATRIX
+[[1606    0]
+ [ 553    0]]
+Model: ROC AUC=0.500
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 36449.45
+Mean monthly MAE for strictly predicted data: 17708.80
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 65116.85
+Mean quarterly MAE for strictly predicted data: 41963.42
+Making predictions finished. Execution time: 00:00:05.30
+NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: RELU AND NUMBER NODES: (100, 100)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.80      0.86      0.83      1606
+           1       0.49      0.38      0.43       553
+
+    accuracy                           0.74      2159
+   macro avg       0.64      0.62      0.63      2159
+weighted avg       0.72      0.74      0.73      2159
+
+CONFUSION MATRIX
+[[1383  223]
+ [ 341  212]]
+Model: ROC AUC=0.657
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 27015.71
+Mean monthly MAE for strictly predicted data: 26598.42
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 45879.66
+Mean quarterly MAE for strictly predicted data: 45432.47
+Making predictions finished. Execution time: 00:00:10.78
+NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: RELU AND NUMBER NODES: (20, 16, 10, 4)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.78      0.87      0.83      1606
+           1       0.45      0.30      0.36       553
+
+    accuracy                           0.73      2159
+   macro avg       0.62      0.59      0.59      2159
+weighted avg       0.70      0.73      0.71      2159
+
+CONFUSION MATRIX
+[[1402  204]
+ [ 387  166]]
+Model: ROC AUC=0.696
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.93
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 24660.38
+Mean monthly MAE for strictly predicted data: 24527.78
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 42748.83
+Mean quarterly MAE for strictly predicted data: 43007.36
+Making predictions finished. Execution time: 00:00:08.48
+NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: RELU AND NUMBER NODES: (100, 80, 60, 40)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.80      0.87      0.83      1606
+           1       0.48      0.37      0.42       553
+
+    accuracy                           0.74      2159
+   macro avg       0.64      0.62      0.62      2159
+weighted avg       0.72      0.74      0.73      2159
+
+CONFUSION MATRIX
+[[1390  216]
+ [ 350  203]]
+Model: ROC AUC=0.654
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.93
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 27247.52
+Mean monthly MAE for strictly predicted data: 26998.03
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 46557.76
+Mean quarterly MAE for strictly predicted data: 46103.57
+Making predictions finished. Execution time: 00:00:12.00
+NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: RELU AND NUMBER NODES: (2, 2, 2)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.00      0.00      0.00      1606
+           1       0.26      1.00      0.41       553
+
+    accuracy                           0.26      2159
+   macro avg       0.13      0.50      0.20      2159
+weighted avg       0.07      0.26      0.10      2159
+
+CONFUSION MATRIX
+[[   0 1606]
+ [   0  553]]
+Model: ROC AUC=0.500
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.97
+Mean monthly MAE for guessed data: 35390.72
+Mean monthly MAE for predicted data: 68338.75
+Mean monthly MAE for strictly predicted data: 84666.29
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 128695.62
+Mean quarterly MAE for strictly predicted data: 164502.16
+Making predictions finished. Execution time: 00:00:07.14
+NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: RELU AND NUMBER NODES: (100, 100)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.74      1.00      0.85      1606
+           1       0.00      0.00      0.00       553
+
+    accuracy                           0.74      2159
+   macro avg       0.37      0.50      0.43      2159
+weighted avg       0.55      0.74      0.63      2159
+
+CONFUSION MATRIX
+[[1606    0]
+ [ 553    0]]
+Model: ROC AUC=0.535
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 44942.70
+Mean monthly MAE for strictly predicted data: 17708.80
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 80725.98
+Mean quarterly MAE for strictly predicted data: 41963.42
+Making predictions finished. Execution time: 00:00:11.86
+NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: RELU AND NUMBER NODES: (20, 16, 10, 4)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.74      1.00      0.85      1606
+           1       0.00      0.00      0.00       553
+
+    accuracy                           0.74      2159
+   macro avg       0.37      0.50      0.43      2159
+weighted avg       0.55      0.74      0.63      2159
+
+CONFUSION MATRIX
+[[1606    0]
+ [ 553    0]]
+Model: ROC AUC=0.519
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 45166.47
+Mean monthly MAE for strictly predicted data: 17708.80
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 81064.39
+Mean quarterly MAE for strictly predicted data: 41963.42
+Making predictions finished. Execution time: 00:00:09.13
+NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: RELU AND NUMBER NODES: (100, 80, 60, 40)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.74      1.00      0.85      1606
+           1       0.00      0.00      0.00       553
+
+    accuracy                           0.74      2159
+   macro avg       0.37      0.50      0.43      2159
+weighted avg       0.55      0.74      0.63      2159
+
+CONFUSION MATRIX
+[[1606    0]
+ [ 553    0]]
+Model: ROC AUC=0.491
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 45328.63
+Mean monthly MAE for strictly predicted data: 17708.80
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 81341.80
+Mean quarterly MAE for strictly predicted data: 41963.42
+Making predictions finished. Execution time: 00:00:13.25
+NEURAL NETWORKS WITH SOLVER: ADAM, ACTIVATION FUNCTION: RELU AND NUMBER NODES: (2, 2, 2)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.00      0.00      0.00      1606
+           1       0.26      1.00      0.41       553
+
+    accuracy                           0.26      2159
+   macro avg       0.13      0.50      0.20      2159
+weighted avg       0.07      0.26      0.10      2159
+
+CONFUSION MATRIX
+[[   0 1606]
+ [   0  553]]
+Model: ROC AUC=0.500
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.97
+Mean monthly MAE for guessed data: 35390.72
+Mean monthly MAE for predicted data: 68951.55
+Mean monthly MAE for strictly predicted data: 84666.29
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 130002.19
+Mean quarterly MAE for strictly predicted data: 164502.16
+Making predictions finished. Execution time: 00:00:05.82
+NEURAL NETWORKS WITH SOLVER: ADAM, ACTIVATION FUNCTION: RELU AND NUMBER NODES: (100, 100)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.80      0.81      0.81      1606
+           1       0.44      0.42      0.43       553
+
+    accuracy                           0.71      2159
+   macro avg       0.62      0.62      0.62      2159
+weighted avg       0.71      0.71      0.71      2159
+
+CONFUSION MATRIX
+[[1304  302]
+ [ 320  233]]
+Model: ROC AUC=0.669
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 34092.18
+Mean monthly MAE for strictly predicted data: 30684.95
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 60033.44
+Mean quarterly MAE for strictly predicted data: 53075.97
+Making predictions finished. Execution time: 00:00:07.21
+NEURAL NETWORKS WITH SOLVER: ADAM, ACTIVATION FUNCTION: RELU AND NUMBER NODES: (20, 16, 10, 4)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.81      0.81      0.81      1606
+           1       0.46      0.46      0.46       553
+
+    accuracy                           0.72      2159
+   macro avg       0.64      0.64      0.64      2159
+weighted avg       0.72      0.72      0.72      2159
+
+CONFUSION MATRIX
+[[1307  299]
+ [ 298  255]]
+Model: ROC AUC=0.669
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 35719.91
+Mean monthly MAE for strictly predicted data: 31204.43
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 63265.57
+Mean quarterly MAE for strictly predicted data: 54243.40
+Making predictions finished. Execution time: 00:00:06.53
+NEURAL NETWORKS WITH SOLVER: ADAM, ACTIVATION FUNCTION: RELU AND NUMBER NODES: (100, 80, 60, 40)
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.81      0.81      0.81      1606
+           1       0.45      0.45      0.45       553
+
+    accuracy                           0.72      2159
+   macro avg       0.63      0.63      0.63      2159
+weighted avg       0.72      0.72      0.72      2159
+
+CONFUSION MATRIX
+[[1302  304]
+ [ 305  248]]
+Model: ROC AUC=0.642
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 30412.79
+Mean monthly MAE for strictly predicted data: 29793.37
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 53557.73
+Mean quarterly MAE for strictly predicted data: 52360.71
+Making predictions finished. Execution time: 00:00:07.25
+BEST NN MODEL BY AUC: NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: LOGISTIC AND NUMBER NODES: (2, 2, 2) with AUC 0.71
+BEST GUESSED REVENUE MAE: 77206.94
+BEST NN MODEL BY PREDICTED REVENUE MAE: NEURAL NETWORKS WITH SOLVER: LBFGS, ACTIVATION FUNCTION: RELU AND NUMBER NODES: (20, 16, 10, 4) with MAE 42748.83
+BEST NN MODEL BY STRICTLY PREDICTED REVENUE MAE: NEURAL NETWORKS WITH SOLVER: SGD, ACTIVATION FUNCTION: IDENTITY AND NUMBER NODES: (100, 100) with MAE 41963.42
+LOGISTIC REGRESSION WITH SOLVER: NEWTON-CG AND C = 0.1
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.83      0.73      0.78      1606
+           1       0.42      0.56      0.48       553
+
+    accuracy                           0.69      2159
+   macro avg       0.62      0.65      0.63      2159
+weighted avg       0.72      0.69      0.70      2159
+
+CONFUSION MATRIX
+[[1172  434]
+ [ 242  311]]
+Model: ROC AUC=0.667
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.91
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 42024.89
+Mean monthly MAE for strictly predicted data: 35230.14
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 74297.03
+Mean quarterly MAE for strictly predicted data: 59825.65
+Making predictions finished. Execution time: 00:00:06.28
+LOGISTIC REGRESSION WITH SOLVER: NEWTON-CG AND C = 0.2
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.76      0.79      1606
+           1       0.42      0.51      0.46       553
+
+    accuracy                           0.69      2159
+   macro avg       0.62      0.63      0.62      2159
+weighted avg       0.72      0.69      0.70      2159
+
+CONFUSION MATRIX
+[[1217  389]
+ [ 270  283]]
+Model: ROC AUC=0.674
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 40014.25
+Mean monthly MAE for strictly predicted data: 33045.49
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 70254.38
+Mean quarterly MAE for strictly predicted data: 55849.78
+Making predictions finished. Execution time: 00:00:06.37
+LOGISTIC REGRESSION WITH SOLVER: NEWTON-CG AND C = 0.30000000000000004
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.78      0.80      1606
+           1       0.43      0.49      0.46       553
+
+    accuracy                           0.71      2159
+   macro avg       0.62      0.63      0.63      2159
+weighted avg       0.72      0.71      0.71      2159
+
+CONFUSION MATRIX
+[[1252  354]
+ [ 282  271]]
+Model: ROC AUC=0.678
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 38790.96
+Mean monthly MAE for strictly predicted data: 31460.04
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 67933.23
+Mean quarterly MAE for strictly predicted data: 53369.59
+Making predictions finished. Execution time: 00:00:06.45
+LOGISTIC REGRESSION WITH SOLVER: NEWTON-CG AND C = 0.4
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.80      0.81      1606
+           1       0.45      0.48      0.46       553
+
+    accuracy                           0.72      2159
+   macro avg       0.63      0.64      0.64      2159
+weighted avg       0.72      0.72      0.72      2159
+
+CONFUSION MATRIX
+[[1284  322]
+ [ 289  264]]
+Model: ROC AUC=0.679
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 37922.75
+Mean monthly MAE for strictly predicted data: 30413.59
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 66330.82
+Mean quarterly MAE for strictly predicted data: 51960.06
+Making predictions finished. Execution time: 00:00:06.41
+LOGISTIC REGRESSION WITH SOLVER: NEWTON-CG AND C = 0.5
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.82      0.82      1606
+           1       0.47      0.47      0.47       553
+
+    accuracy                           0.73      2159
+   macro avg       0.64      0.64      0.64      2159
+weighted avg       0.73      0.73      0.73      2159
+
+CONFUSION MATRIX
+[[1311  295]
+ [ 293  260]]
+Model: ROC AUC=0.680
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 37256.46
+Mean monthly MAE for strictly predicted data: 29702.83
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 65109.70
+Mean quarterly MAE for strictly predicted data: 50758.98
+Making predictions finished. Execution time: 00:00:06.41
+LOGISTIC REGRESSION WITH SOLVER: NEWTON-CG AND C = 0.6000000000000001
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.82      0.82      1606
+           1       0.48      0.46      0.47       553
+
+    accuracy                           0.73      2159
+   macro avg       0.65      0.64      0.65      2159
+weighted avg       0.73      0.73      0.73      2159
+
+CONFUSION MATRIX
+[[1323  283]
+ [ 296  257]]
+Model: ROC AUC=0.680
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 36720.88
+Mean monthly MAE for strictly predicted data: 29303.43
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 64143.68
+Mean quarterly MAE for strictly predicted data: 49929.55
+Making predictions finished. Execution time: 00:00:06.46
+LOGISTIC REGRESSION WITH SOLVER: NEWTON-CG AND C = 0.7000000000000001
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.83      0.82      1606
+           1       0.48      0.46      0.47       553
+
+    accuracy                           0.73      2159
+   macro avg       0.65      0.64      0.64      2159
+weighted avg       0.73      0.73      0.73      2159
+
+CONFUSION MATRIX
+[[1330  276]
+ [ 300  253]]
+Model: ROC AUC=0.681
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 36276.90
+Mean monthly MAE for strictly predicted data: 29120.42
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 63365.67
+Mean quarterly MAE for strictly predicted data: 49274.24
+Making predictions finished. Execution time: 00:00:06.60
+LOGISTIC REGRESSION WITH SOLVER: NEWTON-CG AND C = 0.8
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.83      0.82      1606
+           1       0.48      0.45      0.47       553
+
+    accuracy                           0.74      2159
+   macro avg       0.65      0.64      0.65      2159
+weighted avg       0.73      0.74      0.73      2159
+
+CONFUSION MATRIX
+[[1336  270]
+ [ 302  251]]
+Model: ROC AUC=0.681
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 35900.88
+Mean monthly MAE for strictly predicted data: 28991.36
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 62709.10
+Mean quarterly MAE for strictly predicted data: 49079.11
+Making predictions finished. Execution time: 00:00:06.53
+LOGISTIC REGRESSION WITH SOLVER: NEWTON-CG AND C = 0.9
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.83      0.82      1606
+           1       0.48      0.45      0.47       553
+
+    accuracy                           0.74      2159
+   macro avg       0.65      0.64      0.65      2159
+weighted avg       0.73      0.74      0.73      2159
+
+CONFUSION MATRIX
+[[1340  266]
+ [ 304  249]]
+Model: ROC AUC=0.681
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 35576.61
+Mean monthly MAE for strictly predicted data: 28819.34
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 62150.51
+Mean quarterly MAE for strictly predicted data: 48927.49
+Making predictions finished. Execution time: 00:00:06.52
+LOGISTIC REGRESSION WITH SOLVER: NEWTON-CG AND C = 1.0
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.84      0.83      1606
+           1       0.49      0.45      0.47       553
+
+    accuracy                           0.74      2159
+   macro avg       0.65      0.64      0.65      2159
+weighted avg       0.73      0.74      0.73      2159
+
+CONFUSION MATRIX
+[[1345  261]
+ [ 305  248]]
+Model: ROC AUC=0.682
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 35293.40
+Mean monthly MAE for strictly predicted data: 28730.53
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 61664.57
+Mean quarterly MAE for strictly predicted data: 48941.56
+Making predictions finished. Execution time: 00:00:06.64
+LOGISTIC REGRESSION WITH SOLVER: LBFGS AND C = 0.1
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.83      0.73      0.78      1606
+           1       0.42      0.56      0.48       553
+
+    accuracy                           0.69      2159
+   macro avg       0.62      0.65      0.63      2159
+weighted avg       0.72      0.69      0.70      2159
+
+CONFUSION MATRIX
+[[1172  434]
+ [ 243  310]]
+Model: ROC AUC=0.667
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.91
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 42024.49
+Mean monthly MAE for strictly predicted data: 35215.85
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 74296.25
+Mean quarterly MAE for strictly predicted data: 59797.08
+Making predictions finished. Execution time: 00:00:05.57
+LOGISTIC REGRESSION WITH SOLVER: LBFGS AND C = 0.2
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.76      0.79      1606
+           1       0.42      0.51      0.46       553
+
+    accuracy                           0.69      2159
+   macro avg       0.62      0.63      0.62      2159
+weighted avg       0.72      0.69      0.70      2159
+
+CONFUSION MATRIX
+[[1217  389]
+ [ 270  283]]
+Model: ROC AUC=0.674
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 40013.97
+Mean monthly MAE for strictly predicted data: 33045.49
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 70254.00
+Mean quarterly MAE for strictly predicted data: 55849.78
+Making predictions finished. Execution time: 00:00:05.70
+LOGISTIC REGRESSION WITH SOLVER: LBFGS AND C = 0.30000000000000004
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.78      0.80      1606
+           1       0.43      0.49      0.46       553
+
+    accuracy                           0.71      2159
+   macro avg       0.62      0.63      0.63      2159
+weighted avg       0.72      0.71      0.71      2159
+
+CONFUSION MATRIX
+[[1252  354]
+ [ 282  271]]
+Model: ROC AUC=0.678
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 38791.09
+Mean monthly MAE for strictly predicted data: 31460.04
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 67933.53
+Mean quarterly MAE for strictly predicted data: 53369.59
+Making predictions finished. Execution time: 00:00:05.64
+LOGISTIC REGRESSION WITH SOLVER: LBFGS AND C = 0.4
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.80      0.81      1606
+           1       0.45      0.48      0.46       553
+
+    accuracy                           0.72      2159
+   macro avg       0.63      0.64      0.64      2159
+weighted avg       0.72      0.72      0.72      2159
+
+CONFUSION MATRIX
+[[1285  321]
+ [ 289  264]]
+Model: ROC AUC=0.679
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 37923.35
+Mean monthly MAE for strictly predicted data: 30384.74
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 66331.78
+Mean quarterly MAE for strictly predicted data: 51953.35
+Making predictions finished. Execution time: 00:00:05.69
+LOGISTIC REGRESSION WITH SOLVER: LBFGS AND C = 0.5
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.82      0.82      1606
+           1       0.47      0.47      0.47       553
+
+    accuracy                           0.73      2159
+   macro avg       0.64      0.64      0.64      2159
+weighted avg       0.73      0.73      0.73      2159
+
+CONFUSION MATRIX
+[[1311  295]
+ [ 293  260]]
+Model: ROC AUC=0.680
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 37256.12
+Mean monthly MAE for strictly predicted data: 29702.83
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 65109.19
+Mean quarterly MAE for strictly predicted data: 50758.98
+Making predictions finished. Execution time: 00:00:05.76
+LOGISTIC REGRESSION WITH SOLVER: LBFGS AND C = 0.6000000000000001
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.82      0.82      1606
+           1       0.48      0.46      0.47       553
+
+    accuracy                           0.73      2159
+   macro avg       0.65      0.64      0.65      2159
+weighted avg       0.73      0.73      0.73      2159
+
+CONFUSION MATRIX
+[[1323  283]
+ [ 296  257]]
+Model: ROC AUC=0.680
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 36722.32
+Mean monthly MAE for strictly predicted data: 29303.43
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 64146.58
+Mean quarterly MAE for strictly predicted data: 49929.55
+Making predictions finished. Execution time: 00:00:05.64
+LOGISTIC REGRESSION WITH SOLVER: LBFGS AND C = 0.7000000000000001
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.83      0.82      1606
+           1       0.48      0.46      0.47       553
+
+    accuracy                           0.73      2159
+   macro avg       0.65      0.64      0.64      2159
+weighted avg       0.73      0.73      0.73      2159
+
+CONFUSION MATRIX
+[[1330  276]
+ [ 300  253]]
+Model: ROC AUC=0.681
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 36275.69
+Mean monthly MAE for strictly predicted data: 29120.42
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 63363.37
+Mean quarterly MAE for strictly predicted data: 49274.24
+Making predictions finished. Execution time: 00:00:05.72
+LOGISTIC REGRESSION WITH SOLVER: LBFGS AND C = 0.8
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.83      0.82      1606
+           1       0.48      0.45      0.47       553
+
+    accuracy                           0.74      2159
+   macro avg       0.65      0.64      0.65      2159
+weighted avg       0.73      0.74      0.73      2159
+
+CONFUSION MATRIX
+[[1336  270]
+ [ 302  251]]
+Model: ROC AUC=0.681
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 35901.25
+Mean monthly MAE for strictly predicted data: 28991.36
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 62710.32
+Mean quarterly MAE for strictly predicted data: 49079.11
+Making predictions finished. Execution time: 00:00:05.77
+LOGISTIC REGRESSION WITH SOLVER: LBFGS AND C = 0.9
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.83      0.82      1606
+           1       0.48      0.45      0.47       553
+
+    accuracy                           0.74      2159
+   macro avg       0.65      0.64      0.65      2159
+weighted avg       0.73      0.74      0.73      2159
+
+CONFUSION MATRIX
+[[1340  266]
+ [ 304  249]]
+Model: ROC AUC=0.681
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 35577.88
+Mean monthly MAE for strictly predicted data: 28819.34
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 62153.29
+Mean quarterly MAE for strictly predicted data: 48927.49
+Making predictions finished. Execution time: 00:00:05.75
+LOGISTIC REGRESSION WITH SOLVER: LBFGS AND C = 1.0
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.84      0.83      1606
+           1       0.49      0.45      0.47       553
+
+    accuracy                           0.74      2159
+   macro avg       0.65      0.64      0.65      2159
+weighted avg       0.73      0.74      0.73      2159
+
+CONFUSION MATRIX
+[[1345  261]
+ [ 305  248]]
+Model: ROC AUC=0.681
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 35293.71
+Mean monthly MAE for strictly predicted data: 28730.53
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 61665.87
+Mean quarterly MAE for strictly predicted data: 48941.56
+Making predictions finished. Execution time: 00:00:05.82
+LOGISTIC REGRESSION WITH SOLVER: LIBLINEAR AND C = 0.1
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.83      0.73      0.78      1606
+           1       0.41      0.56      0.47       553
+
+    accuracy                           0.69      2159
+   macro avg       0.62      0.64      0.63      2159
+weighted avg       0.72      0.69      0.70      2159
+
+CONFUSION MATRIX
+[[1173  433]
+ [ 246  307]]
+Model: ROC AUC=0.667
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.91
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 42025.63
+Mean monthly MAE for strictly predicted data: 35345.36
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 74301.48
+Mean quarterly MAE for strictly predicted data: 60057.03
+Making predictions finished. Execution time: 00:00:05.38
+LOGISTIC REGRESSION WITH SOLVER: LIBLINEAR AND C = 0.2
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.76      0.79      1606
+           1       0.42      0.51      0.46       553
+
+    accuracy                           0.69      2159
+   macro avg       0.62      0.63      0.62      2159
+weighted avg       0.72      0.69      0.70      2159
+
+CONFUSION MATRIX
+[[1218  388]
+ [ 271  282]]
+Model: ROC AUC=0.674
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 40017.79
+Mean monthly MAE for strictly predicted data: 33044.50
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 70272.70
+Mean quarterly MAE for strictly predicted data: 56048.81
+Making predictions finished. Execution time: 00:00:05.33
+LOGISTIC REGRESSION WITH SOLVER: LIBLINEAR AND C = 0.30000000000000004
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.78      0.80      1606
+           1       0.43      0.49      0.46       553
+
+    accuracy                           0.71      2159
+   macro avg       0.63      0.64      0.63      2159
+weighted avg       0.72      0.71      0.71      2159
+
+CONFUSION MATRIX
+[[1253  353]
+ [ 282  271]]
+Model: ROC AUC=0.678
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 38795.37
+Mean monthly MAE for strictly predicted data: 31530.65
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 67954.65
+Mean quarterly MAE for strictly predicted data: 53632.79
+Making predictions finished. Execution time: 00:00:05.36
+LOGISTIC REGRESSION WITH SOLVER: LIBLINEAR AND C = 0.4
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.81      0.81      1606
+           1       0.46      0.47      0.46       553
+
+    accuracy                           0.72      2159
+   macro avg       0.64      0.64      0.64      2159
+weighted avg       0.72      0.72      0.72      2159
+
+CONFUSION MATRIX
+[[1293  313]
+ [ 291  262]]
+Model: ROC AUC=0.680
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 37927.31
+Mean monthly MAE for strictly predicted data: 30083.64
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 66352.22
+Mean quarterly MAE for strictly predicted data: 51403.68
+Making predictions finished. Execution time: 00:00:05.36
+LOGISTIC REGRESSION WITH SOLVER: LIBLINEAR AND C = 0.5
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.82      0.82      1606
+           1       0.47      0.47      0.47       553
+
+    accuracy                           0.73      2159
+   macro avg       0.65      0.64      0.65      2159
+weighted avg       0.73      0.73      0.73      2159
+
+CONFUSION MATRIX
+[[1316  290]
+ [ 293  260]]
+Model: ROC AUC=0.680
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 37260.82
+Mean monthly MAE for strictly predicted data: 29582.34
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 65131.38
+Mean quarterly MAE for strictly predicted data: 50431.39
+Making predictions finished. Execution time: 00:00:05.36
+LOGISTIC REGRESSION WITH SOLVER: LIBLINEAR AND C = 0.6000000000000001
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.83      0.82      1606
+           1       0.48      0.46      0.47       553
+
+    accuracy                           0.73      2159
+   macro avg       0.65      0.65      0.65      2159
+weighted avg       0.73      0.73      0.73      2159
+
+CONFUSION MATRIX
+[[1330  276]
+ [ 297  256]]
+Model: ROC AUC=0.680
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 36725.00
+Mean monthly MAE for strictly predicted data: 29079.34
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 64165.50
+Mean quarterly MAE for strictly predicted data: 49371.21
+Making predictions finished. Execution time: 00:00:05.57
+LOGISTIC REGRESSION WITH SOLVER: LIBLINEAR AND C = 0.7000000000000001
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.83      0.82      1606
+           1       0.48      0.46      0.47       553
+
+    accuracy                           0.73      2159
+   macro avg       0.65      0.64      0.65      2159
+weighted avg       0.73      0.73      0.73      2159
+
+CONFUSION MATRIX
+[[1332  274]
+ [ 300  253]]
+Model: ROC AUC=0.681
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 36281.10
+Mean monthly MAE for strictly predicted data: 29020.28
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 63385.00
+Mean quarterly MAE for strictly predicted data: 49180.95
+Making predictions finished. Execution time: 00:00:06.22
+LOGISTIC REGRESSION WITH SOLVER: LIBLINEAR AND C = 0.8
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.83      0.82      1606
+           1       0.48      0.45      0.47       553
+
+    accuracy                           0.73      2159
+   macro avg       0.65      0.64      0.64      2159
+weighted avg       0.73      0.73      0.73      2159
+
+CONFUSION MATRIX
+[[1336  270]
+ [ 303  250]]
+Model: ROC AUC=0.681
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 35906.31
+Mean monthly MAE for strictly predicted data: 28979.20
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 62728.14
+Mean quarterly MAE for strictly predicted data: 49253.79
+Making predictions finished. Execution time: 00:00:06.20
+LOGISTIC REGRESSION WITH SOLVER: LIBLINEAR AND C = 0.9
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.84      0.83      1606
+           1       0.49      0.45      0.47       553
+
+    accuracy                           0.74      2159
+   macro avg       0.65      0.64      0.65      2159
+weighted avg       0.73      0.74      0.73      2159
+
+CONFUSION MATRIX
+[[1343  263]
+ [ 304  249]]
+Model: ROC AUC=0.682
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 35584.51
+Mean monthly MAE for strictly predicted data: 28847.07
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 62167.91
+Mean quarterly MAE for strictly predicted data: 49173.38
+Making predictions finished. Execution time: 00:00:06.65
+LOGISTIC REGRESSION WITH SOLVER: LIBLINEAR AND C = 1.0
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.81      0.84      0.82      1606
+           1       0.48      0.45      0.46       553
+
+    accuracy                           0.74      2159
+   macro avg       0.65      0.64      0.64      2159
+weighted avg       0.73      0.74      0.73      2159
+
+CONFUSION MATRIX
+[[1342  264]
+ [ 306  247]]
+Model: ROC AUC=0.682
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 35303.06
+Mean monthly MAE for strictly predicted data: 28754.97
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 61681.71
+Mean quarterly MAE for strictly predicted data: 48989.18
+Making predictions finished. Execution time: 00:00:05.67
+LOGISTIC REGRESSION WITH SOLVER: SAG AND C = 0.1
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.83      0.73      0.78      1606
+           1       0.42      0.56      0.48       553
+
+    accuracy                           0.69      2159
+   macro avg       0.62      0.65      0.63      2159
+weighted avg       0.72      0.69      0.70      2159
+
+CONFUSION MATRIX
+[[1172  434]
+ [ 243  310]]
+Model: ROC AUC=0.667
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.91
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 42024.64
+Mean monthly MAE for strictly predicted data: 35215.85
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 74296.58
+Mean quarterly MAE for strictly predicted data: 59797.08
+Making predictions finished. Execution time: 00:00:07.43
+LOGISTIC REGRESSION WITH SOLVER: SAG AND C = 0.2
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.76      0.79      1606
+           1       0.42      0.51      0.46       553
+
+    accuracy                           0.69      2159
+   macro avg       0.62      0.63      0.62      2159
+weighted avg       0.72      0.69      0.70      2159
+
+CONFUSION MATRIX
+[[1217  389]
+ [ 270  283]]
+Model: ROC AUC=0.674
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 40014.10
+Mean monthly MAE for strictly predicted data: 33045.49
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 70254.06
+Mean quarterly MAE for strictly predicted data: 55849.78
+Making predictions finished. Execution time: 00:00:07.74
+LOGISTIC REGRESSION WITH SOLVER: SAG AND C = 0.30000000000000004
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.78      0.80      1606
+           1       0.43      0.49      0.46       553
+
+    accuracy                           0.71      2159
+   macro avg       0.62      0.63      0.63      2159
+weighted avg       0.72      0.71      0.71      2159
+
+CONFUSION MATRIX
+[[1252  354]
+ [ 282  271]]
+Model: ROC AUC=0.678
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 38791.80
+Mean monthly MAE for strictly predicted data: 31460.04
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 67934.89
+Mean quarterly MAE for strictly predicted data: 53369.59
+Making predictions finished. Execution time: 00:00:08.37
+LOGISTIC REGRESSION WITH SOLVER: SAG AND C = 0.4
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.80      0.81      1606
+           1       0.45      0.48      0.46       553
+
+    accuracy                           0.72      2159
+   macro avg       0.63      0.64      0.64      2159
+weighted avg       0.72      0.72      0.72      2159
+
+CONFUSION MATRIX
+[[1284  322]
+ [ 289  264]]
+Model: ROC AUC=0.679
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 37921.36
+Mean monthly MAE for strictly predicted data: 30413.59
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 66328.25
+Mean quarterly MAE for strictly predicted data: 51960.06
+Making predictions finished. Execution time: 00:00:07.81
+LOGISTIC REGRESSION WITH SOLVER: SAG AND C = 0.5
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.82      0.82      1606
+           1       0.47      0.47      0.47       553
+
+    accuracy                           0.73      2159
+   macro avg       0.64      0.64      0.64      2159
+weighted avg       0.73      0.73      0.73      2159
+
+CONFUSION MATRIX
+[[1311  295]
+ [ 293  260]]
+Model: ROC AUC=0.680
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 37255.18
+Mean monthly MAE for strictly predicted data: 29702.83
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 65107.32
+Mean quarterly MAE for strictly predicted data: 50758.98
+Making predictions finished. Execution time: 00:00:08.02
+LOGISTIC REGRESSION WITH SOLVER: SAG AND C = 0.6000000000000001
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.82      0.82      1606
+           1       0.48      0.46      0.47       553
+
+    accuracy                           0.73      2159
+   macro avg       0.65      0.64      0.65      2159
+weighted avg       0.73      0.73      0.73      2159
+
+CONFUSION MATRIX
+[[1323  283]
+ [ 296  257]]
+Model: ROC AUC=0.680
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 36719.47
+Mean monthly MAE for strictly predicted data: 29303.43
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 64141.01
+Mean quarterly MAE for strictly predicted data: 49929.55
+Making predictions finished. Execution time: 00:00:07.98
+LOGISTIC REGRESSION WITH SOLVER: SAG AND C = 0.7000000000000001
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.83      0.82      1606
+           1       0.48      0.46      0.47       553
+
+    accuracy                           0.73      2159
+   macro avg       0.65      0.64      0.64      2159
+weighted avg       0.73      0.73      0.73      2159
+
+CONFUSION MATRIX
+[[1329  277]
+ [ 300  253]]
+Model: ROC AUC=0.681
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 36278.63
+Mean monthly MAE for strictly predicted data: 29111.70
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 63368.65
+Mean quarterly MAE for strictly predicted data: 49321.00
+Making predictions finished. Execution time: 00:00:08.00
+LOGISTIC REGRESSION WITH SOLVER: SAG AND C = 0.8
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.83      0.82      1606
+           1       0.48      0.45      0.47       553
+
+    accuracy                           0.74      2159
+   macro avg       0.65      0.64      0.65      2159
+weighted avg       0.73      0.74      0.73      2159
+
+CONFUSION MATRIX
+[[1336  270]
+ [ 302  251]]
+Model: ROC AUC=0.681
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 35900.77
+Mean monthly MAE for strictly predicted data: 28991.36
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 62709.08
+Mean quarterly MAE for strictly predicted data: 49079.11
+Making predictions finished. Execution time: 00:00:08.09
+LOGISTIC REGRESSION WITH SOLVER: SAG AND C = 0.9
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.81      0.83      0.82      1606
+           1       0.48      0.45      0.46       553
+
+    accuracy                           0.74      2159
+   macro avg       0.65      0.64      0.64      2159
+weighted avg       0.73      0.74      0.73      2159
+
+CONFUSION MATRIX
+[[1340  266]
+ [ 305  248]]
+Model: ROC AUC=0.681
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 35575.40
+Mean monthly MAE for strictly predicted data: 28758.52
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 62148.39
+Mean quarterly MAE for strictly predicted data: 48805.84
+Making predictions finished. Execution time: 00:00:08.17
+LOGISTIC REGRESSION WITH SOLVER: SAG AND C = 1.0
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.84      0.83      1606
+           1       0.49      0.45      0.47       553
+
+    accuracy                           0.74      2159
+   macro avg       0.65      0.64      0.65      2159
+weighted avg       0.73      0.74      0.73      2159
+
+CONFUSION MATRIX
+[[1345  261]
+ [ 305  248]]
+Model: ROC AUC=0.681
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 35296.66
+Mean monthly MAE for strictly predicted data: 28730.53
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 61670.34
+Mean quarterly MAE for strictly predicted data: 48941.56
+Making predictions finished. Execution time: 00:00:08.23
+LOGISTIC REGRESSION WITH SOLVER: SAGA AND C = 0.1
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.83      0.73      0.78      1606
+           1       0.42      0.56      0.48       553
+
+    accuracy                           0.69      2159
+   macro avg       0.62      0.65      0.63      2159
+weighted avg       0.72      0.69      0.70      2159
+
+CONFUSION MATRIX
+[[1172  434]
+ [ 243  310]]
+Model: ROC AUC=0.667
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.91
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 42024.98
+Mean monthly MAE for strictly predicted data: 35215.85
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 74297.19
+Mean quarterly MAE for strictly predicted data: 59797.08
+Making predictions finished. Execution time: 00:00:06.98
+LOGISTIC REGRESSION WITH SOLVER: SAGA AND C = 0.2
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.76      0.79      1606
+           1       0.42      0.51      0.46       553
+
+    accuracy                           0.69      2159
+   macro avg       0.62      0.63      0.62      2159
+weighted avg       0.72      0.69      0.70      2159
+
+CONFUSION MATRIX
+[[1217  389]
+ [ 270  283]]
+Model: ROC AUC=0.674
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 40014.63
+Mean monthly MAE for strictly predicted data: 33045.49
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 70255.04
+Mean quarterly MAE for strictly predicted data: 55849.78
+Making predictions finished. Execution time: 00:00:07.05
+LOGISTIC REGRESSION WITH SOLVER: SAGA AND C = 0.30000000000000004
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.78      0.80      1606
+           1       0.43      0.49      0.46       553
+
+    accuracy                           0.71      2159
+   macro avg       0.62      0.63      0.63      2159
+weighted avg       0.72      0.71      0.71      2159
+
+CONFUSION MATRIX
+[[1252  354]
+ [ 282  271]]
+Model: ROC AUC=0.678
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 38791.19
+Mean monthly MAE for strictly predicted data: 31460.04
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 67933.72
+Mean quarterly MAE for strictly predicted data: 53369.59
+Making predictions finished. Execution time: 00:00:08.06
+LOGISTIC REGRESSION WITH SOLVER: SAGA AND C = 0.4
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.80      0.81      1606
+           1       0.45      0.48      0.46       553
+
+    accuracy                           0.72      2159
+   macro avg       0.63      0.64      0.64      2159
+weighted avg       0.72      0.72      0.72      2159
+
+CONFUSION MATRIX
+[[1285  321]
+ [ 289  264]]
+Model: ROC AUC=0.679
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 37922.77
+Mean monthly MAE for strictly predicted data: 30384.74
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 66330.67
+Mean quarterly MAE for strictly predicted data: 51953.35
+Making predictions finished. Execution time: 00:00:08.16
+LOGISTIC REGRESSION WITH SOLVER: SAGA AND C = 0.5
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.82      0.82      1606
+           1       0.47      0.47      0.47       553
+
+    accuracy                           0.73      2159
+   macro avg       0.64      0.64      0.64      2159
+weighted avg       0.73      0.73      0.73      2159
+
+CONFUSION MATRIX
+[[1311  295]
+ [ 293  260]]
+Model: ROC AUC=0.680
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 37256.75
+Mean monthly MAE for strictly predicted data: 29702.83
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 65110.16
+Mean quarterly MAE for strictly predicted data: 50758.98
+Making predictions finished. Execution time: 00:00:08.78
+LOGISTIC REGRESSION WITH SOLVER: SAGA AND C = 0.6000000000000001
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.82      0.82      1606
+           1       0.48      0.46      0.47       553
+
+    accuracy                           0.73      2159
+   macro avg       0.65      0.64      0.65      2159
+weighted avg       0.73      0.73      0.73      2159
+
+CONFUSION MATRIX
+[[1323  283]
+ [ 296  257]]
+Model: ROC AUC=0.680
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 36721.20
+Mean monthly MAE for strictly predicted data: 29303.43
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 64144.25
+Mean quarterly MAE for strictly predicted data: 49929.55
+Making predictions finished. Execution time: 00:00:09.06
+LOGISTIC REGRESSION WITH SOLVER: SAGA AND C = 0.7000000000000001
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.83      0.82      1606
+           1       0.48      0.46      0.47       553
+
+    accuracy                           0.73      2159
+   macro avg       0.65      0.64      0.64      2159
+weighted avg       0.73      0.73      0.73      2159
+
+CONFUSION MATRIX
+[[1330  276]
+ [ 300  253]]
+Model: ROC AUC=0.681
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 36277.54
+Mean monthly MAE for strictly predicted data: 29120.42
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 63366.75
+Mean quarterly MAE for strictly predicted data: 49274.24
+Making predictions finished. Execution time: 00:00:09.34
+LOGISTIC REGRESSION WITH SOLVER: SAGA AND C = 0.8
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.83      0.82      1606
+           1       0.48      0.45      0.47       553
+
+    accuracy                           0.74      2159
+   macro avg       0.65      0.64      0.65      2159
+weighted avg       0.73      0.74      0.73      2159
+
+CONFUSION MATRIX
+[[1336  270]
+ [ 302  251]]
+Model: ROC AUC=0.681
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 35901.78
+Mean monthly MAE for strictly predicted data: 28991.36
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 62710.90
+Mean quarterly MAE for strictly predicted data: 49079.11
+Making predictions finished. Execution time: 00:00:09.34
+LOGISTIC REGRESSION WITH SOLVER: SAGA AND C = 0.9
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.83      0.82      1606
+           1       0.48      0.45      0.47       553
+
+    accuracy                           0.74      2159
+   macro avg       0.65      0.64      0.65      2159
+weighted avg       0.73      0.74      0.73      2159
+
+CONFUSION MATRIX
+[[1340  266]
+ [ 304  249]]
+Model: ROC AUC=0.681
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 35577.27
+Mean monthly MAE for strictly predicted data: 28819.34
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 62151.62
+Mean quarterly MAE for strictly predicted data: 48927.49
+Making predictions finished. Execution time: 00:00:09.52
+LOGISTIC REGRESSION WITH SOLVER: SAGA AND C = 1.0
+PREDICTIONS
+              precision    recall  f1-score   support
+
+           0       0.82      0.84      0.83      1606
+           1       0.49      0.45      0.47       553
+
+    accuracy                           0.74      2159
+   macro avg       0.65      0.64      0.65      2159
+weighted avg       0.73      0.74      0.73      2159
+
+CONFUSION MATRIX
+[[1345  261]
+ [ 305  248]]
+Model: ROC AUC=0.681
+MAE for guessed closing dates: 63.33
+MAE for predicted closing dates: 38.92
+Mean monthly MAE for guessed data: 35343.36
+Mean monthly MAE for predicted data: 35294.30
+Mean monthly MAE for strictly predicted data: 28730.53
+Mean quarterly MAE for guessed data: 77206.94
+Mean quarterly MAE for predicted data: 61666.05
+Mean quarterly MAE for strictly predicted data: 48941.56
+Making predictions finished. Execution time: 00:00:10.27
+BEST LR MODEL BY AUC: LOGISTIC REGRESSION WITH SOLVER: LIBLINEAR AND C = 1.0 with AUC 0.68
+BEST GUESSED REVENUE MAE: 77206.94
+BEST LR MODEL BY PREDICTED REVENUE MAE: LOGISTIC REGRESSION WITH SOLVER: NEWTON-CG AND C = 1.0 with MAE 61664.57
+BEST LR MODEL BY STRICTLY PREDICTED REVENUE MAE: LOGISTIC REGRESSION WITH SOLVER: SAG AND C = 0.9 with MAE 48805.84

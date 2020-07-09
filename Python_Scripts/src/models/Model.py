@@ -21,10 +21,6 @@ mpl_logger = logging.getLogger('matplotlib')
 mpl_logger.setLevel(logging.WARNING)
 model_logger = logging.getLogger('Training Model')
 
-pd.set_option('display.max_rows', 500)
-pd.set_option('display.max_columns', 500)
-pd.set_option('display.width', 1000)
-
 
 class Model(ABC):
     """
@@ -335,4 +331,3 @@ class Model(ABC):
                            'quarterly')
 
         return mean_quarterly_mae_guessed, mean_quarterly_mae_weighted, mean_quarterly_mae_unweighted
-
