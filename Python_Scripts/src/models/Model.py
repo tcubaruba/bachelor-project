@@ -11,7 +11,7 @@ from sklearn.metrics import roc_auc_score
 from sklearn.metrics import roc_curve
 from sklearn.metrics import mean_absolute_error
 
-from src.utils.preprocess import timer
+from utils.preprocess import timer
 
 import matplotlib.pyplot as plt
 
