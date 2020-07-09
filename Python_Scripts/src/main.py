@@ -2,7 +2,6 @@ import pandas as pd
 import numpy as np
 
 import sys
-
 from src.utils.preprocess import preprocess
 
 from src.models.NeuralNetModel import NeuralNetModel
