@@ -21,6 +21,10 @@ mpl_logger = logging.getLogger('matplotlib')
 mpl_logger.setLevel(logging.WARNING)
 model_logger = logging.getLogger('Training Model')
 
+pd.set_option('display.max_rows', 500)
+pd.set_option('display.max_columns', 500)
+pd.set_option('display.width', 1000)
+
 
 class Model(ABC):
     """
@@ -46,7 +50,6 @@ class Model(ABC):
         self.y_predict = None
         self.win_probability = None
         self.y_probability_guessed = guessed_win_probabilities_for_test_data.copy()
-        # self.y_guessed = [1 if x >= 0.5 else 0 for x in self.y_probability_guessed]
         self.updates = updates.copy()
         self.data_won = data_won
         self.plot_name = ""
@@ -198,8 +201,8 @@ class Model(ABC):
         :return:
         """
         plt.plot(guessed, color='red', label='Guessed Revenue')
-        plt.plot(weighted, color='blue', label='Predicted Revenue')
-        plt.plot(unweighted, color='green', label='Strictly Predicted Revenue')
+        plt.plot(weighted, color='blue', label='Weighted Predicted Revenue')
+        plt.plot(unweighted, color='green', label='Unweighted Predicted Revenue')
         plt.legend()
         plt.ylabel('Mean Root Square Error')
         title = 'Compare ' + frequency + ' errors for ' + self.data_name + ' with\n' + self.plot_name
@@ -211,32 +214,67 @@ class Model(ABC):
 
     def calculate_revenue_forecast(self, predictions):
         """
-
-        :param predictions:
-        :return:
+        Calculates revenue based on classification and regression predictions, as well as guessed values
+        :param predictions: pandas data frame which contains predictions
+        :return: accuracy metrics from the function calculate_revenue_error()
         """
-        predictions = predictions[['Opportunity_Name', 'Stage', 'Expected_closing', 'Volume', self.target_second_part,
-                                   self.predict_col_name, self.period_column_name, 'probability win']]
-        predictions['Update'] = self.updates
-        predictions['Guessed probabilities'] = self.y_probability_guessed
-        predictions['Guessed_closing'] = pd.to_datetime(predictions['Update']) + pd.to_timedelta(
-            predictions['Expected_closing'], unit='D')
-        predictions['Predicted_closing'] = pd.to_datetime(predictions['Update']) + pd.to_timedelta(
+        # column names to work with
+        upd = 'Update'
+        guessed_proba = 'Guessed probabilities'
+        cl_guessed = 'Guessed_closing_date'
+        guessed_days_to_close = 'Expected_closing'  # guessed days
+        cl_predicted = 'Predicted_closing'
+        guessed_rev = 'Guessed_revenue'
+        predicted_rev_weighted = 'Weighted_revenue'
+        predicted_rev_unweighted = 'Unweighted_revenue'
+        opp_name = 'Opportunity_Name'
+
+        # get columns from dataframe with predictions which are needed
+        predictions = predictions[
+            [opp_name, 'Stage', guessed_days_to_close, 'Volume', self.target_second_part,
+             self.predict_col_name, self.period_column_name, 'probability win']]
+        predictions[upd] = self.updates
+        predictions[guessed_proba] = self.y_probability_guessed
+        predictions[cl_guessed] = pd.to_datetime(predictions[upd]) + pd.to_timedelta(
+            predictions[guessed_days_to_close], unit='D')
+        predictions[cl_predicted] = pd.to_datetime(predictions[upd]) + pd.to_timedelta(
             predictions[self.period_column_name], unit='D')
-        predictions['Guessed_revenue'] = predictions['Volume'] * predictions['Guessed probabilities']
-        predictions['Predicted_revenue'] = predictions['Volume'] * predictions['probability win']
-        predictions['Predicted_revenue_strict'] = np.where(predictions['probability win'] < 0.5, 0,
-                                                           predictions['Volume'])
+        predictions[guessed_rev] = predictions['Volume'] * predictions[guessed_proba]
+        predictions[predicted_rev_weighted] = predictions['Volume'] * predictions['probability win']
+        predictions[predicted_rev_unweighted] = np.where(predictions['probability win'] < 0.5, 0,
+                                                         predictions['Volume'])
 
         # Closing dates MAE:
-        mae_dates_guessed = mean_absolute_error(predictions[self.target_second_part], predictions['Expected_closing'])
+        mae_dates_guessed = mean_absolute_error(predictions[self.target_second_part],
+                                                predictions[guessed_days_to_close])
         mae_dates_predicted = mean_absolute_error(predictions[self.target_second_part],
                                                   predictions[self.period_column_name])
 
         print('MAE for guessed closing dates: {:.2f}'.format(mae_dates_guessed))
         print('MAE for predicted closing dates: {:.2f}'.format(mae_dates_predicted))
 
-        updates = predictions['Update'].unique()
+        return self.calculate_revenue_error(predictions, upd, opp_name, cl_guessed, guessed_rev,
+                                            cl_predicted, predicted_rev_weighted, predicted_rev_unweighted)
+
+    def calculate_revenue_error(self, predictions, upd, opp_name, cl_guessed, guessed_rev,
+                                cl_predicted, predicted_rev_weighted, predicted_rev_unweighted):
+        """
+        Calculates monthly and quarterly revenue prediction errors for guessed and calculated values
+        :param predictions: data frame with predictions
+        :param upd: name of column with updates
+        :param opp_name: name of column with opp names
+        :param cl_guessed: name of column with guessed closing date
+        :param guessed_rev: name of column with calculated guessed revenue
+        :param cl_predicted: name of column with predicted closing date
+        :param predicted_rev_weighted: name of column with calculated weighted predicted revenue
+        :param predicted_rev_unweighted: name of column with calculated unweighted predicted revenue
+        :return: MAE for quarterly errors
+        """
+        updates = predictions[upd].unique()
+        act_sum = 'Actual_sum'
+        guessed_sum = 'Guessed_sum'
+        weighted_sum = 'Weighted_sum'
+        unweighted_sum = 'Unweighted_sum'
         monthly_errors_guessed = []
         monthly_errors_weighted = []
         monthly_errors_unweighted = []
@@ -244,57 +282,57 @@ class Model(ABC):
         quarterly_errors_weighted = []
         quarterly_errors_unweighted = []
         for u in updates:
-            df = predictions[predictions['Update'] == u]
+            df = predictions[predictions[upd] == u]
 
-            test_opps = df['Opportunity_Name'].unique()
-            actual_won_opps = self.data_won[self.data_won['Opportunity_Name'].isin(test_opps)]
-            actual_won_opps = actual_won_opps[['Opportunity_Name', 'Upload_date', 'Volume']]
+            test_opps = df[opp_name].unique()
+            actual_won_opps = self.data_won[self.data_won[opp_name].isin(test_opps)]
+            actual_won_opps = actual_won_opps[[opp_name, 'Upload_date', 'Volume']]
 
-            actual_revenue = self.__group_values_by_update(actual_won_opps, 'Actual_sum', 'Upload_date', 'Volume')
-            guessed_revenue = self.__group_values_by_update(df, 'Guessed_sum', 'Guessed_closing', 'Guessed_revenue')
-            weighted_revenue = self.__group_values_by_update(df, 'Weighted_sum', 'Predicted_closing', 'Predicted_revenue')
-            unweighted_revenue = self.__group_values_by_update(df, 'Unweighted_sum', 'Predicted_closing', 'Predicted_revenue_strict')
+            actual_revenue = self.__group_values_by_update(actual_won_opps, act_sum, 'Upload_date', 'Volume')
+
+            guessed_revenue = self.__group_values_by_update(df, guessed_sum, cl_guessed, guessed_rev)
+            weighted_revenue = self.__group_values_by_update(df, weighted_sum, cl_predicted, predicted_rev_weighted)
+            unweighted_revenue = self.__group_values_by_update(df, unweighted_sum, cl_predicted,
+                                                               predicted_rev_unweighted)
 
             res_montly = pd.concat([guessed_revenue, weighted_revenue, unweighted_revenue], axis=1)
             res_montly = pd.concat([res_montly, actual_revenue], axis=1)
             res_montly = res_montly.fillna(0)
 
-            monthly_errors_guessed.append(mean_absolute_error(res_montly['Actual_sum'], res_montly['Guessed_sum']))
+            monthly_errors_guessed.append(mean_absolute_error(res_montly[act_sum], res_montly[guessed_sum]))
             monthly_errors_weighted.append(
-                mean_absolute_error(res_montly['Actual_sum'], res_montly['Weighted_sum']))
-            monthly_errors_unweighted.append(mean_absolute_error(res_montly['Actual_sum'], res_montly['Unweighted_sum']))
+                mean_absolute_error(res_montly[act_sum], res_montly[weighted_sum]))
+            monthly_errors_unweighted.append(mean_absolute_error(res_montly[act_sum], res_montly[unweighted_sum]))
 
-            res_quarterly = res_montly[['Guessed_sum', 'Weighted_sum', 'Unweighted_sum', 'Actual_sum']].resample(
-                'Q-JAN',
-                convention='end').agg(
+            res_quarterly = res_montly[[guessed_sum, weighted_sum, unweighted_sum, act_sum]].resample('Q-JAN',
+                                                                                                      convention='end').agg(
                 'sum')
 
-            quarterly_errors_guessed.append(mean_absolute_error(res_quarterly['Actual_sum'],
-                                                                res_quarterly['Guessed_sum']))
-            quarterly_errors_weighted.append(mean_absolute_error(res_quarterly['Actual_sum'],
-                                                                  res_quarterly['Weighted_sum']))
-            quarterly_errors_unweighted.append(mean_absolute_error(res_quarterly['Actual_sum'],
-                                                                         res_quarterly['Unweighted_sum']))
+            quarterly_errors_guessed.append(mean_absolute_error(res_quarterly[act_sum], res_quarterly[guessed_sum]))
+            quarterly_errors_weighted.append(mean_absolute_error(res_quarterly[act_sum], res_quarterly[weighted_sum]))
+            quarterly_errors_unweighted.append(
+                mean_absolute_error(res_quarterly[act_sum], res_quarterly[unweighted_sum]))
 
         mean_monthly_mae_guessed = sum(monthly_errors_guessed) / len(monthly_errors_guessed)
-        mean_monthly_mae_predicted = sum(monthly_errors_weighted) / len(monthly_errors_weighted)
-        mean_monthly_mae_predicted_strict = sum(monthly_errors_unweighted) / len(monthly_errors_unweighted)
+        mean_monthly_mae_weighted = sum(monthly_errors_weighted) / len(monthly_errors_weighted)
+        mean_monthly_mae_unweighted = sum(monthly_errors_unweighted) / len(monthly_errors_unweighted)
 
         print('Mean monthly MAE for guessed data: {:.2f}'.format(mean_monthly_mae_guessed))
-        print('Mean monthly MAE for predicted data: {:.2f}'.format(mean_monthly_mae_predicted))
-        print('Mean monthly MAE for strictly predicted data: {:.2f}'.format(mean_monthly_mae_predicted_strict))
+        print('Mean monthly MAE for predicted data: {:.2f}'.format(mean_monthly_mae_weighted))
+        print('Mean monthly MAE for strictly predicted data: {:.2f}'.format(mean_monthly_mae_unweighted))
 
         mean_quarterly_mae_guessed = sum(quarterly_errors_guessed) / len(quarterly_errors_guessed)
-        mean_quarterly_mae_predicted = sum(quarterly_errors_weighted) / len(quarterly_errors_weighted)
-        mean_quarterly_mae_predicted_strict = sum(quarterly_errors_unweighted) / len(
+        mean_quarterly_mae_weighted = sum(quarterly_errors_weighted) / len(quarterly_errors_weighted)
+        mean_quarterly_mae_unweighted = sum(quarterly_errors_unweighted) / len(
             quarterly_errors_unweighted)
 
         print('Mean quarterly MAE for guessed data: {:.2f}'.format(mean_quarterly_mae_guessed))
-        print('Mean quarterly MAE for predicted data: {:.2f}'.format(mean_quarterly_mae_predicted))
-        print('Mean quarterly MAE for strictly predicted data: {:.2f}'.format(mean_quarterly_mae_predicted_strict))
+        print('Mean quarterly MAE for predicted data: {:.2f}'.format(mean_quarterly_mae_weighted))
+        print('Mean quarterly MAE for strictly predicted data: {:.2f}'.format(mean_quarterly_mae_unweighted))
 
         self.__plot_errors(monthly_errors_guessed, monthly_errors_weighted, monthly_errors_unweighted, 'monthly')
         self.__plot_errors(quarterly_errors_guessed, quarterly_errors_weighted, quarterly_errors_unweighted,
                            'quarterly')
 
-        return mean_quarterly_mae_guessed, mean_quarterly_mae_predicted, mean_quarterly_mae_predicted_strict
+        return mean_quarterly_mae_guessed, mean_quarterly_mae_weighted, mean_quarterly_mae_unweighted
+
