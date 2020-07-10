@@ -153,6 +153,7 @@ class Model(ABC):
         model_fpr, model_tpr, _ = roc_curve(self.y_test, self.win_probability)
 
         # plot the roc curve for the model
+        fig = plt.figure()
         plt.plot(ns_fpr, ns_tpr, linestyle='--', label='No Skill')
         plt.plot(model_fpr, model_tpr, marker='.', label='Trained Model')
         plt.legend()
@@ -161,7 +162,7 @@ class Model(ABC):
         plot_name = '../../Plots/roc_' + self.description.lower().replace(" ", "_") + self.data_name.lower().replace(
             " ", "_") + '.svg'
         plt.savefig(plot_name)
-        plt.show()
+        plt.close(fig)
 
         mpe_guessed, mpe_predicted, mpe_predicted_strict = self.calculate_revenue_forecast(
             predictions_periods.loc[self.index_test])
@@ -196,6 +197,7 @@ class Model(ABC):
         :param frequency: time frequency
         :return:
         """
+        fig = plt.figure()
         plt.plot(guessed, color='red', label='Guessed Revenue')
         plt.plot(weighted, color='blue', label='Weighted Predicted Revenue')
         plt.plot(unweighted, color='green', label='Unweighted Predicted Revenue')
@@ -206,7 +208,7 @@ class Model(ABC):
         plot_name = '../../Plots/' + frequency[0] + '_err_' + self.description.lower().replace(" ", "_") + \
                     self.data_name.lower().replace(" ", "_") + '.svg'
         plt.savefig(plot_name)
-        plt.show()
+        plt.close(fig)
 
     def calculate_revenue_forecast(self, predictions):
         """
