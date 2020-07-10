@@ -316,8 +316,8 @@ class Model(ABC):
         mean_monthly_mae_unweighted = sum(monthly_errors_unweighted) / len(monthly_errors_unweighted)
 
         print('Mean monthly MAE for guessed data: {:.2f}'.format(mean_monthly_mae_guessed))
-        print('Mean monthly MAE for predicted data: {:.2f}'.format(mean_monthly_mae_weighted))
-        print('Mean monthly MAE for strictly predicted data: {:.2f}'.format(mean_monthly_mae_unweighted))
+        print('Mean monthly MAE for weighted data: {:.2f}'.format(mean_monthly_mae_weighted))
+        print('Mean monthly MAE for unweighted data: {:.2f}'.format(mean_monthly_mae_unweighted))
 
         mean_quarterly_mae_guessed = sum(quarterly_errors_guessed) / len(quarterly_errors_guessed)
         mean_quarterly_mae_weighted = sum(quarterly_errors_weighted) / len(quarterly_errors_weighted)
@@ -325,8 +325,8 @@ class Model(ABC):
             quarterly_errors_unweighted)
 
         print('Mean quarterly MAE for guessed data: {:.2f}'.format(mean_quarterly_mae_guessed))
-        print('Mean quarterly MAE for predicted data: {:.2f}'.format(mean_quarterly_mae_weighted))
-        print('Mean quarterly MAE for strictly predicted data: {:.2f}'.format(mean_quarterly_mae_unweighted))
+        print('Mean quarterly MAE for weighted data: {:.2f}'.format(mean_quarterly_mae_weighted))
+        print('Mean quarterly MAE for unweighted data: {:.2f}'.format(mean_quarterly_mae_unweighted))
 
         self.__plot_errors(monthly_errors_guessed, monthly_errors_weighted, monthly_errors_unweighted, 'monthly')
         self.__plot_errors(quarterly_errors_guessed, quarterly_errors_weighted, quarterly_errors_unweighted,
