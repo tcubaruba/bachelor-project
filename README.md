@@ -1,4 +1,5 @@
 # Predicting Sales Pipeline for CRM Data Using Machine Learning Methods
+The thesis can be found in ***Docs*** directory
 
 ## Installation & Preparations
 I used ***pip*** as packet management system and provide a requirements.txt file to easily install all necessary libraries.  
