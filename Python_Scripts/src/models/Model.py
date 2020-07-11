@@ -202,7 +202,7 @@ class Model(ABC):
         plt.plot(weighted, color='blue', label='Weighted Predicted Revenue')
         plt.plot(unweighted, color='green', label='Unweighted Predicted Revenue')
         plt.legend()
-        plt.ylabel('Mean Root Square Error')
+        plt.ylabel('Mean Average Error')
         title = 'Compare ' + frequency + ' errors for ' + self.data_name + ' with\n' + self.plot_name
         plt.title(title)
         plot_name = '../../Plots/' + frequency[0] + '_err_' + self.description.lower().replace(" ", "_") + \
